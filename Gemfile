@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 1.2'
 # d3 gem
 gem "d3-rails"
 
+# coveralls gem
+gem 'coveralls', require: false
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -37,6 +40,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'capybara'
 end
 
 # Use ActiveModel has_secure_password
