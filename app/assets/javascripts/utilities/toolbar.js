@@ -1,17 +1,28 @@
-function Tool(color){
-  this.color = color;
+function Tool(args){
+  this.type = args.type;
+  this.color = args.color;
 }
 
+var toolData = [{
+  type: 'grassland',
+  color: '#99FF33'},
+  {type: 'desert',
+  color: '#DBB84D'
+}]
 
-
+function loadTools(){
+   return toolData.map(function(args){
+      return new Tool(args);
+   })
+}
 
 
 function curTool() {
   $('#toolbar')
 }
 $(function () {
-  $.each(['#99FF33', '#DBB84D'], function(){
-    $('#toolbar').append("<div data-color='" + this + "' style='width: 10px; background: " + this +";'></div>");
+  $.each(loadTools(), function(){
+    $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background: " + this.color +";'></div>");
   });
   currentTool();
   $('path').on('click', function(event){
