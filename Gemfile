@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 1.2'
 # d3 gem
 gem "d3-rails"
 
+# coveralls gem
+gem 'coveralls', require: false
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
