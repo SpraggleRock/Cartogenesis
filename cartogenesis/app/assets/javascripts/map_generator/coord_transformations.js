@@ -24,7 +24,7 @@ function randomR(maxRadius) {
 }
 // the nth subangle should be n * 2 Math.PI/ numPOints
 //[[random r, 0], [random r, 2pi/numPOints], [ random r, 4pi/numpoints], etc... ]
-var numPoints = 30
+var numPoints = 20
 
 function genPolarCoordinates(maxRadius) {
   pcoords = []
