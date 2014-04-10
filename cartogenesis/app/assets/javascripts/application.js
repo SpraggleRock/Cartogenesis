@@ -13,4 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require d3
+//= require map_generator/coord_transformations
+//= require map_generator/map_generator
 //= require_tree .
+
