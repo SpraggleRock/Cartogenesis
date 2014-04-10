@@ -1,4 +1,4 @@
-var radius = 200;
+var radius = 300;
 
 var vertices = genLineData(genPolarCoordinates(radius), [radius, radius]);
 
@@ -14,6 +14,6 @@ var lineFunction = d3.svg.line()
 
 var lineShow = svg.append("path")
 .attr("d", lineFunction(vertices).concat("z"))
-.attr("stroke", "blue")
-.attr("stroke-width", 4)
-.attr("fill", "green");
+.attr("stroke", "black")
+.attr("stroke-width", 3)
+.attr("fill", "beige");

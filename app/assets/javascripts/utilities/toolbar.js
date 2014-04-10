@@ -3,12 +3,21 @@ function Tool(args){
   this.color = args.color;
 }
 
+var selectedTool;
+
 var toolData = [{
   type: 'grassland',
   color: '#99FF33'},
   {type: 'desert',
-  color: '#DBB84D'
-}]
+  color: '#DBB84D'},
+  {type: 'tundra',
+  color: '#B8E6E6'},
+  {type: 'forest',
+  color: '#006600'},
+  {type: 'mountain',
+  color: '#999999'},
+  {type: 'ocean',
+  color: '#0000FF'}]
 
 function loadTools(){
    return toolData.map(function(args){
@@ -16,26 +25,23 @@ function loadTools(){
    })
 }
 
-
-function curTool() {
-  $('#toolbar')
-}
-$(function () {
-  $.each(loadTools(), function(){
-    $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background: " + this.color +";'></div>");
+function currentTool(allTools) {
+  $("#toolbar").on('click', 'div', function(){
+    console.log(this.id)
+    for(i=0; i < allTools.length; i++){
+      if (allTools[i].type == this.id)
+        selectedTool = allTools[i]
+    }
   });
-  currentTool();
+}
+
+$(function () {
+  var allTools = loadTools();
+  $.each(allTools, function(){
+    $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
+  });
+  currentTool(allTools);
   $('path').on('click', function(event){
-    $(this).attr("fill", currentTool());
+    $(this).attr("fill", selectedTool.color);
   });
 });
-
-
-function currentTool() {
-  $("#toolbar").on('click', 'div', function(){
-    console.log(this);
-    return $(this);
-  });
-}
-
-// console.log(currentTool())

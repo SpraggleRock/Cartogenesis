@@ -171,8 +171,8 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   coveralls
   d3-rails
-  jasmine
   haml
+  jasmine
   jbuilder (~> 1.2)
   jquery-rails
   pg

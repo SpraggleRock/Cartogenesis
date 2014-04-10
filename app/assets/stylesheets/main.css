@@ -24,13 +24,18 @@ svg{
   border: 1px solid black;
 }
 
+#toolbar {
+  float: left;
+  border: 1px solid black;
+}
+
 #toolbar div{
   border: 1px solid black;
   width: 100px;
   height: 30px;
   line-height: 30px;
   padding: 0 10px;
-  margin: 3px;
+  margin: 5px 20px;
   vertical-align: middle;
   text-align: center;
   text-decoration: none;
@@ -38,3 +43,7 @@ svg{
   color: black;
   font-weight: bold;
 }
+
+
+
+
