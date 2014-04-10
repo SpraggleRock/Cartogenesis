@@ -20,7 +20,7 @@ CartesianCoordinate.prototype.formatForLine = function (translation_vector) {
 }
 
 function randomR(maxRadius) {
-  return Math.random() * maxRadius / .9 + maxRadius / 2;
+  return Math.random() * maxRadius / 2 + maxRadius / 2;
 }
 // the nth subangle should be n * 2 Math.PI/ numPOints
 //[[random r, 0], [random r, 2pi/numPOints], [ random r, 4pi/numpoints], etc... ]

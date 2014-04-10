@@ -1,12 +1,10 @@
-var vertices = genLineData(genPolarCoordinates(300), [650, 450]);
+var radius = 200;
 
-
-var width = 1200,
-    height = 1200
+var vertices = genLineData(genPolarCoordinates(radius), [radius, radius]);
 
 var svg = d3.select("body").append("svg")
-   .attr("width", width)
-   .attr("height", height);
+   .attr("width", 2*radius)
+   .attr("height", 2*radius);
 
  //create line
 var lineFunction = d3.svg.line()
