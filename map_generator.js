@@ -1,5 +1,8 @@
-var width = 960,
-    height = 500
+var vertices = genLineData(genPolarCoordinates(200), [300,300]);
+
+
+var width = 1200,
+    height = 1200
 
 var numPoints = 100
 
@@ -11,10 +14,10 @@ var numPoints = 100
  var lineFunction = d3.svg.line()
     .x(function(d){ return d.x;})
     .y(function(d){ return d.y;})
-    .interpolate("linear");
+    .interpolate("basis");
 
   var lineShow = svg.append("path")
-  .attr("d", lineFunction(vertices))
-  .attr("stroke", "red")
+  .attr("d", lineFunction(vertices).concat("z"))
+  .attr("stroke", "blue")
   .attr("stroke-width", 4)
-  .attr("fill", "none");
+  .attr("fill", "green");
