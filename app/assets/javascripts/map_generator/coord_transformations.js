@@ -2,17 +2,18 @@ function PolarCoordinate(r,t) {
   this.r = r;
   this.t = t;
  }
+
+function CartesianCoordinate(x,y) {
+  this.x = x;
+  this.y = y;
+}
+
 PolarCoordinate.prototype.convertToCartesian = function() {
   return new CartesianCoordinate( this.r * Math.cos(this.t), this.r * Math.sin(this.t) );
 }
 
 PolarCoordinate.prototype.formatForLine = function(translation_vector) {
   return this.convertToCartesian().formatForLine(translation_vector);
-}
-
-function CartesianCoordinate(x,y) {
-  this.x = x;
-  this.y = y;
 }
 
 CartesianCoordinate.prototype.formatForLine = function (translation_vector) {
@@ -26,7 +27,7 @@ function randomR(maxRadius) {
 //[[random r, 0], [random r, 2pi/numPOints], [ random r, 4pi/numpoints], etc... ]
 var numPoints = 20
 
-function genPolarCoordinates(maxRadius) {
+function genRandomPolarCoordinates(maxRadius) {
   pcoords = []
   for(i=0; i < numPoints; i++){
     pcoords.push([randomR(maxRadius), (i * 2 * Math.PI / numPoints)])
@@ -40,3 +41,5 @@ function genLineData(pcoordsArray, translation_vector) {
     return pcoords.formatForLine(translation_vector);
   });
 }
+
+
