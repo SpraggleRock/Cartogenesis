@@ -2,6 +2,9 @@ class GamesController < ApplicationController
   def new
   end
 
+  def index
+  end
+
   def create
     @game = Game.create(game_svg: params[:svg])
   end

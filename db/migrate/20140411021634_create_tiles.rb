@@ -2,8 +2,11 @@ class CreateTiles < ActiveRecord::Migration
   def change
     create_table :tiles do |t|
       t.integer :game_id
-      t.integer :x_coord
-      t.integer :y_coord
+      t.string :type
+      t.float :radius
+      t.integer :a
+      t.integer :b
+      t.integer :c
       t.timestamps
     end
   end

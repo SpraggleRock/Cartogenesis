@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411021738) do
+ActiveRecord::Schema.define(version: 20140411174744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20140411021738) do
   create_table "adjacencies", force: true do |t|
     t.integer  "tile_id"
     t.integer  "neighbor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "boards", force: true do |t|
+    t.integer  "radius"
+    t.float    "tile_radius"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,6 +38,11 @@ ActiveRecord::Schema.define(version: 20140411021738) do
 
   create_table "tiles", force: true do |t|
     t.integer  "game_id"
+    t.string   "type"
+    t.float    "radius"
+    t.integer  "a"
+    t.integer  "b"
+    t.integer  "c"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
