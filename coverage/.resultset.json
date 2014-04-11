@@ -1,0 +1,68 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/apprentice/Desktop/project_genesis/app/controllers/games_controller.rb": [
+        1,
+        1,
+        2,
+        2,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/project_genesis/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null
+      ],
+      "/Users/apprentice/Desktop/project_genesis/spec/controllers/welcome_controller_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/project_genesis/app/controllers/welcome_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/project_genesis/spec/features/welcome_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/project_genesis/spec/models/game_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/Desktop/project_genesis/app/models/game.rb": [
+        1,
+        null
+      ]
+    },
+    "timestamp": 1397164109
+  }
+}
