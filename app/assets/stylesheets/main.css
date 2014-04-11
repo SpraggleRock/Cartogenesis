@@ -1,6 +1,5 @@
 .container {
   width: 400px;
-
 }
 
 .enter {
@@ -20,3 +19,31 @@
 .enter:active{
   box-shadow: 0px 0px 0px white;
 }
+
+svg{
+  border: 1px solid black;
+}
+
+#toolbar {
+  float: left;
+  border: 1px solid black;
+}
+
+#toolbar div{
+  border: 1px solid black;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 5px 20px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+  font-weight: bold;
+}
+
+
+
+
