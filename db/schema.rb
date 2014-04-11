@@ -37,15 +37,13 @@ ActiveRecord::Schema.define(version: 20140411211911) do
 
   create_table "tiles", force: true do |t|
     t.integer  "board_id"
-    t.string   "type"
+    t.string   "terrain",     default: "ocean"
     t.float    "radius"
-    t.integer  "a"
-    t.integer  "b"
-    t.integer  "c"
+    t.string   "coordinates"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "tiles", ["a", "b", "c"], name: "hex_coords", using: :btree
+  add_index "tiles", ["coordinates"], name: "index_tiles_on_coordinates", using: :btree
 
 end
