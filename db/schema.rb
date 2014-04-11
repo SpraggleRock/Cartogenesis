@@ -24,8 +24,7 @@ ActiveRecord::Schema.define(version: 20140411174744) do
   end
 
   create_table "boards", force: true do |t|
-    t.integer  "radius"
-    t.float    "tile_radius"
+    t.integer  "board_size"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140411174744) do
   end
 
   create_table "tiles", force: true do |t|
-    t.integer  "game_id"
+    t.integer  "board_id"
     t.string   "type"
     t.float    "radius"
     t.integer  "a"
