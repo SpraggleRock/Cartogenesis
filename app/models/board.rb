@@ -7,7 +7,7 @@ class Board < ActiveRecord::Base
       (-board_size..board_size).to_a.each do |y|
         (-board_size..board_size).to_a.each do |z|
           self.tiles << Tile.create(radius: tile_radius,
-            a: x, b: y, c: z) if x + y + z == 0
+           coordinates: [x, y, z].join(", ")) if x + y + z == 0
         end
       end
     end
