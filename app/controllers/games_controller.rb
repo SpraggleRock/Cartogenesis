@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def new
-    @game = Game.create(game_svg: params[:svg])
+    @game = Game.create()
   end
 
   def index
