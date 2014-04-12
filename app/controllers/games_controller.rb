@@ -23,6 +23,15 @@ class GamesController < ApplicationController
     redirect_to play_game_path
   end
 
+  def play_game
+    #if @game.users.include?(current_user)
+    # else redirect "you're not authorized to view that game"
+    @game = game.find(params[:id])
+    @game.new_round
+    @active_player = game.active_player
+    @points = @active_player.points
+  end
+
   # def show
   # end
 

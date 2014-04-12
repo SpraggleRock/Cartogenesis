@@ -27,6 +27,7 @@ class Game < ActiveRecord::Base
   def new_round
     self.round_counter = self.round_counter + 1
     self.turn_counter = 0
+    self.next_player
     assign_round_points
   end
 
