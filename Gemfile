@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 1.2'
 
 # d3 gem
 gem "d3-rails"
+gem 'bcrypt'
+gem 'bcrypt-ruby'
 
 # coveralls gem
 gem 'coveralls', require: false
