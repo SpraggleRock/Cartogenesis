@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140412151311) do
 
   create_table "boards", force: true do |t|
     t.integer  "board_size"
+    t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

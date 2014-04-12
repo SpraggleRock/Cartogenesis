@@ -1,11 +1,12 @@
 class Round < ActiveRecord::Base
   belongs_to :game
   has_many :players, through: :game
-  after_initialize :assign_round_points
+  after_create :assign_round_points
 
   def assign_round_points
-    players do |player|
-      player.points += (rand(6) +rand(6) + 2)
+    self.players.each do |player|
+      player.points = player.points + (rand(6) +rand(6) + 2)
+      player.save
     end
   end
 end
