@@ -5,7 +5,9 @@
 / = form_tag game_path(@game.id), id: "end_turn", method: :post do
 /     = submit_tag "End Turn"
 
-%div{:id => 'toolbar'}
-%div.games.new
+%div{class: 'game_container'}
+  %div{:id => 'toolbar'}
+  %div{class: 'svg_container'}
+    %div.games.new
 
 
