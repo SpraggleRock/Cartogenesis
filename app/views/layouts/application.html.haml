@@ -6,15 +6,5 @@
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
-    :css
-      rect {
-        fill: none;
-        pointer-events: all;
-      }
-      circle {
-        fill: white;
-        stroke: black;
-        stroke-width: 1.5px;
-      }
   %body
     = yield
