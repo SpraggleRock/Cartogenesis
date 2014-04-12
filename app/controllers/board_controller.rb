@@ -21,4 +21,8 @@ class BoardController < ApplicationController
 
     render nothing: true
   end
+
+  def json_params
+    params.require(:_json)
+  end
 end

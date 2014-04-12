@@ -10,16 +10,9 @@ class GamesController < ApplicationController
     @game = Game.create()
   end
 
-  # def generate_board
-  #   board = Board.create(board_size: 7)
-  #   board.setup_board(25)
-  #   @tiles = board.tiles
-
-  #   render json: @tiles
-  # end
-
   def update
 
+    render nothing: true
   end
 
   # def show

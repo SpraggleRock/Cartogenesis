@@ -1,0 +1,10 @@
+<h1>Game Lobby</h1>
+  <form action=<%="/games/#{@game.id}"%> method='post'>
+    <input name="_method" type="hidden" value="PATCH">
+    <input name="authenticity_token" type="hidden" value="#{authenticity_token}"
+    <ul id='player_list'>
+    <li><input type="text" name="players[]" placeholder="Player Name"></li>
+    </ul>
+    <button class="add_player" type="button">Add Player</button>
+    <input type="submit" value="Enter World">
+  </form>
