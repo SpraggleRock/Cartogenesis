@@ -3,6 +3,8 @@ function Tool(args){
   this.color = args.color;
 }
 
+var updateQueue = [];
+
 var selectedTool;
 
 var toolData = [{
@@ -42,7 +44,10 @@ $(function () {
   });
   currentTool(allTools);
   $('svg').on('click','path', function(event){
-    $(this).attr("fill", selectedTool.color)
-    $(this).attr("terrain", selectedTool.type);
+    if($(this).attr("terrain") != selectedTool.type){
+      $(this).attr("fill", selectedTool.color)
+      $(this).attr("terrain", selectedTool.type);
+      updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+    } 
   });
 });

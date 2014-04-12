@@ -16,16 +16,21 @@ class GamesController < ApplicationController
     board.setup_board(25)
     @tiles = board.tiles
 
-    puts "------------------------------------"
-    puts
-    p @tiles.inspect
-    puts
-    puts "-----------------------------------------"
     render json: @tiles
+  end
 
-    # respond_to do |format|
-    #   format.json {render :json => @tiles}
-    # end
+  def update
+    data = []
+    json_params.each do |string|
+      data.push(JSON.parse(string.to_json))
+    end
+
+    data.each do |datum|
+      tile = Tile.find(datum['id'])
+      tile.update_attribute(:terrain, datum['terrain'])
+    end
+
+    render nothing: true
   end
 
   def show
@@ -33,5 +38,9 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:svg)
+  end
+
+  def json_params
+    params.require(:_json)
   end
 end
