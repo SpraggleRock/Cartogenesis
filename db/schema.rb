@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 20140412151311) do
     t.datetime "updated_at"
   end
 
+  create_table "ages", force: true do |t|
+    t.integer  "game_id"
+    t.text     "age_history"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "boards", force: true do |t|
     t.integer  "board_size"
     t.integer  "game_id"
@@ -31,7 +38,6 @@ ActiveRecord::Schema.define(version: 20140412151311) do
   end
 
   create_table "games", force: true do |t|
-    t.text     "game_svg"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,13 +46,6 @@ ActiveRecord::Schema.define(version: 20140412151311) do
     t.integer  "game_id"
     t.integer  "user_id"
     t.integer  "points"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "rounds", force: true do |t|
-    t.integer  "game_id"
-    t.text     "round_history"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

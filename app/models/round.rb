@@ -1,7 +1,6 @@
-class Round < ActiveRecord::Base
+class Age < ActiveRecord::Base
   belongs_to :game
   has_many :players, through: :game
-  after_create :assign_round_points
 
   def assign_round_points
     self.players.each do |player|
