@@ -1,8 +1,7 @@
-%h1 Lobby
-= form_tag games_path, method: :post do
-    = submit_tag "New Game"
+= form_tag game_path(@game.id), method: :post do
+    = submit_tag "Accept Map"
+= form_tag get_tiles_path, id: "generate_map", method: :post do
+    = submit_tag "Generate Map"
 
-    %div{:id => 'toolbar'}
-
-
+%div{:id => 'toolbar'}
 

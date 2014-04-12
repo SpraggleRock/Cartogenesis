@@ -41,7 +41,8 @@ $(function () {
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
   });
   currentTool(allTools);
-  $('path').on('click', function(event){
-    $(this).attr("fill", selectedTool.color);
+  $('svg').on('click','path', function(event){
+    $(this).attr("fill", selectedTool.color)
+    $(this).attr("terrain", selectedTool.type);
   });
 });
