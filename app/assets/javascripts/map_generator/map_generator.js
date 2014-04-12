@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   var radius = 300;
+  var board;
 
   var svg = d3.select("body").append("svg")
    .attr("width", 2*radius)
@@ -26,20 +27,26 @@ $(document).ready(function(){
   }
 
   function drawHexes(hexes) {
+    i = 1;
     hexes.forEach(function(hex){
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
       .attr("stroke", "black")
       .attr("stroke-width", 1)
       .attr("fill", "beige")
+      .attr("tile_id", (i + (169 * board[0].board_id) - 169))
+
+      i++;
     });
   }
+
+  $('#sav')
 
   $('#generate_map').on("submit", function(event){
     event.preventDefault();
     $.getJSON( '/get_tiles', function(data){
       var tiles=[];
-      console.log(data);
+      board = data;
       $.each(data, function(k, v){
         tiles.push(v.coordinates);
       });
