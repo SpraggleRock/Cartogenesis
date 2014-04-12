@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 20140412151311) do
 
   add_index "tiles", ["coordinates"], name: "index_tiles_on_coordinates", using: :btree
 
+<<<<<<< HEAD
+=======
+  create_table "user_games", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+>>>>>>> dbda0a6fb09fc7a87a661301bfd572882ccea18c
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email"
