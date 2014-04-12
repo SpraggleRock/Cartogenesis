@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(".games.new").ready(function(){
 
   var radius = 300;
   var board;
