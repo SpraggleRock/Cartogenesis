@@ -28,7 +28,7 @@ class GamesController < ApplicationController
     # else redirect "you're not authorized to view that game"
     @game = Game.find(params[:id])
     @game.new_round
-    @active_player = game.active_player
+    @active_player = @game.active_player
     @points = @active_player.points
   end
 
