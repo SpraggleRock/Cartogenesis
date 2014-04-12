@@ -15,8 +15,8 @@ class GamesController < ApplicationController
   end
 
   def start_game
-    @game = game.find(params[:id])
-    new_players_params[:players].each do |player|
+    @game = Game.find(params[:id])
+    new_players_params.each do |player|
       @game.players << Player.create(name: player, game_id: @game.id)
     end
 
@@ -26,7 +26,7 @@ class GamesController < ApplicationController
   def play_game
     #if @game.users.include?(current_user)
     # else redirect "you're not authorized to view that game"
-    @game = game.find(params[:id])
+    @game = Game.find(params[:id])
     @game.new_round
     @active_player = game.active_player
     @points = @active_player.points

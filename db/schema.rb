@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140412151311) do
   create_table "players", force: true do |t|
     t.integer  "game_id"
     t.integer  "user_id"
-    t.integer  "points"
+    t.integer  "points",     default: 0
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
