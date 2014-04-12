@@ -34,7 +34,7 @@ $(".games.new").ready(function(){
       .attr("stroke", "black")
       .attr("stroke-width", 1)
       .attr("terrain", 'ocean')
-      .attr("fill", "beige")
+      .attr("fill", "#0000FF")
       .attr("tile_id", (i + (169 * board[0].board_id) - 169))
 
       i++;
@@ -44,14 +44,18 @@ $(".games.new").ready(function(){
   $('#end_turn').on("submit", function(event){
     event.preventDefault();
 
+    console.log(JSON.stringify(updateQueue))
+
+
     $.ajax({
       type: "POST",
-      url: '/save_board',
-      data: updateQueue,
+      url: '/update_game',
+      data: JSON.stringify(updateQueue),
+      accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function(){
-        alert('Sent board succesfully');
+        alert('Sent update info succesfully');
       }
     });
   });

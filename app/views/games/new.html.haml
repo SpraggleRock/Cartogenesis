@@ -2,6 +2,8 @@
     = submit_tag "Accept Map"
 = form_tag get_tiles_path, id: "generate_map", method: :post do
     = submit_tag "Generate Map"
+= form_tag game_path(@game.id), id: "end_turn", method: :post do
+    = submit_tag "Update Map"
 
 %div{:id => 'toolbar'}
 %div.games.new

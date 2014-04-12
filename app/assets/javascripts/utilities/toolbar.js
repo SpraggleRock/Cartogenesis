@@ -44,10 +44,10 @@ $(function () {
   });
   currentTool(allTools);
   $('svg').on('click','path', function(event){
-    $(this).attr("fill", selectedTool.color)
-    $(this).attr("terrain", selectedTool.type);
-    console.log($(this).attr("tile_id"))
-    updateQueue.push({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")})
-    console.log(updateQueue)
+    if($(this).attr("terrain") != selectedTool.type){
+      $(this).attr("fill", selectedTool.color)
+      $(this).attr("terrain", selectedTool.type);
+      updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+    } 
   });
 });
