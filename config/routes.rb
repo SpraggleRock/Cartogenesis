@@ -2,7 +2,7 @@ Cartogenesis::Application.routes.draw do
 
   root to: 'welcome#index'
 
-  resources :games
+  resources :games, except: :update
 
   get '/get_tiles', to: 'games#generate_board'
 

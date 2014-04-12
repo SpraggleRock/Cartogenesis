@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411235120) do
+ActiveRecord::Schema.define(version: 20140412151311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,29 @@ ActiveRecord::Schema.define(version: 20140411235120) do
     t.datetime "updated_at"
   end
 
+  create_table "ages", force: true do |t|
+    t.integer  "game_id"
+    t.text     "age_history"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "boards", force: true do |t|
     t.integer  "board_size"
+    t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "games", force: true do |t|
-    t.text     "game_svg"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.integer  "points"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,6 +61,8 @@ ActiveRecord::Schema.define(version: 20140411235120) do
 
   add_index "tiles", ["coordinates"], name: "index_tiles_on_coordinates", using: :btree
 
+<<<<<<< HEAD
+=======
   create_table "user_games", force: true do |t|
     t.integer  "game_id"
     t.integer  "user_id"
@@ -53,6 +70,7 @@ ActiveRecord::Schema.define(version: 20140411235120) do
     t.datetime "updated_at"
   end
 
+>>>>>>> dbda0a6fb09fc7a87a661301bfd572882ccea18c
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email"
