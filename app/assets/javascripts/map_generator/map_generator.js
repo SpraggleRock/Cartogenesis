@@ -33,6 +33,7 @@ $(document).ready(function(){
       .attr("d", lineFunction(hex).concat("Z"))
       .attr("stroke", "black")
       .attr("stroke-width", 1)
+      .attr("terrain", 'ocean')
       .attr("fill", "beige")
       .attr("tile_id", (i + (169 * board[0].board_id) - 169))
 
@@ -40,26 +41,39 @@ $(document).ready(function(){
     });
   }
 
-  $('#sav')
+  $('#end_turn').on("submit", function(event){
+    event.preventDefault();
+
+    $.ajax({
+      type: "POST",
+      url: '/save_board',
+      data: updateQueue,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(){
+        alert('Sent board succesfully');
+      }
+    });
+  });
 
   $('#generate_map').on("submit", function(event){
     event.preventDefault();
+
     $.getJSON( '/get_tiles', function(data){
       var tiles=[];
       board = data;
+      console.log(board)
       $.each(data, function(k, v){
         tiles.push(v.coordinates);
       });
       formatted_tiles = format_coords(tiles)
-      console.log(formatted_tiles)
-      var thing_we_want = formatted_tiles.map(function(tile){
+      var hex_data = formatted_tiles.map(function(tile){
         hold = genHexData(genHexVertices(25), hexToCartesian(tile, 25))
         return hold
       });
-      drawHexes(thing_we_want);
+      drawHexes(hex_data);
     });
   });
-
 
 
   //Darws line and appends it to the svg
