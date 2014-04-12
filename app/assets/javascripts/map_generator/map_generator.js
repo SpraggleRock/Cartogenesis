@@ -44,12 +44,23 @@ $(".games.new").ready(function(){
   $('#end_turn').on("submit", function(event){
     event.preventDefault();
 
-    console.log(JSON.stringify(updateQueue))
+    $.ajax({
+      type: "PATCH",
+      url: '/board/' + board[0].board_id ,
+      data: JSON.stringify(updateQueue),
+      accept: 'application/json',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(){
+        alert('Sent update info succesfully');
+      }
+    });
+  });
 
-
+  $('#accept_board').on("submit", function(event){
     $.ajax({
       type: "POST",
-      url: '/update_game',
+      url: '/board',
       data: JSON.stringify(updateQueue),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
@@ -63,7 +74,7 @@ $(".games.new").ready(function(){
   $('#generate_map').on("submit", function(event){
     event.preventDefault();
 
-    $.getJSON( '/get_tiles', function(data){
+    $.getJSON( '/create_board', function(data){
       var tiles=[];
       board = data;
       console.log(board)
