@@ -12,7 +12,15 @@ class GamesController < ApplicationController
 
   def update
 
-    render nothing: true
+  end
+
+  def start_game
+    @game = game.find(params[:id])
+    new_players_params[:players].each do |player|
+      @game.players << Player.create(name: player, game_id: @game.id)
+    end
+
+    redirect_to play_game_path
   end
 
   # def show
@@ -20,5 +28,9 @@ class GamesController < ApplicationController
 
   def json_params
     params.require(:_json)
+  end
+
+  def new_players_params
+    params.require(:players)
   end
 end

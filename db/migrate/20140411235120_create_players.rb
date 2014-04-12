@@ -4,7 +4,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :game_id
       t.integer :user_id
       t.integer :points
-      t.string :player_name
+      t.string :name
 
       t.timestamps
     end

@@ -32,12 +32,24 @@ ActiveRecord::Schema.define(version: 20140412151311) do
 
   create_table "boards", force: true do |t|
     t.integer  "board_size"
+    t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "games", force: true do |t|
-    t.text     "game_svg"
+    t.integer  "round_counter", default: 0
+    t.integer  "turn_counter",  default: 0
+    t.integer  "active_player"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.integer  "points"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,13 +64,6 @@ ActiveRecord::Schema.define(version: 20140412151311) do
   end
 
   add_index "tiles", ["coordinates"], name: "index_tiles_on_coordinates", using: :btree
-
-  create_table "user_games", force: true do |t|
-    t.integer  "game_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", force: true do |t|
     t.string   "username"
