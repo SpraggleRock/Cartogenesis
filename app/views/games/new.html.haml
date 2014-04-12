@@ -1,9 +1,9 @@
-= form_tag game_path(@game.id), method: :post do
+= form_tag games_path, id: "accept_board", method: :post do
     = submit_tag "Accept Map"
-= form_tag get_tiles_path, id: "generate_map", method: :post do
+= form_tag create_board_path, id: "generate_map", method: :post do
     = submit_tag "Generate Map"
-= form_tag game_path(@game.id), id: "end_turn", method: :post do
-    = submit_tag "Update Map"
+/ = form_tag game_path(@game.id), id: "end_turn", method: :post do
+/     = submit_tag "End Turn"
 
 %div{:id => 'toolbar'}
 %div.games.new
