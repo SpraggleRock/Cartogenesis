@@ -58,12 +58,12 @@ $(".games.play").ready(function(){
     drawHexes(hex_data);
   });
 
-  $('#end_turn').on("submit", function(event){
-    event.preventDefault();
+  $('.end_turn').on("submit", function(event){
 
+    console.log('i am here')
     $.ajax({
       type: "PATCH",
-      url: '/board/' + board[0].board_id ,
+      url: '/board/' + board[0].board_id,
       data: JSON.stringify(updateQueue),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',

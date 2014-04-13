@@ -41,22 +41,6 @@ $(".games.new").ready(function(){
     });
   }
 
-  $('#end_turn').on("submit", function(event){
-    event.preventDefault();
-
-    $.ajax({
-      type: "PATCH",
-      url: '/board/' + board[0].board_id,
-      data: JSON.stringify(updateQueue),
-      accept: 'application/json',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      success: function(){
-        alert('Sent update info succesfully');
-      }
-    });
-  });
-
   $('#accept_board').on("submit", function(event){
     $.ajax({
       type: "PATCH",
@@ -83,7 +67,7 @@ $(".games.new").ready(function(){
       });
       formatted_tiles = format_coords(tiles)
       var hex_data = formatted_tiles.map(function(tile){
-        hold = genHexData(genHexVertices(25), hexToCartesian(tile, 25))
+        hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
         return hold
       });
       drawHexes(hex_data);

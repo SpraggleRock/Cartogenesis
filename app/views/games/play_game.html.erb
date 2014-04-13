@@ -3,7 +3,7 @@
 <h1> It is the <%=@game.turn_counter%> turn </h1>
 <h1> It is <%=@game.round_counter%>'s round </h1>
 
-<%= button_to "End Turn", @game, method: :patch%>
+<%= button_to "End Turn", @game, method: :patch, form_class: "end_turn"%>
 
 
 <div id='toolbar'></div>

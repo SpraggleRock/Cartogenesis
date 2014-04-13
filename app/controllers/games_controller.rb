@@ -13,10 +13,9 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
+    @board = Board.find_by(game_id: params[:id])
     @game.end_turn
     @game.save
-
-    p "i'm in update!!!"
 
     redirect_to play_game_path
   end

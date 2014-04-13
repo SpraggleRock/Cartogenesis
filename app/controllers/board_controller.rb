@@ -1,8 +1,8 @@
 class BoardController < ApplicationController
 
   def create
-    board = Board.create(board_size: 7)
-    board.setup_board(25)
+    board = Board.create(board_size: 15)
+    board.setup_board(20)
     @tiles = board.tiles.order(id: :asc)
     session[:board_id] = board.id
 
