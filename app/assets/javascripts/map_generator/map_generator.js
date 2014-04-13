@@ -35,7 +35,7 @@ $(".games.new").ready(function(){
       .attr("stroke-width", 1)
       .attr("terrain", 'ocean')
       .attr("fill", "#0000FF")
-      .attr("tile_id", (i + (169 * board[0].board_id) - 169))
+      // .attr("tile_id", (i + (169 * board[0].board_id) - 169))
 
       i++;
     });
@@ -55,21 +55,51 @@ $(".games.new").ready(function(){
     });
   });
 
-  $('#generate_map').on("submit", function(event){
-    event.preventDefault();
 
-    $.getJSON( '/create_board', function(data){
-      var tiles=[];
-      board = data;
-      $.each(data, function(k, v){
-        tiles.push(v.coordinates);
-      });
-      formatted_tiles = format_coords(tiles)
-      var hex_data = formatted_tiles.map(function(tile){
-        hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
-        return hold
-      });
-      drawHexes(hex_data);
+// function Tile(radius, coordinates, terrain) {
+//   this.radius = radius
+//   this.coordinates = coordinates
+//   this.terrain = terrain
+// }
+//new Tile(25, terrainOptions[Math.floor((3 * Math.random()))],
+// var terrainOptions = ["ocean", "ocean", "desert"]
+  $('#generate_map').on("click", function(event){
+    event.preventDefault();
+    console.log("hey");
+    var tiles = [];
+    var boardSize = 50
+    for (var i = -boardSize; Math.abs(i) <= boardSize; i++){
+      for (var j = -boardSize; Math.abs(j) <= boardSize; j++){
+        for (var k = -boardSize; Math.abs(k) <= boardSize; k++){
+          if(i+j+k == 0){
+            tiles.push(i.toString()+", "+j.toString()+", "+k.toString());
+          }
+        }
+      }
+    }
+    formatted_tiles = format_coords(tiles)
+    var hex_data = formatted_tiles.map(function(tile){
+      hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
+      return hold
     });
+    console.log(tiles);
+    drawHexes(hex_data);
+
+    //
+
+    // $.getJSON( '/create_board', function(data){
+    //   var tiles=[];
+    //   board = data;
+    //   $.each(data, function(k, v){
+    //     tiles.push(v.coordinates);
+    //   });
+    //   formatted_tiles = format_coords(tiles)
+    //   var hex_data = formatted_tiles.map(function(tile){
+    //     hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
+    //     return hold
+    //   });
+    //   console.log(board);
+    //   drawHexes(hex_data);
+    // });
   });
 });

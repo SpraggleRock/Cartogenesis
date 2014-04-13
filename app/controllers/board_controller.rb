@@ -2,7 +2,6 @@ class BoardController < ApplicationController
 
   def new
     @tiles = Tile.tileset(params[:size])
-
     render json: @tiles
   end
 
@@ -11,7 +10,6 @@ class BoardController < ApplicationController
     board.setup_board(20)
     @tiles = board.tiles.order(id: :asc)
     session[:board_id] = board.id
-
     render json: @tiles
   end
 
