@@ -15,5 +15,8 @@
 //= require turbolinks
 //= require d3
 //= require jquery-readyselector
+//= require websocket_rails/main
 //= require_tree .
+
+
 
