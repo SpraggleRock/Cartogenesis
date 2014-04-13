@@ -1,7 +1,9 @@
 class BoardController < ApplicationController
 
   def new
+    @tiles = Tile.tileset(params[:size])
 
+    render json: @tiles
   end
 
   def create
