@@ -46,7 +46,7 @@ $(".games.new").ready(function(){
 
     $.ajax({
       type: "PATCH",
-      url: '/board/' + board[0].board_id ,
+      url: '/board/' + board[0].board_id,
       data: JSON.stringify(updateQueue),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
@@ -59,8 +59,8 @@ $(".games.new").ready(function(){
 
   $('#accept_board').on("submit", function(event){
     $.ajax({
-      type: "POST",
-      url: '/board',
+      type: "PATCH",
+      url: '/board/'+ board[0].board_id,
       data: JSON.stringify(updateQueue),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',

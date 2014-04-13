@@ -28,16 +28,18 @@ $(".games.play").ready(function(){
 
   function drawHexes(hexes) {
     i = 1;
+    j = 0;
     hexes.forEach(function(hex){
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
       .attr("stroke", "black")
       .attr("stroke-width", 1)
-      .attr("terrain", 'ocean')
+      .attr("terrain", board[j].terrain)
       .attr("fill", "#0000FF")
-      .attr("tile_id", (i + (169 * board[0].board_id) - 169))
+      .attr("tile_id", board[j].id)
 
       i++;
+      j++;
     });
   }
 
@@ -46,7 +48,6 @@ $(".games.play").ready(function(){
   $.getJSON( '/board/'+ gameID, function(data){
     var tiles=[];
     board = data;
-    console.log(board)
     $.each(data, function(k, v){
       tiles.push(v.coordinates);
     });

@@ -4,6 +4,7 @@ class BoardController < ApplicationController
     board = Board.create(board_size: 7)
     board.setup_board(25)
     @tiles = board.tiles
+    session[:board_id] = board.id
 
     render json: @tiles
   end
@@ -11,8 +12,6 @@ class BoardController < ApplicationController
   def show
     board = Board.find_by(game_id: params[:id])
     @tiles = board.tiles
-
-    puts "I'm here"
 
     render json: @tiles
   end
@@ -25,7 +24,9 @@ class BoardController < ApplicationController
 
     data.each do |datum|
       tile = Tile.find(datum['id'])
+      p tile
       tile.update_attribute(:terrain, datum['terrain'])
+      p tile
     end
 
     render nothing: true

@@ -8,6 +8,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create()
+    @game.board = Board.find(session[:board_id])
   end
 
   def update
