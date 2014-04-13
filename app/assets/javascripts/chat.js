@@ -1,5 +1,5 @@
 console.log('in chat.js');
-
+COLORS = ['red', 'yellow', 'blue'];
 var dispatcher = new WebSocketRails('localhost:3000/websocket');
 
 dispatcher.on_open = function(data) {
@@ -36,5 +36,6 @@ function receiveAndDisplay() {
     console.log(message);
 
     $('#chat_window').append("<p>"+message.text+"</p>");
+    $('#chat_window').css('background-color', COLORS[Math.floor(Math.random() * 3)]);
   })
 }
