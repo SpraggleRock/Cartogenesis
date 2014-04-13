@@ -30,6 +30,7 @@ function loadTools(){
 
 function currentTool(allTools) {
   $("#toolbar").on('click', 'div', function(){
+
     for(i=0; i < allTools.length; i++){
       if (allTools[i].type == this.id)
         selectedTool = allTools[i]

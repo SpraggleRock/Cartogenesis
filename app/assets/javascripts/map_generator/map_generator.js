@@ -1,7 +1,7 @@
 $(".games.new").ready(function(){
 
   var radius = 300;
-  var board;
+  var board_id;
   var createdTiles = [];
 
   var svg = d3.select(".svg_container").append("svg")
@@ -28,7 +28,7 @@ $(".games.new").ready(function(){
   }
 
   function drawHexes(hexes, tiles) {
-    i = 1;
+    i = 0;
     hexes.forEach(function(hex){
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
@@ -43,27 +43,28 @@ $(".games.new").ready(function(){
     });
   }
 
+function snapshotTiles() {
+  for(var i = 1; i <= $('g').children().length; i++){
+    var path = $("path:nth-child("+i+")")
+    createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain")));
+  }
+}
+
   $('#accept_board').on("submit", function(event){
     event.preventDefault();
+    snapshotTiles();
     $.ajax({
       type: "POST",
-      url: '/board',
+      url: '/games',
       data: JSON.stringify(createdTiles),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function(response){
-        $.ajax({
-          type: "PATCH",
-          url: '/board/'+response.id,
-          data: JSON.stringify(updateQueue),
-          accept: 'application/json',
-          contentType: 'application/json; charset=utf-8',
-          dataType: 'json',
-          success: function(){
-          alert('Sent update info succesfully');
-          }
-        });
+        console.log(response)
+        debugger
+        board_id = response.id
+        window.location.href = '/game_portal/' + response.game_id
       }
     });
   });
@@ -78,7 +79,6 @@ function Tile(radius, coordinates, terrain) {
 // var terrainOptions = ["ocean", "ocean", "desert"]
   $('#generate_map').on("click", function(event){
     event.preventDefault();
-    console.log("hey");
     var tiles = [];
     var boardSize = 7;
     for (var i = -boardSize; Math.abs(i) <= boardSize; i++){
@@ -87,7 +87,6 @@ function Tile(radius, coordinates, terrain) {
           if(i+j+k == 0){
             coordinates = i.toString()+", "+j.toString()+", "+k.toString();
             tiles.push(coordinates);
-            createdTiles.push(new Tile(20, coordinates, "ocean"));
           }
         }
       }
@@ -97,25 +96,7 @@ function Tile(radius, coordinates, terrain) {
       hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
       return hold
     });
-    console.log(tiles);
-    console.log(createdTiles);
     drawHexes(hex_data, tiles);
 
-    //
-
-    // $.getJSON( '/create_board', function(data){
-    //   var tiles=[];
-    //   board = data;
-    //   $.each(data, function(k, v){
-    //     tiles.push(v.coordinates);
-    //   });
-    //   formatted_tiles = format_coords(tiles)
-    //   var hex_data = formatted_tiles.map(function(tile){
-    //     hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
-    //     return hold
-    //   });
-    //   console.log(board);
-    //   drawHexes(hex_data);
-    // });
   });
 });

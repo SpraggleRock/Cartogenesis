@@ -27,7 +27,6 @@ $(".games.play").ready(function(){
   }
 
   function drawHexes(hexes) {
-    i = 1;
     j = 0;
     hexes.forEach(function(hex){
     hexShow = g.append("path")
@@ -37,8 +36,8 @@ $(".games.play").ready(function(){
       .attr("terrain", board[j].terrain)
       .attr("fill", getColor(board[j].terrain, allTools))
       .attr("tile_id", board[j].id)
+      .attr("board_id", board[0].board_id)
 
-      i++;
       j++;
     });
   }

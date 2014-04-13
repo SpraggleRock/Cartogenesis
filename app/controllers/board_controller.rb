@@ -17,8 +17,6 @@ class BoardController < ApplicationController
       board.tiles << Tile.create(coordinates: datum['coordinates'], terrain: datum['terrain'], radius: datum['radius'])
     end
     @tiles = board.tiles.order(id: :asc)
-    session[:board_id] = board.id
-    render json: board
   end
 
   def show
@@ -35,11 +33,8 @@ class BoardController < ApplicationController
     end
     puts params
     data.each do |datum|
-      tile = Tile.find_by(coordinates: datum['coordinates'])
-      p tile
+      tile = Tile.find(datum['id'])
       tile.update_attribute(:terrain, datum['terrain'])
-      tile.update_attribute(:board_id, params[:id])
-      p tile
     end
 
     render nothing: true
