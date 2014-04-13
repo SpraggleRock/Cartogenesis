@@ -1,9 +1,9 @@
-$(".games.new").ready(function(){
+$(".games.play").ready(function(){
 
   var radius = 300;
   var board;
 
-  var svg = d3.select(".svg_container").append("svg")
+  var svg = d3.select("body").append("svg")
    .attr("width", 2*radius)
    .attr("height", 2*radius)
 
@@ -28,25 +28,42 @@ $(".games.new").ready(function(){
 
   function drawHexes(hexes) {
     i = 1;
+    j = 0;
     hexes.forEach(function(hex){
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
       .attr("stroke", "black")
       .attr("stroke-width", 1)
-      .attr("terrain", 'ocean')
-      .attr("fill", "#0000FF")
-      .attr("tile_id", (i + (169 * board[0].board_id) - 169))
+      .attr("terrain", board[j].terrain)
+      .attr("fill", getColor(board[j].terrain, allTools))
+      .attr("tile_id", board[j].id)
 
       i++;
+      j++;
     });
   }
+  var gameID = $('.games.play').attr("id");
+
+  $.getJSON( '/board/'+ gameID, function(data){
+    var tiles=[];
+    board = data;
+    $.each(data, function(k, v){
+      tiles.push(v.coordinates);
+    });
+    formatted_tiles = format_coords(tiles)
+    var hex_data = formatted_tiles.map(function(tile){
+      hold = genHexData(genHexVertices(25), hexToCartesian(tile, 25))
+      return hold
+    });
+    drawHexes(hex_data);
+  });
 
   $('#end_turn').on("submit", function(event){
     event.preventDefault();
 
     $.ajax({
       type: "PATCH",
-      url: '/board/' + board[0].board_id,
+      url: '/board/' + board[0].board_id ,
       data: JSON.stringify(updateQueue),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
@@ -56,41 +73,7 @@ $(".games.new").ready(function(){
       }
     });
   });
-
-  $('#accept_board').on("submit", function(event){
-    $.ajax({
-      type: "PATCH",
-      url: '/board/'+ board[0].board_id,
-      data: JSON.stringify(updateQueue),
-      accept: 'application/json',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      success: function(){
-        alert('Sent update info succesfully');
-      }
-    });
-  });
-
-  $('#generate_map').on("submit", function(event){
-    event.preventDefault();
-
-    $.getJSON( '/create_board', function(data){
-      var tiles=[];
-      board = data;
-      console.log(board)
-      $.each(data, function(k, v){
-        tiles.push(v.coordinates);
-      });
-      formatted_tiles = format_coords(tiles)
-      var hex_data = formatted_tiles.map(function(tile){
-        hold = genHexData(genHexVertices(25), hexToCartesian(tile, 25))
-        return hold
-      });
-      drawHexes(hex_data);
-    });
-  });
-
-
+});
 
   //Darws line and appends it to the svg
   // var lineShow = svg.append("path")
@@ -100,9 +83,6 @@ $(".games.new").ready(function(){
   //   .attr("fill", "beige");
 
   //Draws hexes and appends them to svg
-});
-
-
 
   //  var fakeHexDatas = [ {'a':0,'b':0,'c':0}, {'a':1, 'b':0 , 'c':-1}, {'a':-1, 'b':1, 'c':0},
   //   {'a':-1, 'b':0, 'c':1},{'a':0, 'b':1, 'c':-1}, {'a':0, 'b':-1, 'c':1},{'a':1, 'b':-1, 'c':0}, {'a':0,'b':-2,'c':2},

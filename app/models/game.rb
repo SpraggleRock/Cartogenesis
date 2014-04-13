@@ -21,12 +21,13 @@ class Game < ActiveRecord::Base
   end
 
   def next_player
-    active_player = player[turn_counter]
+    self.active_player = self.players[turn_counter]
   end
 
   def new_round
     self.round_counter = self.round_counter + 1
     self.turn_counter = 0
+    self.next_player
     assign_round_points
   end
 

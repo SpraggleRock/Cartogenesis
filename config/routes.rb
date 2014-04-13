@@ -2,13 +2,15 @@ Cartogenesis::Application.routes.draw do
 
   root to: 'welcome#index'
 
-  resources :games, except: [:update, :create]
+  patch '/games/:id/start', to: "games#start_game", as: 'start_game'
 
-  resources :board, only: [ :update]
+  get '/games/:id/play', to: "games#play_game", as: 'play_game'
+
+  resources :games, except: [:create ]
+
+  resources :board, only: [ :update , :show]
 
   get '/create_board', to: 'board#create'
-
-  post '/update_game', to: 'games#update'
 
   post '/game_portal', to: 'games#create'
 end
