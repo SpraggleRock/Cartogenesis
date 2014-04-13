@@ -62,7 +62,6 @@ function snapshotTiles() {
       dataType: 'json',
       success: function(response){
         console.log(response)
-        debugger
         board_id = response.id
         window.location.href = '/game_portal/' + response.game_id
       }
