@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def new
-    @game = Game.new(id: (Game.all.last.id + 1))
+    @game = Game.new()
   end
 
   def index

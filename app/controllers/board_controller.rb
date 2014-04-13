@@ -1,5 +1,9 @@
 class BoardController < ApplicationController
 
+  def new
+
+  end
+
   def create
     board = Board.create(board_size: 15)
     board.setup_board(20)
