@@ -51,6 +51,11 @@ function getColor(terrainType, Tools){
 var allTools = loadTools();
 
 $(function () {
+
+  $(this).on('click', function(event){
+    console.log(this)
+  })
+
   $.each(allTools, function(){
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
   });
@@ -68,6 +73,11 @@ $(function () {
   }
   $('svg').on('mousedown','path', function(event){
     startHover().bind()
+    if($(this).attr("terrain") != selectedTool.type){
+        $(this).attr("fill", selectedTool.color)
+        $(this).attr("terrain", selectedTool.type);
+        updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+      }
   });
 
   $(document).on('mouseup', function(event){

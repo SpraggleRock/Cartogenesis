@@ -13,21 +13,21 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
+    @board = Board.find_by(game_id: params[:id])
     @game.end_turn
     @game.save
-
-    p "i'm in update!!!"
 
     redirect_to play_game_path
   end
 
   def start_game
-    @game = Game.find(params[:id])
-    new_players_params.each do |player|
-      @game.players << Player.create(name: player, game_id: @game.id)
+    @game = Game.find(params[:id].to_i)
+    puts params
+    params[:players].each do |player|
+      @game.players << Player.create!(name: player)
     end
-    @game.active_player = @game.players[0]
-
+    @game.active_player = @game.players[0].id
+    @game.save
     redirect_to play_game_path
   end
 
@@ -45,7 +45,7 @@ class GamesController < ApplicationController
     params.require(:_json)
   end
 
-  def new_players_params
-    params.require(:players)
-  end
+  # def new_players_params
+  #   params.require(:players)
+  # end
 end
