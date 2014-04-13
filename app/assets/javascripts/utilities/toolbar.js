@@ -30,7 +30,6 @@ function loadTools(){
 
 function currentTool(allTools) {
   $("#toolbar").on('click', 'div', function(){
-    console.log(this.id)
     for(i=0; i < allTools.length; i++){
       if (allTools[i].type == this.id)
         selectedTool = allTools[i]
@@ -51,10 +50,6 @@ function getColor(terrainType, Tools){
 var allTools = loadTools();
 
 $(function () {
-
-  $(this).on('click', function(event){
-    console.log(this)
-  })
 
   $.each(allTools, function(){
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
