@@ -55,11 +55,23 @@ $(function () {
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
   });
   currentTool(allTools);
-  $('svg').on('click','path', function(event){
-    if($(this).attr("terrain") != selectedTool.type){
-      $(this).attr("fill", selectedTool.color)
-      $(this).attr("terrain", selectedTool.type);
-      updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
-    }
+
+  function startHover(){
+    var hold;
+    return hold = $('svg').on('mouseenter', 'path', function(evet){
+      if($(this).attr("terrain") != selectedTool.type){
+        $(this).attr("fill", selectedTool.color)
+        $(this).attr("terrain", selectedTool.type);
+        updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+      }
+    })
+  }
+  $('svg').on('mousedown','path', function(event){
+    startHover().bind()
   });
+
+  $(document).on('mouseup', function(event){
+    $('svg').unbind('mouseenter')
+  });
+
 });
