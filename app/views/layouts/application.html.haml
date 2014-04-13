@@ -7,4 +7,24 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
+    #chat_window
+    %a{href: "#"}
+      %button#start_chat Start Chat!
+    %form.chat_form{action: "#", method: "get"}
+      %p
+        %textarea#chat_input{cols: "30", rows: "5"}
+      %p
+        %input{type: "submit", value: "Send"}
+
     = yield
+
+  / <div id="chat_window"></div>
+  / <a href='#'><button id="start_chat">Start Chat!</button></a>
+  /   <%= form_for '@task', url: {action: 'create'}, html: {class: "chat_form"} do |f| %>
+  /   <p>
+  /     <%= f.text_area :user_input, size: "60x3" %>
+  /   </p>
+  /   <p>
+  /     <%= f.submit "Send" %>
+  /   </p>
+  / <% end %>
