@@ -1,11 +1,13 @@
 = form_tag game_portal_path, id: "accept_board", method: :post do
-    = submit_tag "Accept Map"
+  = submit_tag "Accept Map"
 = form_tag create_board_path, id: "generate_map", method: :post do
-    = submit_tag "Generate Map"
+  = submit_tag "Generate Map"
 / = form_tag game_path(@game.id), id: "end_turn", method: :post do
-/     = submit_tag "End Turn"
+/   = submit_tag "End Turn"
 
-%div{:id => 'toolbar'}
-%div.games.new
+%div{class: 'game_container'}
+  %div{:id => 'toolbar'}
+  %div{class: 'svg_container'}
+    %div.games.new
 
 

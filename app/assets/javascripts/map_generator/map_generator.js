@@ -3,7 +3,7 @@ $(".games.new").ready(function(){
   var radius = 300;
   var board;
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select(".svg_container").append("svg")
    .attr("width", 2*radius)
    .attr("height", 2*radius)
 
