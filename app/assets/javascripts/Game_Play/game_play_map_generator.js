@@ -30,7 +30,6 @@ $(".games.play").ready(function(){
     i = 1;
     j = 0;
     hexes.forEach(function(hex){
-      console.log(hex)
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
       .attr("stroke", "black")

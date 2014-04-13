@@ -13,20 +13,37 @@ class Game < ActiveRecord::Base
   end
 
   def end_turn
+    p '======================================='
+    p self
+    p '======================================='
+
     self.turn_counter = self.turn_counter + 1
     if self.turn_counter > self.players.length
         new_round
     end
+    p '--------------------------------------------'
+    p "turn counter:#{self.turn_counter}"
+    p "round counter:#{self.round_counter}"
+    p "active_player:#{self.active_player}"
+    p "players in game:#{self.players.map(&:name)}"
+    p '--------------------------------------------'
+
     next_player
   end
 
   def next_player
-    self.active_player = self.players[turn_counter]
+    p '++++++++++++++++++++++++++++++++++++++++'
+    p 'next player is being called!!!'
+    p '++++++++++++++++++++++++++++++++++++++++'
+    self.active_player = self.players[turn_counter - 1]
   end
 
   def new_round
+    p '--------------------------------------------'
+    p 'starting a new round!'
+    p '--------------------------------------------'
     self.round_counter = self.round_counter + 1
-    self.turn_counter = 0
+    self.update(turn_counter: 1)
     self.next_player
     assign_round_points
   end
