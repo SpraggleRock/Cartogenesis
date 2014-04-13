@@ -4,6 +4,11 @@ class Tile < ActiveRecord::Base
 
   NEIGHBOR_VECTORS = [ [+1, -1,  0], [+1,  0, -1], [ 0, +1, -1], [-1, +1,  0], [-1,  0, +1], [ 0, -1, +1] ]
 
+  def self.tileset(size)
+    if size == small
+    end
+  end
+
   def neighbors
     neighbor_coords = NEIGHBOR_VECTORS.map { |vector| self.add_coords(vector) }
     neighbor_coords.map{ |coord| Tile.where(coordinates: coord.join(", "))}

@@ -2,6 +2,7 @@ $(".games.new").ready(function(){
 
   var radius = 300;
   var board;
+  var createdTiles = [];
 
   var svg = d3.select(".svg_container").append("svg")
    .attr("width", 2*radius)
@@ -26,7 +27,7 @@ $(".games.new").ready(function(){
     return formatted_coord_array;
   }
 
-  function drawHexes(hexes) {
+  function drawHexes(hexes, tiles) {
     i = 1;
     hexes.forEach(function(hex){
     hexShow = g.append("path")
@@ -35,6 +36,7 @@ $(".games.new").ready(function(){
       .attr("stroke-width", 1)
       .attr("terrain", 'ocean')
       .attr("fill", "#0000FF")
+      .attr("coordinates", tiles[i])
       // .attr("tile_id", (i + (169 * board[0].board_id) - 169))
 
       i++;
@@ -42,37 +44,50 @@ $(".games.new").ready(function(){
   }
 
   $('#accept_board').on("submit", function(event){
+    event.preventDefault();
     $.ajax({
-      type: "PATCH",
-      url: '/board/'+ board[0].board_id,
-      data: JSON.stringify(updateQueue),
+      type: "POST",
+      url: '/board',
+      data: JSON.stringify(createdTiles),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      success: function(){
-        alert('Sent update info succesfully');
+      success: function(response){
+        $.ajax({
+          type: "PATCH",
+          url: '/board/'+response.id,
+          data: JSON.stringify(updateQueue),
+          accept: 'application/json',
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          success: function(){
+          alert('Sent update info succesfully');
+          }
+        });
       }
     });
   });
 
 
-// function Tile(radius, coordinates, terrain) {
-//   this.radius = radius
-//   this.coordinates = coordinates
-//   this.terrain = terrain
-// }
+function Tile(radius, coordinates, terrain) {
+  this.radius = radius
+  this.coordinates = coordinates
+  this.terrain = terrain
+}
 //new Tile(25, terrainOptions[Math.floor((3 * Math.random()))],
 // var terrainOptions = ["ocean", "ocean", "desert"]
   $('#generate_map').on("click", function(event){
     event.preventDefault();
     console.log("hey");
     var tiles = [];
-    var boardSize = 50
+    var boardSize = 7;
     for (var i = -boardSize; Math.abs(i) <= boardSize; i++){
       for (var j = -boardSize; Math.abs(j) <= boardSize; j++){
         for (var k = -boardSize; Math.abs(k) <= boardSize; k++){
           if(i+j+k == 0){
-            tiles.push(i.toString()+", "+j.toString()+", "+k.toString());
+            coordinates = i.toString()+", "+j.toString()+", "+k.toString();
+            tiles.push(coordinates);
+            createdTiles.push(new Tile(20, coordinates, "ocean"));
           }
         }
       }
@@ -83,7 +98,8 @@ $(".games.new").ready(function(){
       return hold
     });
     console.log(tiles);
-    drawHexes(hex_data);
+    console.log(createdTiles);
+    drawHexes(hex_data, tiles);
 
     //
 
