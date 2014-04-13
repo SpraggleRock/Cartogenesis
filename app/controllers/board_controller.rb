@@ -1,12 +1,22 @@
 class BoardController < ApplicationController
 
-  def create
-    board = Board.create(board_size: 15)
-    board.setup_board(20)
-    @tiles = board.tiles.order(id: :asc)
-    session[:board_id] = board.id
-
+  def new
+    @tiles = Tile.tileset(params[:size])
     render json: @tiles
+  end
+
+  def create
+    board = Board.create(board_size: 7)
+    puts json_params
+    data = []
+    json_params.each do |string|
+      data.push(JSON.parse(string.to_json))
+    end
+    puts data
+    data.each do |datum|
+      board.tiles << Tile.create(coordinates: datum['coordinates'], terrain: datum['terrain'], radius: datum['radius'])
+    end
+    @tiles = board.tiles.order(id: :asc)
   end
 
   def show
@@ -21,12 +31,10 @@ class BoardController < ApplicationController
     json_params.each do |string|
       data.push(JSON.parse(string.to_json))
     end
-
+    puts params
     data.each do |datum|
       tile = Tile.find(datum['id'])
-      p tile
       tile.update_attribute(:terrain, datum['terrain'])
-      p tile
     end
 
     render nothing: true

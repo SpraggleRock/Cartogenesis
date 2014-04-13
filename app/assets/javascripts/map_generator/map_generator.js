@@ -1,7 +1,8 @@
 $(".games.new").ready(function(){
 
   var radius = 300;
-  var board;
+  var board_id;
+  var createdTiles = [];
 
   var svg = d3.select(".svg_container").append("svg")
    .attr("width", 2*radius)
@@ -26,8 +27,8 @@ $(".games.new").ready(function(){
     return formatted_coord_array;
   }
 
-  function drawHexes(hexes) {
-    i = 1;
+  function drawHexes(hexes, tiles) {
+    i = 0;
     hexes.forEach(function(hex){
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
@@ -35,42 +36,67 @@ $(".games.new").ready(function(){
       .attr("stroke-width", 1)
       .attr("terrain", 'ocean')
       .attr("fill", "#0000FF")
-      .attr("tile_id", (i + (169 * board[0].board_id) - 169))
+      .attr("coordinates", tiles[i])
+      // .attr("tile_id", (i + (169 * board[0].board_id) - 169))
 
       i++;
     });
   }
 
+function snapshotTiles() {
+  for(var i = 1; i <= $('g').children().length; i++){
+    var path = $("path:nth-child("+i+")")
+    createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain")));
+  }
+}
+
   $('#accept_board').on("submit", function(event){
+    event.preventDefault();
+    snapshotTiles();
     $.ajax({
-      type: "PATCH",
-      url: '/board/'+ board[0].board_id,
-      data: JSON.stringify(updateQueue),
+      type: "POST",
+      url: '/games',
+      data: JSON.stringify(createdTiles),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      success: function(){
-        alert('Sent update info succesfully');
+      success: function(response){
+        console.log(response)
+        debugger
+        board_id = response.id
+        window.location.href = '/game_portal/' + response.game_id
       }
     });
   });
 
-  $('#generate_map').on("submit", function(event){
-    event.preventDefault();
 
-    $.getJSON( '/create_board', function(data){
-      var tiles=[];
-      board = data;
-      console.log(board)
-      $.each(data, function(k, v){
-        tiles.push(v.coordinates);
-      });
-      formatted_tiles = format_coords(tiles)
-      var hex_data = formatted_tiles.map(function(tile){
-        hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
-        return hold
-      });
-      drawHexes(hex_data);
+function Tile(radius, coordinates, terrain) {
+  this.radius = radius
+  this.coordinates = coordinates
+  this.terrain = terrain
+}
+//new Tile(25, terrainOptions[Math.floor((3 * Math.random()))],
+// var terrainOptions = ["ocean", "ocean", "desert"]
+  $('#generate_map').on("click", function(event){
+    event.preventDefault();
+    var tiles = [];
+    var boardSize = 7;
+    for (var i = -boardSize; Math.abs(i) <= boardSize; i++){
+      for (var j = -boardSize; Math.abs(j) <= boardSize; j++){
+        for (var k = -boardSize; Math.abs(k) <= boardSize; k++){
+          if(i+j+k == 0){
+            coordinates = i.toString()+", "+j.toString()+", "+k.toString();
+            tiles.push(coordinates);
+          }
+        }
+      }
+    }
+    formatted_tiles = format_coords(tiles)
+    var hex_data = formatted_tiles.map(function(tile){
+      hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
+      return hold
     });
+    drawHexes(hex_data, tiles);
+
   });
 });

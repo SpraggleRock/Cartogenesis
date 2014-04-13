@@ -1,6 +1,11 @@
 class GamesController < ApplicationController
   def new
-    @game = Game.new(id: (Game.all.last.id + 1))
+    @game = Game.new()
+  end
+
+  def portal
+    @game = Game.find(params[:id])
+    render :create
   end
 
   def index
@@ -8,7 +13,20 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create()
-    @game.board = Board.find(session[:board_id])
+    board = Board.create(board_size: 7, game_id: @game.id)
+    @game.board = Board.last
+    puts json_params
+    data = []
+    json_params.each do |string|
+      data.push(JSON.parse(string.to_json))
+    end
+    puts data
+    data.each do |datum|
+      board.tiles << Tile.create(coordinates: datum['coordinates'], terrain: datum['terrain'], radius: datum['radius'])
+    end
+    @tiles = board.tiles.order(id: :asc)
+
+    render json: board
   end
 
   def update
