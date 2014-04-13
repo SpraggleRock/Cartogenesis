@@ -35,14 +35,13 @@ $(".games.play").ready(function(){
       .attr("stroke", "black")
       .attr("stroke-width", 1)
       .attr("terrain", board[j].terrain)
-      .attr("fill", "#0000FF")
+      .attr("fill", getColor(board[j].terrain, allTools))
       .attr("tile_id", board[j].id)
 
       i++;
       j++;
     });
   }
-
   var gameID = $('.games.play').attr("id");
 
   $.getJSON( '/board/'+ gameID, function(data){

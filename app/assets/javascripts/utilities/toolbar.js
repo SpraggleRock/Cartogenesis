@@ -7,6 +7,7 @@ var updateQueue = [];
 
 var selectedTool;
 
+
 var toolData = [{
   type: 'grassland',
   color: '#99FF33'},
@@ -37,8 +38,19 @@ function currentTool(allTools) {
   });
 }
 
+function getColor(terrainType, Tools){
+  var myTool = "string";
+  Tools.forEach(function(tool){
+    if(tool.type == terrainType){
+      myTool = tool.color
+    }
+  })
+  return myTool
+}
+
+var allTools = loadTools();
+
 $(function () {
-  var allTools = loadTools();
   $.each(allTools, function(){
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
   });
@@ -48,6 +60,6 @@ $(function () {
       $(this).attr("fill", selectedTool.color)
       $(this).attr("terrain", selectedTool.type);
       updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
-    } 
+    }
   });
 });
