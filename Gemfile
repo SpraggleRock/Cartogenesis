@@ -37,6 +37,10 @@ gem 'bcrypt-ruby'
 # coveralls gem
 gem 'coveralls', require: false
 
+gem 'websocket-rails'
+
+gem 'cancan'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
