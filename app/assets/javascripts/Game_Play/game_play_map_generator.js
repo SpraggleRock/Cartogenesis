@@ -59,19 +59,19 @@ $(".games.play").ready(function(){
   });
 
   $('.end_turn').on("submit", function(event){
-
-    console.log('i am here')
-    $.ajax({
-      type: "PATCH",
-      url: '/board/' + board[0].board_id,
-      data: JSON.stringify(updateQueue),
-      accept: 'application/json',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      success: function(){
-        alert('Sent update info succesfully');
-      }
-    });
+    if(updateQueue){
+      $.ajax({
+        type: "PATCH",
+        url: '/board/' + board[0].board_id,
+        data: JSON.stringify(updateQueue),
+        accept: 'application/json',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+         success: function(){
+           alert('Sent update info succesfully');
+         }
+      });
+    }
   });
 });
 
