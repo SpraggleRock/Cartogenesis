@@ -3,7 +3,7 @@ class BoardController < ApplicationController
   def create
     board = Board.create(board_size: 7)
     board.setup_board(25)
-    @tiles = board.tiles
+    @tiles = board.tiles.order(id: :asc)
     session[:board_id] = board.id
 
     render json: @tiles
@@ -11,7 +11,7 @@ class BoardController < ApplicationController
 
   def show
     board = Board.find_by(game_id: params[:id])
-    @tiles = board.tiles
+    @tiles = board.tiles.order(id: :asc)
 
     render json: @tiles
   end
