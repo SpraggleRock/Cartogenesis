@@ -61,7 +61,6 @@ $(".games.new").ready(function(){
     $.getJSON( '/create_board', function(data){
       var tiles=[];
       board = data;
-      console.log(board)
       $.each(data, function(k, v){
         tiles.push(v.coordinates);
       });
