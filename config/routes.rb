@@ -6,11 +6,9 @@ Cartogenesis::Application.routes.draw do
 
   get '/games/:id/play', to: "games#play_game", as: 'play_game'
 
-  resources :games, except: [:create ]
+  resources :games
 
   resources :board, only: [ :update , :show]
 
   get '/create_board', to: 'board#create'
-
-  post '/game_portal', to: 'games#create'
 end
