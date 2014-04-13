@@ -8,7 +8,7 @@ Cartogenesis::Application.routes.draw do
 
   resources :games, except: [:create ]
 
-  resources :board, only: [ :update ]
+  resources :board, only: [ :update , :show]
 
   get '/create_board', to: 'board#create'
 

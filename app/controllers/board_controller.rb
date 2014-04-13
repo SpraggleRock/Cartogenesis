@@ -8,6 +8,15 @@ class BoardController < ApplicationController
     render json: @tiles
   end
 
+  def show
+    board = Board.find_by(game_id: params[:id])
+    @tiles = board.tiles
+
+    puts "I'm here"
+
+    render json: @tiles
+  end
+
   def update
     data = []
     json_params.each do |string|
