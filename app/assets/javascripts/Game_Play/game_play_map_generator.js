@@ -58,7 +58,6 @@ $(".games.play").ready(function(){
   });
 
   $('.end_turn').on("submit", function(event){
-    event.preventDefault();
     if(updateQueue){
       $.ajax({
         type: "PATCH",
