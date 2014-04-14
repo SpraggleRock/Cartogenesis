@@ -97,7 +97,7 @@ $(".games.play").ready(function(){
 
     $.ajax({
        type: "POST",
-        url: '/turn_log',
+        url: '/turn_logs',
         data: JSON.stringify({turn_log: {board_json: createdTiles,
                documentation: $('#turn_log_documentation').val(),
                game_id: gameID}
