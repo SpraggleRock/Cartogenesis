@@ -100,9 +100,11 @@ $(".games.play").ready(function(){
        type: "POST",
         url: '/games/'+gameID+'/chronicles/'+chronicleID+'/turn_logs',
         data: JSON.stringify({turn_log: {board_json: createdTiles,
-               documentation: $('#turn_log_documentation').val(),
-               chronicle_id: chronicleID}
-              }),
+              documentation: $('#turn_log_documentation').val(),
+              chronicle_id: chronicleID,
+              game_id: gameID
+              }
+            }),
         accept: 'application/json',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',

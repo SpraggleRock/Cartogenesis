@@ -12,8 +12,14 @@ class TurnLogsController < ApplicationController
     puts
     puts
     p '+++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+    game = Game.find(params['turn_log']['game_id'])
+    active_player = Player.find(game.active_player)
     chronicle = Chronicle.find(params['turn_log']['chronicle_id'])
-    turn_log = TurnLog.create(documentation: params['turn_log']['documentation'], board_json: params['turn_log']['board_json'])
+    turn_log = TurnLog.create(
+      documentation: params['turn_log']['documentation'],
+      board_json: params['turn_log']['board_json'],
+      active_player: active_player
+      )
     chronicle.turn_logs << turn_log
 
     # puts params
