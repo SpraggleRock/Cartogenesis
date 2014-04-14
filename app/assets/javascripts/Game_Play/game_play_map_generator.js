@@ -2,6 +2,7 @@ $(".games.play").ready(function(){
 
   var radius = 300;
   var board;
+  var createdTiles = [];
 
   function Tile(radius, coordinates, terrain) {
     this.radius = radius
@@ -88,4 +89,24 @@ $(".games.play").ready(function(){
       }
     })
   })
+
+  $('.end_turn').on("submit", function(event){
+    snapshotTiles();
+
+    $.ajax({
+       type: "POST",
+        url: '/turn_logs',
+        data: {board_json: createdTiles,
+               documentation: $('#turn_log_documentation')
+               game_id: gameID
+              },
+        accept: 'application/json',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+         success: function(){
+           alert('Sent update info succesfully');
+         }
+      });
+    });
+  });
 });
