@@ -101,7 +101,7 @@ $(".games.play").ready(function(){
         url: '/games/'+gameID+'/chronicles/'+chronicleID+'/turn_logs',
         data: JSON.stringify({turn_log: {board_json: createdTiles,
                documentation: $('#turn_log_documentation').val(),
-               game_id: gameID}
+               chronicle_id: chronicleID}
               }),
         accept: 'application/json',
         contentType: 'application/json; charset=utf-8',
