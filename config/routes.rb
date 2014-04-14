@@ -7,13 +7,20 @@ Cartogenesis::Application.routes.draw do
   get '/games/:id/play', to: "games#play_game", as: 'play_game'
 
   get '/game_portal/:id', to: 'games#portal'
-  resources :games
+
+  resources :games do
+    resources :chronicles do
+      resources :turn_logs do
+      end
+    end
+  end
+
 
   resources :board, only: [ :update , :show, :create]
 
   get '/create_board', to: 'board#create'
 
 
-  resources :turn_logs, only: [:create, :show]
+
 
 end

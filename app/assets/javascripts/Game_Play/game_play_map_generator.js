@@ -56,6 +56,7 @@ $(".games.play").ready(function(){
     });
   }
   var gameID = $('.games.play').attr("id");
+  var chronicleID = $('.chronicle_id').attr("id");
 
   $.getJSON( '/board/'+ gameID, function(data){
     var tiles=[];
@@ -97,7 +98,7 @@ $(".games.play").ready(function(){
 
     $.ajax({
        type: "POST",
-        url: '/turn_logs',
+        url: '/games/'+gameID+'/chronicles/'+chronicleID+'/turn_logs',
         data: JSON.stringify({turn_log: {board_json: createdTiles,
                documentation: $('#turn_log_documentation').val(),
                game_id: gameID}
