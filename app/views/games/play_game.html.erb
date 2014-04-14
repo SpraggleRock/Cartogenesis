@@ -5,6 +5,13 @@
 
 <%= button_to "End Turn", @game, method: :patch, form_class: "end_turn"%>
 
-
+<%= form_for :turn_log, url: turn_logs_path, html: {id: "turn_log" } do |f| %>
+  <p>
+    Log: <%= f.text_field :documentation %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
 <div id='toolbar'></div>
 <div class='games play' id="<%= @game.id%>"></div>

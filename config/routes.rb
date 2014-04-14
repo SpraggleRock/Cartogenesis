@@ -13,4 +13,6 @@ Cartogenesis::Application.routes.draw do
 
   get '/create_board', to: 'board#create'
 
+  resources :turn_logs, only: [:create]
+
 end
