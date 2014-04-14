@@ -37,7 +37,7 @@ class Game < ActiveRecord::Base
     p '++++++++++++++++++++++++++++++++++++++++'
     p 'next player is being called!!!'
     p '++++++++++++++++++++++++++++++++++++++++'
-    self.active_player = self.players[turn_counter - 1].id
+    self.active_player = self.players.order(id: :asc)[self.turn_counter - 1].id
   end
 
   def new_round

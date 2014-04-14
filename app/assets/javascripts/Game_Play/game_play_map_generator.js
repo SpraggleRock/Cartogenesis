@@ -73,7 +73,7 @@ $(".games.play").ready(function(){
   });
 
   $('svg').on('click', function(event){
-    console.log('holy shit i clicked');
+    //console.log('holy shit i clicked');
     $.ajax({
       type: 'PATCH',
       url: '/board/1/',
@@ -93,9 +93,7 @@ $(".games.play").ready(function(){
 
   $('.end_turn').on("submit", function(event){
     snapshotTiles();
-
-    // alert("about to send log data");
-
+    //alert("about to send log data");
     $.ajax({
        type: "POST",
         url: '/games/'+gameID+'/chronicles/'+chronicleID+'/turn_logs',
@@ -112,7 +110,7 @@ $(".games.play").ready(function(){
            // alert('Sent update info succesfully');
          },
          complete: function(){
-            // alert('request went through.');
+            //alert('request went through.');
          }
     });
   });

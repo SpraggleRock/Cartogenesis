@@ -32,6 +32,11 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     @board = Board.find_by(game_id: params[:id])
+    points = params[:points][:to_s]
+    player = Player.find(@game.active_player)
+    puts points
+    player.points = points
+    player.save
     @game.end_turn
     @game.save
 
@@ -42,9 +47,10 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id].to_i)
     puts params
     params[:players].each do |player|
-      @game.players << Player.create!(name: player)
+      @game.players << Player.create(name: player)
     end
     @game.active_player = @game.players[0].id
+    @game.assign_round_points
     @game.save
     redirect_to play_game_path
   end
@@ -53,6 +59,7 @@ class GamesController < ApplicationController
     #if @game.users.include?(current_user)
     # else redirect "you're not authorized to view that game"
     @game = Game.find(params[:id])
+    @players = @game.players.order(id: :asc)
     @points = Player.find(@game.active_player).points
   end
 

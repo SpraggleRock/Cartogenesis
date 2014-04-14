@@ -1,14 +1,13 @@
-= form_tag games_path, id: "accept_board", method: :post do
-  = submit_tag "Accept Map"
-/ = form_tag create_board_path, id: "generate_map", method: :post do
-/   = submit_tag "Generate Map"
-%button.generate_map{type: "button", id: 'generate_map'} Generate Map
-/ = form_tag game_path(@game.id), id: "end_turn", method: :post do
-/   = submit_tag "End Turn"
+#create_game_page
+  = form_tag games_path, id: "accept_board", method: :post do
+    = submit_tag "Accept Map"
+  / = form_tag create_board_path, id: "generate_map", method: :post do
+  /   = submit_tag "Generate Map"
+  %button.generate_map{type: "button", id: 'generate_map'} Generate Map
+  / = form_tag game_path(@game.id), id: "end_turn", method: :post do
+  /   = submit_tag "End Turn"
 
-%div{class: 'game_container'}
-  %div{:id => 'toolbar'}
-  %div{class: 'svg_container'}
-    %div.games.new
-
-
+  %div{class: 'game_container'}
+    %div{:id => 'toolbar'}
+    %div{class: 'svg_container'}
+      %div.games.new
