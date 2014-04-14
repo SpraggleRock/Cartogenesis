@@ -2,9 +2,9 @@ function Chat() {
   this.dispatcher = new WebSocketRails('localhost:3000/websocket');
 };
 
-Chat.prototype.init = function() {
-  this.dispatcher.on_open = function(data) { console.log('Connection has been established', data)};
-}
+// Chat.prototype.init = function() {
+//   this.dispatcher.on_open = function(data) { console.log('Connection has been established', data)};
+// }
 Chat.prototype.setUpChat = function() {
   this.receiveAndDisplay();
   this.chatWindowOpenClose();
@@ -40,11 +40,12 @@ Chat.prototype.chatWindowOpenClose = function() {
   });
 }
 Chat.prototype.hookUpWebSocketsToSendMessage = function() {
+  console.log('hooking up websockets');
   $('.chat_form').on('submit', function(event){
     event.preventDefault();
     var message = $('#chat_input').val();
-    Chat.sendChatMessage(message);
-  });
+    this.sendChatMessage(message);
+  }.bind(this));
 }
 
 
