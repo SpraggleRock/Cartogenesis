@@ -4,6 +4,8 @@ class Game < ActiveRecord::Base
   has_many :players
   has_many :users, through: :players
   has_many :ages
+  has_many :turn_logs
+  has_one :chronicle
 
   def assign_round_points
     self.players.each do |player|

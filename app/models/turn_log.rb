@@ -1,6 +1,6 @@
 class TurnLog < ActiveRecord::Base
-  has_one :active_player, through: :players
-  has_one :chronicle
-  has_one :game
+  belongs_to :active_player, through: :players
+  belongs_to :chronicle
+  belongs_to :game
 
 end
