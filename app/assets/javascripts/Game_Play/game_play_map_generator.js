@@ -94,7 +94,7 @@ $(".games.play").ready(function(){
   $('.end_turn').on("submit", function(event){
     snapshotTiles();
 
-    alert("about to send log data");
+    // alert("about to send log data");
 
     $.ajax({
        type: "POST",
@@ -109,10 +109,10 @@ $(".games.play").ready(function(){
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
          success: function(){
-           alert('Sent update info succesfully');
+           // alert('Sent update info succesfully');
          },
          complete: function(){
-            alert('request went through.');
+            // alert('request went through.');
          }
     });
   });

@@ -8,11 +8,19 @@ dispatcher.on_open = function(data) {
 $(function(event){
 console.log('jQuery!');
   receiveAndDisplay();
-  $('#start_chat').on('click', function(event){
+  $('#open_chat').on('click', function(event){
     event.preventDefault();
     $('#chat_window').show();
     $('.chat_form').show();
     $(this).hide();
+    $('#close_chat').show();
+  });
+  $('#close_chat').on('click', function(event){
+    event.preventDefault();
+    $('#chat_window').hide();
+    $('.chat_form').hide();
+    $(this).hide();
+    $('#open_chat').show();
   });
 
   $('.chat_form').on('submit', function(event){
