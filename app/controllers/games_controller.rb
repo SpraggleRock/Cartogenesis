@@ -59,6 +59,7 @@ class GamesController < ApplicationController
     #if @game.users.include?(current_user)
     # else redirect "you're not authorized to view that game"
     @game = Game.find(params[:id])
+    @players = @game.players.order(id: :asc)
     @points = Player.find(@game.active_player).points
   end
 

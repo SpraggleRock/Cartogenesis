@@ -11,7 +11,7 @@
       %p
         Round #{@game.round_counter}
       %p
-        Player #{@game.turn_counter}
+        Player #{@game.turn_counter} (#{Player.find(@game.active_player).name})'s turn
       %ul
         -@game.players.each do |player|
           %li

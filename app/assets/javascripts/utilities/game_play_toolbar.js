@@ -55,7 +55,10 @@ function getColor(terrainType, Tools){
 
 var allTools = loadTools();
 
-$('#create_game_page').ready(function () {
+$("#game_page").ready(function () {
+  var activePlayer = $(".active_player")
+  var activePlayerPoints = $('#points_to_s').val();
+  console.log(activePlayerPoints);
   $.each(allTools, function(){
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
   });
@@ -64,19 +67,23 @@ $('#create_game_page').ready(function () {
   function startHover(){
     var hold;
     return hold = $('svg').on('mouseenter', 'path', function(event){
-      if($(this).attr("terrain") != selectedTool.type){
+      if(($(this).attr("terrain") != selectedTool.type) && (activePlayerPoints >= selectedTool.cost)){
         $(this).attr("fill", selectedTool.color)
         $(this).attr("terrain", selectedTool.type);
+        activePlayerPoints = activePlayerPoints - selectedTool.cost
         updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+        $('#points_to_s').val(activePlayerPoints.toString());
       }
     })
   }
   $('svg').on('mousedown','path', function(event){
     startHover().bind()
-    if($(this).attr("terrain") != selectedTool.type){
+    if(($(this).attr("terrain") != selectedTool.type) && (activePlayerPoints >= selectedTool.cost)){
         $(this).attr("fill", selectedTool.color)
         $(this).attr("terrain", selectedTool.type);
         updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+        activePlayerPoints = activePlayerPoints - selectedTool.cost
+        $('#points_to_s').val(activePlayerPoints.toString());
       }
   });
 
