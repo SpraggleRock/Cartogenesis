@@ -93,20 +93,24 @@ $(".games.play").ready(function(){
   $('.end_turn').on("submit", function(event){
     snapshotTiles();
 
+    alert("about to send log data");
+
     $.ajax({
        type: "POST",
-        url: '/turn_logs',
-        data: {board_json: createdTiles,
-               documentation: $('#turn_log_documentation')
-               game_id: gameID
-              },
+        url: '/turn_log',
+        data: JSON.stringify({turn_log: {board_json: createdTiles,
+               documentation: $('#turn_log_documentation').val(),
+               game_id: gameID}
+              }),
         accept: 'application/json',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
          success: function(){
            alert('Sent update info succesfully');
+         },
+         complete: function(){
+            alert('request went through.');
          }
-      });
     });
   });
 });
