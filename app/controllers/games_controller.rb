@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.create()
     board = Board.create(board_size: 7, game_id: @game.id)
-    @game.board = Board.last
+    @game.board = board
     puts json_params
     data = []
     json_params.each do |string|
