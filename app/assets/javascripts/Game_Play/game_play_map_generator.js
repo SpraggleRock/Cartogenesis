@@ -2,6 +2,20 @@ $(".games.play").ready(function(){
 
   var radius = 300;
   var board;
+  var createdTiles = [];
+
+  function Tile(radius, coordinates, terrain) {
+    this.radius = radius
+    this.coordinates = coordinates
+    this.terrain = terrain
+  }
+
+  function snapshotTiles() {
+    for(var i = 1; i <= $('g').children().length; i++){
+      var path = $("path:nth-child("+i+")")
+      createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain")));
+    }
+  }
 
   var svg = d3.select("body").append("svg")
    .attr("width", 2*radius)
@@ -75,4 +89,28 @@ $(".games.play").ready(function(){
       }
     })
   })
+
+  $('.end_turn').on("submit", function(event){
+    snapshotTiles();
+
+    alert("about to send log data");
+
+    $.ajax({
+       type: "POST",
+        url: '/turn_log',
+        data: JSON.stringify({turn_log: {board_json: createdTiles,
+               documentation: $('#turn_log_documentation').val(),
+               game_id: gameID}
+              }),
+        accept: 'application/json',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+         success: function(){
+           alert('Sent update info succesfully');
+         },
+         complete: function(){
+            alert('request went through.');
+         }
+    });
+  });
 });

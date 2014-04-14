@@ -1,0 +1,2 @@
+module TurnLogControllerHelper
+end
