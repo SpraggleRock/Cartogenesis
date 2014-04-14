@@ -1,4 +1,4 @@
-class ChronicleController < ApplicationController
+class ChroniclesController < ApplicationController
 
   def show
 
