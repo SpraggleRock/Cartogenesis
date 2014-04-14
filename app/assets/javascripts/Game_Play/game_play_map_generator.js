@@ -57,19 +57,22 @@ $(".games.play").ready(function(){
     drawHexes(hex_data);
   });
 
-  $('.end_turn').on("submit", function(event){
-    if(updateQueue){
-      $.ajax({
-        type: "PATCH",
-        url: '/board/' + $('path').attr("board_id"),
-        data: JSON.stringify(updateQueue),
-        accept: 'application/json',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-         success: function(){
-           alert('Sent update info succesfully');
-         }
-      });
-    }
-  });
+  $('svg').on('click', function(event){
+    console.log('holy shit i clicked');
+    $.ajax({
+      type: 'PATCH',
+      url: '/board/1/',
+      data: JSON.stringify(updateQueue),
+      accept: 'application/json',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(){
+        console.log('success')
+        updateQueue = []
+      },
+      error: function(){
+        console.log(JSON.stringify(updateQueue))
+      }
+    })
+  })
 });
