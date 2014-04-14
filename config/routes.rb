@@ -2,6 +2,8 @@ Cartogenesis::Application.routes.draw do
 
   root to: 'welcome#index'
 
+  resources :user, only: [ :update , :show, :create, :new]
+
   patch '/games/:id/start', to: "games#start_game", as: 'start_game'
 
   get '/games/:id/play', to: "games#play_game", as: 'play_game'
@@ -14,7 +16,6 @@ Cartogenesis::Application.routes.draw do
       end
     end
   end
-
 
   resources :board, only: [ :update , :show, :create]
 
