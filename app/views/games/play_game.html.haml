@@ -1,0 +1,39 @@
+#game_page
+  #left_panel_wrapper
+    #left_panel_top
+      %p
+        Round #{@game.round_counter}
+      %p
+        Player #{@game.turn_counter}
+      %ul
+        -@game.players.each do |player|
+          %li= player.name
+      %p
+        = button_to "End Turn", @game, method: :patch, form_class: "end_turn"
+    #left_panel_middle
+      .tabs
+        .tab
+          %input#tab-1{name: "tab-group-1", type: "radio", checked: "checked"}
+          %label{for: "tab-1"} Colors
+          .content
+            #toolbar
+        .tab
+          %input#tab-2{name: "tab-group-1", type: "radio"}
+          %label{for: "tab-2"} Navigate
+          .content
+            #other_tool
+              %p navigation tools
+        .tab
+          %input#tab-3{name: "tab-group-1", type: "radio"}
+          %label{for: "tab-3"} Something
+          .content
+            #another_tool
+              %p something else!!!!
+    #left_panel_bottom
+      %p Chat
+      %p Bob: something something something
+      %p Larry: Hello, how are you doing???
+      %p something something something.
+  .play_game_svg_container
+    .games.play{id: @game.id}
+
