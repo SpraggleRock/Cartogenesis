@@ -9,6 +9,7 @@
         -@game.players.each do |player|
           %li= player.name
       %p
+        = text_area_tag(:turn_log_documentation)
         = button_to "End Turn", @game, method: :patch, form_class: "end_turn"
     #left_panel_middle
       .tabs
