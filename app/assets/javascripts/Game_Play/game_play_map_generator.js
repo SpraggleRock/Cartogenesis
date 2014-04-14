@@ -17,7 +17,7 @@ $(".games.play").ready(function(){
     }
   }
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select(".play_game_svg_container").append("svg")
    .attr("width", 2*radius)
    .attr("height", 2*radius)
 
