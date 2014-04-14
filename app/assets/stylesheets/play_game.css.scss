@@ -1,0 +1,129 @@
+#game_page {
+  width: 1850px;
+  height: 1000px;
+  border: 1px solid #000;
+}
+
+#left_panel_wrapper {
+  height: 1000px;
+  width: 300px;
+  float: left;
+  border-bottom: 1px solid #fff;
+  background: #eee;
+}
+
+#left_panel_top {
+  height: 33%;
+  width: 100%;
+}
+
+
+#left_panel_middle {
+  height: 32%;
+  width: 100%;
+  border-top: 1px solid #000;
+  background: #888;
+  padding: 0;
+  margin: 0;
+}
+
+/* TABS */
+.tabs {
+  position: relative;
+  height: 308px;
+  clear: both;
+  padding-top: 11px;
+}
+
+.tab {
+  float: left;
+}
+
+.tab label {
+  background: #eee;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-left: -1px;
+  position: relative;
+  left: 1px;
+}
+
+.tab [type=radio] {
+  display: none;
+}
+
+.content {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+}
+
+[type=radio]:checked ~ label {
+  background: #789abc;
+  border-bottom: 1px solid white;
+  z-index: 2;
+}
+
+[type=radio]:checked ~ label ~ .content {
+  z-index: 1;
+}
+
+
+
+#left_panel_bottom {
+  height: 33%;
+  width: 100%;
+  border: 1px solid #000;
+}
+
+.play_game_svg_container {
+  border: 1px solid #000;
+  width: 1548px;
+  height: 997px;
+  overflow: scroll;
+  background: #000;
+}
+
+
+svg {
+  height: 2000px;
+  width: 2000px;
+  padding: 40px;
+}
+
+
+#toolbar {
+  border: 1px solid black;
+  width: 298px;
+}
+
+#toolbar div {
+  border: 1px solid black;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 5px 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#other_tool {
+  border: 1px solid black;
+  width: 298px;
+  height: 200px;
+}
+
+#another_tool {
+  border: 1px solid black;
+  width: 298px;
+  height: 200px;
+}
+
+
+
+
