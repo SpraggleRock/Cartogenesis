@@ -1,0 +1,12 @@
+
+<h1> In the reign of <%=Player.find(@game.active_player).name%> </h1>
+<h1> It is turn <%=@game.turn_counter%></h1>
+<h1> It is round <%=@game.round_counter%></h1>
+
+
+<%= text_area_tag(:turn_log_documentation) %>
+<%= button_to "End Turn", @game, method: :patch, form_class: "end_turn"%>
+
+
+<div id='toolbar'></div>
+<div class='games play' id="<%= @game.id%>"></div>
