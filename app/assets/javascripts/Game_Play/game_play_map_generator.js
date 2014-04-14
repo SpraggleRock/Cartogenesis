@@ -93,7 +93,6 @@ $(".games.play").ready(function(){
 
   $('.end_turn').on("submit", function(event){
     snapshotTiles();
-
     //alert("about to send log data");
     $.ajax({
        type: "POST",

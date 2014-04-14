@@ -57,7 +57,7 @@ var allTools = loadTools();
 
 $(function () {
   var activePlayer = $(".active_player")
-  var activePlayerPoints = $('.players').data("activeplayerpoints");
+  var activePlayerPoints = $('#points_to_s').val();
   $.each(allTools, function(){
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
   });
@@ -71,7 +71,7 @@ $(function () {
         $(this).attr("terrain", selectedTool.type);
         activePlayerPoints = activePlayerPoints - selectedTool.cost
         updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
-        $('.players').data("activeplayerpoints", activePlayerPoints);
+        $('#points_to_s').val(activePlayerPoints.toString());
       }
     })
   }
@@ -80,10 +80,9 @@ $(function () {
     if(($(this).attr("terrain") != selectedTool.type) && (activePlayerPoints >= selectedTool.cost)){
         $(this).attr("fill", selectedTool.color)
         $(this).attr("terrain", selectedTool.type);
-        console.log(activePlayerPoints);
         updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
         activePlayerPoints = activePlayerPoints - selectedTool.cost
-        $('.players').data("activeplayerpoints", activePlayerPoints);
+        $('#points_to_s').val(activePlayerPoints.toString());
       }
   });
 

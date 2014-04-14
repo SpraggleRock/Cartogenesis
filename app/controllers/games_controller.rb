@@ -32,6 +32,11 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     @board = Board.find_by(game_id: params[:id])
+    points = params[:points][:to_s]
+    player = Player.find(@game.active_player)
+    puts points
+    player.points = points
+    player.save
     @game.end_turn
     @game.save
 

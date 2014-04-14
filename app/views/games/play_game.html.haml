@@ -12,7 +12,7 @@
         Round #{@game.round_counter}
       %p
         Player #{@game.turn_counter}
-      %ul.players{"data-activePlayerPoints" => @points}
+      %ul
         -@game.players.each do |player|
           %li
             = player.name
@@ -22,7 +22,10 @@
             points to spend
       %p
         = text_area_tag(:turn_log_documentation)
-        = button_to "End Turn", @game, method: :patch, form_class: "end_turn"
+        = form_tag @game, class: "end_turn", method: :patch do |f|
+          = hidden_field(:points, :to_s)
+          = submit_tag "End Turn"
+
     #left_panel_middle
       .tabs
         .tab
