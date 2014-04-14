@@ -10,3 +10,7 @@
   overflow: scroll;
   background-color:white;
 }
+
+#close_chat {
+  display: none;
+}

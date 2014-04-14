@@ -9,12 +9,13 @@
   %body
     #chat_window
     %a{href: "#"}
-      %button#start_chat Start Chat!
+      %button#open_chat Open Chat!
     %form.chat_form{action: "#", method: "get"}
       %p
         %textarea#chat_input{cols: "30", rows: "5"}
       %p
         %input{type: "submit", value: "Send"}
+    %button#close_chat Close Chat!
 
     = yield
 
