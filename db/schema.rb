@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140413210754) do
   end
 
   create_table "chronicles", force: true do |t|
-    t.string   "initial_board"
+    t.json     "initial_board_json"
     t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"

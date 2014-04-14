@@ -47,6 +47,7 @@ function snapshotTiles() {
   for(var i = 1; i <= $('g').children().length; i++){
     var path = $("path:nth-child("+i+")")
     createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain")));
+    console.log(createdTiles[i-1]);
   }
 }
 

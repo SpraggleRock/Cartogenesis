@@ -12,10 +12,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create()
+    @game = Game.create
     board = Board.create(board_size: 7, game_id: @game.id)
     @game.board = board
-    puts json_params
+    p json_params
     data = []
     json_params.each do |string|
       data.push(JSON.parse(string.to_json))
@@ -25,7 +25,7 @@ class GamesController < ApplicationController
       board.tiles << Tile.create(coordinates: datum['coordinates'], terrain: datum['terrain'], radius: datum['radius'])
     end
     @tiles = board.tiles.order(id: :asc)
-
+    @game.update(chronicle: Chronicle.create(initial_board_json: JSON.parse(board.tiles.to_json)))
     render json: board
   end
 
