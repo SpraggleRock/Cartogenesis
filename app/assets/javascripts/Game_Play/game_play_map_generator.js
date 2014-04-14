@@ -3,6 +3,19 @@ $(".games.play").ready(function(){
   var radius = 300;
   var board;
 
+  function Tile(radius, coordinates, terrain) {
+    this.radius = radius
+    this.coordinates = coordinates
+    this.terrain = terrain
+  }
+
+  function snapshotTiles() {
+    for(var i = 1; i <= $('g').children().length; i++){
+      var path = $("path:nth-child("+i+")")
+      createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain")));
+    }
+  }
+
   var svg = d3.select("body").append("svg")
    .attr("width", 2*radius)
    .attr("height", 2*radius)
