@@ -42,9 +42,10 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id].to_i)
     puts params
     params[:players].each do |player|
-      @game.players << Player.create!(name: player)
+      @game.players << Player.create(name: player)
     end
     @game.active_player = @game.players[0].id
+    @game.assign_round_points
     @game.save
     redirect_to play_game_path
   end
