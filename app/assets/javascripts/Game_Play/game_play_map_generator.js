@@ -62,7 +62,7 @@ $(".games.play").ready(function(){
     if(updateQueue){
       $.ajax({
         type: "PATCH",
-        url: '/board/' + board[0].board_id,
+        url: '/board/' + $('path').attr("board_id"),
         data: JSON.stringify(updateQueue),
         accept: 'application/json',
         contentType: 'application/json; charset=utf-8',
