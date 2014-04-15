@@ -61,10 +61,15 @@
           .content
             #another_tool
     #left_panel_bottom
-      %p Chat
-      %p Bob: something something something
-      %p Larry: Hello, how are you doing???
-      %p something something something.
+      - if signed_in?
+        #chat_window
+        %form.chat_form{action: "#", method: "get"}
+          %p
+            %textarea#chat_input{cols: "30", rows: "5"}
+          %p
+            %input{type: "submit", value: "Send"}
+      - else
+        %p You must sign in to see chat!
   .play_game_svg_container
     .games.play{id: @game.id}
   .chronicle_id_container{id: @game.chronicle.id}
