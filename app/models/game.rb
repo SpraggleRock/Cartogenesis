@@ -7,6 +7,14 @@ class Game < ActiveRecord::Base
   has_many :turn_logs
   has_one :chronicle
 
+  def generate_url
+    lowercase_letters = ('a'..'z').to_a
+    uppercase_letters = lowercase_letters.map(&:upcase)
+    numbers = (0..9).to_a
+    char_set = lowercase_letters + uppercase_letters + numbers
+    char_set.sample(30).join()
+  end
+
   def assign_round_points
     self.players.each do |player|
       player.points = player.points + (rand(6) +rand(6) + 2)

@@ -62,13 +62,12 @@ function snapshotTiles() {
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function(response){
-        console.log(response)
-        board_id = response.id
-        window.location.href = '/game_portal/' + response.game_id
+        console.log(response);
+        board_id = response.id;
+       // window.location.href = '/game_portal/' + response.game_id
       }
     });
   });
-
 
 function Tile(radius, coordinates, terrain) {
   this.radius = radius

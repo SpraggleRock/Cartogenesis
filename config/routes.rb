@@ -24,7 +24,7 @@ Cartogenesis::Application.routes.draw do
 
   get '/create_board', to: 'board#create'
 
-
+  get '/join/:game_slug', to: 'games#join_game'
 
 
 end

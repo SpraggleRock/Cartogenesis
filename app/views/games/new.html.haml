@@ -1,6 +1,6 @@
 #create_game_page
   = form_tag games_path, id: "accept_board", method: :post do
-    = submit_tag "Accept Map"
+    = submit_tag "Accept Map and Create Game"
   / = form_tag create_board_path, id: "generate_map", method: :post do
   /   = submit_tag "Generate Map"
   %button.generate_map{type: "button", id: 'generate_map'} Generate Map

@@ -12,6 +12,7 @@ class GamesController < ApplicationController
   end
 
   def create
+    p params
     @game = Game.create
     board = Board.create(board_size: 7, game_id: @game.id)
     @game.board = board
@@ -26,7 +27,8 @@ class GamesController < ApplicationController
     end
     @tiles = board.tiles.order(id: :asc)
     @game.update(chronicle: Chronicle.create(initial_board_json: JSON.parse(board.tiles.to_json)))
-    render json: board
+    # render json: board
+    redirect_to "/join/#{@game.slug}"
   end
 
   def update
@@ -41,6 +43,10 @@ class GamesController < ApplicationController
     @game.save
     WebsocketRails[:multiplayer].trigger(:end_turn, {board_json: @tiles, myTurn: true})
     redirect_to play_game_path
+  end
+
+  def join_game
+    @game = Game.find_by(slug: params[:game])
   end
 
   def start_game
