@@ -17,20 +17,21 @@ Chat.prototype.receiveAndDisplay = function() {
   });
 }
 Chat.prototype.chatWindowOpenClose = function() {
-  $('#open_chat').on('click', function(event){
-    event.preventDefault();
+  // console.log("in chat open,close");
+  // $('#open_chat').on('click', function(event){
+  //   event.preventDefault();
     $('#chat_window').show();
     $('.chat_form').show();
-    $(this).hide();
-    $('#close_chat').show();
-  });
-  $('#close_chat').on('click', function(event){
-    event.preventDefault();
-    $('#chat_window').hide();
-    $('.chat_form').hide();
-    $(this).hide();
-    $('#open_chat').show();
-  });
+  //   $(this).hide();
+  //   $('#close_chat').show();
+  // });
+  // $('#close_chat').on('click', function(event){
+  //   event.preventDefault();
+  //   $('#chat_window').hide();
+  //   $('.chat_form').hide();
+  //   $(this).hide();
+  //   $('#open_chat').show();
+  // });
 }
 Chat.prototype.hookUpWebSocketsToSendMessage = function() {
   $('.chat_form').on('submit', function(event){
