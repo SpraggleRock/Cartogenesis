@@ -37,7 +37,14 @@ class GamesController < ApplicationController
     player.save
     @game.end_turn
     @game.save
-    WebsocketRails[:multiplayer].trigger(:end_turn, {board_json: @tiles, myTurn: true})
+    puts "sendgin end turn event==============================="
+    puts
+    puts
+    WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
+    puts
+    puts
+    puts "========================================================"
+
     redirect_to play_game_path
   end
 
@@ -48,19 +55,19 @@ class GamesController < ApplicationController
   def start_game
     @game = Game.find(params[:id].to_i)
     puts params
-    params[:players].each do |player|
+    @game.players.each do |player|
       @game.players << Player.create(name: player)
     end
     @game.active_player = @game.players[0].id
     @game.assign_round_points
     @game.save
-    redirect_to play_game_path
+    redirect_to play_game_path(@game.slug)
   end
 
   def play_game
     #if @game.users.include?(current_user)
     # else redirect "you're not authorized to view that game"
-    @game = Game.find(params[:id])
+    @game = Game.find_by(slug: params[:game_slug])
     @players = @game.players.order(id: :asc)
     @points = Player.find(@game.active_player).points
   end

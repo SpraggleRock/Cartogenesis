@@ -7,9 +7,9 @@ Cartogenesis::Application.routes.draw do
   post '/sessions', to: 'user#create_session', as: 'sessions'
   delete '/sign_out', to: 'user#destroy_session', as: 'signout'
 
-  patch '/games/:id/start', to: "games#start_game", as: 'start_game'
+  get '/games/:id/start', to: "games#start_game", as: 'start_game'
 
-  get '/games/:id/play', to: "games#play_game", as: 'play_game'
+  get '/play/:game_slug', to: "games#play_game", as: 'play_game'
 
   get '/game_portal/:id', to: 'games#portal'
 
