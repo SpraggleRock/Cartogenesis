@@ -12,23 +12,19 @@ class GamesController < ApplicationController
   end
 
   def create
-    p params
     @game = Game.create
     board = Board.create(board_size: 7, game_id: @game.id)
     @game.board = board
-    p json_params
     data = []
     json_params.each do |string|
       data.push(JSON.parse(string.to_json))
     end
-    puts data
     data.each do |datum|
       board.tiles << Tile.create(coordinates: datum['coordinates'], terrain: datum['terrain'], radius: datum['radius'])
     end
     @tiles = board.tiles.order(id: :asc)
     @game.update(chronicle: Chronicle.create(initial_board_json: JSON.parse(board.tiles.to_json)))
-    # render json: board
-    redirect_to "/join/#{@game.slug}"
+    render json: @game
   end
 
   def update
@@ -46,7 +42,7 @@ class GamesController < ApplicationController
   end
 
   def join_game
-    @game = Game.find_by(slug: params[:game])
+    @game = Game.find_by(slug: join_game_params)
   end
 
   def start_game
@@ -74,6 +70,10 @@ class GamesController < ApplicationController
 
   def json_params
     params.require(:_json)
+  end
+
+  def join_game_params
+    params.require(:game_slug)
   end
 
   # def new_players_params

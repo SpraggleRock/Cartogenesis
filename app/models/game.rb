@@ -6,13 +6,14 @@ class Game < ActiveRecord::Base
   has_many :ages
   has_many :turn_logs
   has_one :chronicle
+  before_create :generate_url
 
   def generate_url
     lowercase_letters = ('a'..'z').to_a
     uppercase_letters = lowercase_letters.map(&:upcase)
     numbers = (0..9).to_a
     char_set = lowercase_letters + uppercase_letters + numbers
-    char_set.sample(30).join()
+    self.slug = char_set.sample(30).join()
   end
 
   def assign_round_points
