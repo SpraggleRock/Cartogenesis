@@ -22,7 +22,6 @@ class BoardController < ApplicationController
   def show
     board = Board.find_by(game_id: params[:id])
     @tiles = board.tiles.order(id: :asc)
-
     render json: @tiles
   end
 
@@ -36,7 +35,6 @@ class BoardController < ApplicationController
       tile = Tile.find(datum['id'])
       tile.update_attribute(:terrain, datum['terrain'])
     end
-
     render nothing: true
   end
 
