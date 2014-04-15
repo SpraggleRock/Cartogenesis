@@ -1,0 +1,7 @@
+%h1 Waiting Room
+%ul
+  - @game.players.each do |player|
+    %li
+      = "#{player.user.username} as: #{player.name}"
+
+= button_to("Got Everyone? Begin!", start_game_path(@game), method: "get")

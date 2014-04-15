@@ -20,6 +20,8 @@ Cartogenesis::Application.routes.draw do
     end
   end
 
+  resources :players, only: [:create]
+
   resources :board, only: [ :update , :show, :create]
 
   get '/create_board', to: 'board#create'
