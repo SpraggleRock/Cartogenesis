@@ -1,10 +1,13 @@
 $(".games.play").ready(function(){
+  var slugLength = 30;
+  socket = new Multiplayer(document.URL.slice(-slugLength));
 
-  var dispatcher = new WebSocketRails('localhost:3000/websocket');
-  var multiplayer_channel = dispatcher.subscribe('multiplayer');
+  // var dispatcher = new WebSocketRails('localhost:3000/websocket');
+  // var multiplayer_channel = dispatcher.subscribe('multiplayer');
 
-  multiplayer_channel.bind('end_turn', function(data) {
-    location.reload();
+  socket.update('end_turn', refresh);
+
+
     // $('svg').remove();
     // console.log('board data :' + data);
     //  var tiles=[];
@@ -18,7 +21,10 @@ $(".games.play").ready(function(){
     //   return genHexData(genHexVertices(25), hexToCartesian(tile, 25));
     // });
     // drawHexes(hex_data);
-  });
+
+  function refresh(data) {
+    location.reload();
+  }
 
   var radius = 300;
   var board;
