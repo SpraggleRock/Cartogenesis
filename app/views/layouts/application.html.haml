@@ -19,6 +19,36 @@
       %button#close_chat Close Chat!
     - else
       %p You must sign in to see chat!
+    - if signed_in?
+      %p
+        = current_user.username
+        = link_to "Sign out", signout_path, method: "delete"
+    - else
+      = form_for(:session, url: sessions_path) do |f|
+        = f.label :email
+        = f.text_field :email
+        = f.label :password
+        = f.password_field :password
+        = f.submit "Sign in", class: "login_button"
+      %br
+      = form_for :user, url: user_index_path, method: :post do |f|
+        - if @user.errors.any?
+          #error_explanation
+            .alert.alert-error
+              The form contains #{pluralize(@user.errors.count, "error")}.
+            %ul
+              - @user.errors.full_messages.each do |msg|
+                %li
+                  * #{msg}
+        = f.label :username
+        = f.text_field :username
+        = f.label :email
+        = f.text_field :email
+        = f.label :password
+        = f.password_field :password
+        = f.label :password_confirmation, "Confirmation"
+        = f.password_field :password_confirmation
+        = f.submit "Create my account", class: "signup_button"
     = yield
 
   / <div id="chat_window"></div>

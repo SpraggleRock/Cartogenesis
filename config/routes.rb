@@ -5,7 +5,7 @@ Cartogenesis::Application.routes.draw do
   resources :user
   get '/signin', to: 'user#new_session', as: 'signin'
   post '/sessions', to: 'user#create_session', as: 'sessions'
-  delete '/sessions/:id', to: 'user#destroy_session', as: 'session'
+  delete '/sign_out', to: 'user#destroy_session', as: 'signout'
 
   patch '/games/:id/start', to: "games#start_game", as: 'start_game'
 

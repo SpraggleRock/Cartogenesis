@@ -6,6 +6,7 @@ class UserController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      sign_in @user
       redirect_to new_game_path
     else
       render 'new'
@@ -27,6 +28,8 @@ class UserController < ApplicationController
   end
 
   def destroy_session
+    sign_out
+    redirect_to new_user_path
   end
 
   private
