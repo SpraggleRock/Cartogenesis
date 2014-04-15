@@ -55,9 +55,6 @@ class GamesController < ApplicationController
   def start_game
     @game = Game.find(params[:id].to_i)
     puts params
-    @game.players.each do |player|
-      @game.players << Player.create(name: player)
-    end
     @game.active_player = @game.players[0].id
     @game.assign_round_points
     @game.save
