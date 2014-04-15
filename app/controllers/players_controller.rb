@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
     player.update(user_id: current_user.id)
     player.update(game_id: params[:game_id])
     @game = player.game
-    WebsocketRails[@game.slug.to_sym].trigger(:new_player, @game.players.to_json)
+    WebsocketRails[@game.slug.to_sym].trigger(:new_player, {player_name: player.name, username: current_user.username}.to_json)
     puts
   end
 

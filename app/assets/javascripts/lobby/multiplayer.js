@@ -11,10 +11,11 @@ Multiplayer.prototype.update = function(eventName, callback) {
 
 $(function(){
   console.log("this worked")
-    socket = new Multiplayer(document.URL);
-    socket.update('new_player', log);
+  socket = new Multiplayer(document.URL.slice(-30));
+  socket.update('new_player', appendPlayer);
 });
 
-function log(data) {
-  console.log("have joined the channel!! " + data);
+function appendPlayer(data) {
+  var parsedData = $.parseJSON(data);
+  $('#waiting_room').append("<li>" + parsedData.username + " as: " + parsedData.player_name + "</li>");
 }
