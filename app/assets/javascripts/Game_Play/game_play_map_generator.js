@@ -1,5 +1,29 @@
 $(".games.play").ready(function(){
 
+  var dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+
+  function sendUpdateBoard(board_json) {
+    var data = { board_json: board_json, myTurn: mrTurn};
+    dispatcher.trigger('multiplayer.end_turn', data);
+    console.log('sent data :' + data);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   var radius = 300;
   var board;
   var createdTiles = [];
