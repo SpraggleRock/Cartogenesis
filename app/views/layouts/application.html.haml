@@ -7,16 +7,18 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    #chat_window
-    %a{href: "#"}
-      %button#open_chat Open Chat!
-    %form.chat_form{action: "#", method: "get"}
-      %p
-        %textarea#chat_input{cols: "30", rows: "5"}
-      %p
-        %input{type: "submit", value: "Send"}
-    %button#close_chat Close Chat!
-
+    - if signed_in?
+      #chat_window
+      %a{href: "#"}
+        %button#open_chat Open Chat!
+      %form.chat_form{action: "#", method: "get"}
+        %p
+          %textarea#chat_input{cols: "30", rows: "5"}
+        %p
+          %input{type: "submit", value: "Send"}
+      %button#close_chat Close Chat!
+    - else
+      %p You must sign in to see chat!
     = yield
 
   / <div id="chat_window"></div>
