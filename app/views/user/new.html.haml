@@ -1,3 +1,29 @@
+- unless @user.nil?
+  - if @user.errors.any?
+    #error_explanation
+      .alert.alert-error
+        The form contains #{pluralize(@user.errors.count, "error")}.
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li
+            * #{msg}
+= form_for :session, url: sessions_path do |f|
+  = f.label :email
+  = f.text_field :email
+  = f.label :password
+  = f.password_field :password
+  = f.submit "Sign in", class: "login_button"
+%br
+= form_for :user, url: user_index_path, method: :post do |f|
+  = f.label :username
+  = f.text_field :username
+  = f.label :email
+  = f.text_field :email
+  = f.label :password
+  = f.password_field :password
+  = f.label :password_confirmation, "Confirmation"
+  = f.password_field :password_confirmation
+  = f.submit "Create my account", class: "signup_button"
 .title
   %h1 CartoGenesis
 / = form_tag new_game_path, id: 'main_page', method: :get do
