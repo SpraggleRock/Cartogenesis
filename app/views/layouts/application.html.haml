@@ -7,16 +7,26 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    #chat_window
-    %a{href: "#"}
-      %button#open_chat Open Chat!
-    %form.chat_form{action: "#", method: "get"}
+    - if signed_in?
+      #chat_window
+      %a{href: "#"}
+        %button#open_chat Open Chat!
+      %form.chat_form{action: "#", method: "get"}
+        %p
+          %textarea#chat_input{cols: "30", rows: "5"}
+        %p
+          %input{type: "submit", value: "Send"}
+      %button#close_chat Close Chat!
+    - else
+      %p You must sign in to see chat!
+    - if signed_in?
       %p
-        %textarea#chat_input{cols: "30", rows: "5"}
-      %p
-        %input{type: "submit", value: "Send"}
-    %button#close_chat Close Chat!
-
+        = current_user.username
+        = link_to "Sign out", signout_path, method: "delete"
+    - else
+      = link_to "Sign in", new_user_path, method: "get"
+    - flash.each do |key, value|
+      %div{class: "alert alert-#{key}"}= value
     = yield
 
   / <div id="chat_window"></div>
