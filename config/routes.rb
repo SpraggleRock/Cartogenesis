@@ -9,7 +9,7 @@ Cartogenesis::Application.routes.draw do
 
   get '/games/:id/start', to: "games#start_game", as: 'start_game'
 
-  patch '/games/:id/leave', to: "game#leave_game", as: 'leave_game'
+  patch '/games/:id/leave', to: "games#leave_game", as: 'leave_game'
 
   get '/game_portal/:id', to: 'games#portal'
 

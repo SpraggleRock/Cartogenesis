@@ -51,9 +51,9 @@ class GamesController < ApplicationController
   end
 
   def leave_game
-    @game = Game.find_by(params[:id])
-    player = player.where(game_id: @game.id, user_id: current_user.id)
-    @games.players.delete(player)
+    @game = Game.find(params[:id])
+    player = Player.where(game_id: @game.id, user_id: current_user.id)
+    @game.players.delete(player)
     redirect_to root_path
   end
 
