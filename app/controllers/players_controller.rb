@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
 
   def create
-    player = Player.create(player_params)
+    player = Player.find_or_create_by(player_params)
     player.update(user_id: current_user.id)
     player.update(game_id: params[:game_id])
     @game = player.game
