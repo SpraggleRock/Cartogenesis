@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20140413210754) do
   create_table "games", force: true do |t|
     t.integer  "round_counter", default: 1
     t.integer  "turn_counter",  default: 1
+    t.integer  "votes"
+    t.boolean  "is_running"
     t.integer  "active_player"
     t.string   "slug"
     t.datetime "created_at"

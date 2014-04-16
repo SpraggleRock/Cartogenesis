@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create
+    @game = Game.create(is_running: true)
     board = Board.create(board_size: 7, game_id: @game.id)
     @game.board = board
     data = []
@@ -42,15 +42,13 @@ class GamesController < ApplicationController
     player.save
     @game.end_turn
     @game.save
-    puts "sendgin end turn event==============================="
-    puts
-    puts
-    WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
-    puts
-    puts
-    puts "========================================================"
-
-    redirect_to play_game_path(@game.slug)
+    if @game.is_running
+      WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
+      redirect_to play_game_path(@game.slug)
+    else
+      WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
+      redirect_to game_overview
+    end
   end
 
   def join_game
@@ -67,8 +65,6 @@ class GamesController < ApplicationController
   end
 
   def play_game
-    #if @game.users.include?(current_user)
-    # else redirect "you're not authorized to view that game"
     @game = Game.find_by(slug: params[:game_slug])
     @players = @game.players.order(id: :asc)
     @points = Player.find(@game.active_player).points
