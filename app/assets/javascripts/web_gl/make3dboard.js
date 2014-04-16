@@ -1,12 +1,23 @@
 $( document ).ready(function() {
   $( '#3d' ).ready(function(){
     var board3d = [];
+    var hex_data;
 
 
-    var grabBoard = $.getJSON( '/board/'+ 18, function(data){
+    var grabBoard = $.getJSON( '/board/'+ 10, function(data){
+      console.log(data)
       data.forEach(function(datum){
         board3d.push(datum['terrain'])
       })
+    var tiles=[];
+    board = data;
+      $.each(data, function(k, v){
+        tiles.push(v.coordinates);
+      });
+      var formatted_tiles = format_coords(tiles)
+      hex_data = formatted_tiles.map(function(tile){
+        return genHexData(genHexVertices(25), hexToCartesian(tile, 25));
+      });
     });
 
   grabBoard.complete(function(){
@@ -33,11 +44,11 @@ $( document ).ready(function() {
     document.body.appendChild( renderer.domElement );
 
     // testVerts = genHexData(genHexVertices(1),);
-    generateNewMap();
-    var hex_data = formatted_tiles.map(function(tile){
-        hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
-        return hold
-      });
+    //generateNewMap();
+    // var hex_data = formatted_tiles.map(function(tile){
+    //     hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
+    //     return hold
+    //   });
 
       function makeHex(vertices, radius, terrain){
         var side1 = new THREE.Geometry();
@@ -127,7 +138,7 @@ $( document ).ready(function() {
           trunks = []
           treeTops = []
           randomLocations = []
-          for(i=0;i<30;i++){
+          for(i=0;i<15;i++){
             trunk = new THREE.CylinderGeometry(1,1,10,10,10,false)
             trunk.applyMatrix(new THREE.Matrix4().makeRotationX(1.57))
             randomLocations.push([randomIntFromInterval(side1.vertices[1].x, side1.vertices[4].x), randomIntFromInterval(side1.vertices[1].y, side1.vertices[5].y)])
@@ -135,7 +146,7 @@ $( document ).ready(function() {
             trunks.push(trunk)
           }
 
-          for(i=0; i<30; i++){
+          for(i=0; i<15; i++){
             hold = new THREE.SphereGeometry(3,10,10)
             hold.applyMatrix(new THREE.Matrix4().makeTranslation(randomLocations[i][0], randomLocations[i][1], side1.vertices[0].z + 7))//(side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, side1.vertices[0].z + 10)
             treeTops.push(hold)
@@ -151,7 +162,7 @@ $( document ).ready(function() {
         }
 
         if (terrain == 'tundra'){
-          var particleCount = 50,
+          var particleCount = 15,
           particles = new THREE.Geometry(),
           pMaterial = new THREE.ParticleBasicMaterial({
             color: 0xffffff,
@@ -207,8 +218,8 @@ $( document ).ready(function() {
     var y = 0
     function makeSomeWaves(){
       boardHexes.forEach(function(hex){
-        var deltaZ = 1
-        if(hex.ocean_delta && y % 50 == 0){
+        var deltaZ = 2
+        if(hex.ocean_delta && y % 40 == 0){
           if(hex.position.z > 5 || hex.position.z < -5 ){
             deltaZ = -deltaZ
           }
@@ -221,9 +232,9 @@ $( document ).ready(function() {
     g = 0
     function makeItSnow(){
       scene.__objectsAdded.forEach(function(object){
-        console.log(object)
+        //console.log(object)
         if(object.name == 'particleSys' && g % 10 == 0){
-          console.log(object.position)
+         // console.log(object.position)
         //   object.geometry.vertices.forEach(function(particle){
         //     console.log(object)
         //       if (particle.y < 0) {
@@ -249,19 +260,19 @@ $( document ).ready(function() {
       scene.add( hex );
     })
 
-    var pointLight = new THREE.PointLight(0xffffff, 1.5, 0);
+    var pointLight = new THREE.PointLight(0xffffff, 1.5);
     scene.add( pointLight )
 
     controls = new THREE.OrbitControls(camera);
 
-    pointLight.position.z = 400
+    pointLight.position.z = 750
     camera.position.z = 5;
 
     function render() {
       stats.begin();
       controls.update();
       makeSomeWaves();
-      makeItSnow();
+      //makeItSnow();
       requestAnimationFrame(render);
       renderer.render(scene, camera);
       stats.end();
