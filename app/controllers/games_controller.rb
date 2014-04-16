@@ -45,7 +45,7 @@ class GamesController < ApplicationController
     puts
     puts "========================================================"
 
-    redirect_to play_game_path
+    redirect_to play_game_path(@game.slug)
   end
 
   def join_game
