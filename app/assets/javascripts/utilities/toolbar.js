@@ -1,3 +1,5 @@
+$('#create_game_page').ready(function () {
+
 function Tool(args){
   this.type = args.type;
   this.color = args.color;
@@ -55,7 +57,6 @@ function getColor(terrainType, Tools){
 
 var allTools = loadTools();
 
-$('#create_game_page').ready(function () {
   $.each(allTools, function(){
     $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
   });

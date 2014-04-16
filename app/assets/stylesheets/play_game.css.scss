@@ -121,7 +121,17 @@ svg {
 #another_tool {
   border: 1px solid black;
   width: 298px;
-  height: 200px;
+  height: 100px;
+}
+
+#another_tool div{
+  border: 1px solid black;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 5px 20px;
+  text-decoration: none;
+  display: inline-block;
 }
 
 #chronicle_id {
