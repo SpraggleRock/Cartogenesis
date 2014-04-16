@@ -1,30 +1,74 @@
-- unless @user.nil?
-  - if @user.errors.any?
-    #error_explanation
-      .alert.alert-error
-        The form contains #{pluralize(@user.errors.count, "error")}.
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li
-            * #{msg}
-= form_for :session, url: sessions_path do |f|
-  = f.label :email
-  = f.text_field :email
-  = f.label :password
-  = f.password_field :password
-  = f.submit "Sign in", class: "login_button"
-%br
-= form_for :user, url: user_index_path, method: :post do |f|
-  = f.label :username
-  = f.text_field :username
-  = f.label :email
-  = f.text_field :email
-  = f.label :password
-  = f.password_field :password
-  = f.label :password_confirmation, "Confirmation"
-  = f.password_field :password_confirmation
-  = f.submit "Create my account", class: "signup_button"
 .title
   %h1 CartoGenesis
-/ = form_tag new_game_path, id: 'main_page', method: :get do
-/   = submit_tag "Enter your world", class: 'enter'
+  #sign_up_sign_in
+    #signin.front_buttons.hide
+      %p
+        SIGN IN
+      = form_for :session, url: sessions_path do |f|
+        .form_inputs
+        = f.label :email
+        .form_inputs
+        = f.text_field :email
+        .form_inputs
+        = f.label :password
+        .form_inputs
+        = f.password_field :password
+        .form_inputs
+        = f.submit "Sign in", class: "login_button"
+    #signup.front_buttons.hide
+      %p
+        SIGN UP
+      = form_for :user, url: user_index_path, method: :post do |f|
+        %p
+        = f.label :username
+        %p
+        = f.text_field :username
+        %p
+        = f.label :email
+        %p
+        = f.text_field :email
+        %p
+        = f.label :password
+        %p
+        = f.password_field :password
+        %p
+        = f.label :password_confirmation, "Confirmation"
+        %p
+        = f.password_field :password_confirmation
+        %p
+        = f.submit "Create an account", class: "signup_button"
+  - flash.each do |key, value|
+    .alert.alert-error
+      %div{class: "alert alert-#{key}"}= value
+  - unless @user.nil?
+    - if @user.errors.any?
+      #error_explanation
+        .alert.alert-error
+          The form contains #{pluralize(@user.errors.count, "error")}.
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li
+                * #{msg}
+:javascript
+  $(document).ready( function() {
+    $('#signin p').on("click", function(){
+      if($(this).parent().hasClass('hide')) {
+        if($('#signup').hasClass('front_buttons_open')) {
+          $('#signup').animate({height:130},200).addClass('hide').removeClass('front_buttons_open');
+        }
+        $(this).parent().animate({height:540},200).removeClass('hide').addClass('front_buttons_open');
+      } else {
+        $(this).parent().animate({height:130},200).addClass('hide').removeClass('front_buttons_open');
+      }
+    });
+  $('#signup p').on("click", function(){
+    if($(this).parent().hasClass('hide')) {
+      if($('#signin').hasClass('front_buttons_open')) {
+        $('#signin').animate({height:130},200).addClass('hide').removeClass('front_buttons_open');
+      }
+      $(this).parent().animate({height:800},200).removeClass('hide').addClass('front_buttons_open');
+    } else {
+      $(this).parent().animate({height:130},200).addClass('hide').removeClass('front_buttons_open');
+    }
+  });
+  } );
