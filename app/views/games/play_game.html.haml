@@ -26,7 +26,7 @@
           = hidden_field(:points, :to_s)
           = submit_tag "End Turn"
 
-      = button_to("End Game", root_path, method: :get)
+      = button_to("Leave Game", leave_game_path(@game.id), method: :patch)
     #left_panel_middle
       .tabs
         .tab

@@ -9,6 +9,8 @@ Cartogenesis::Application.routes.draw do
 
   get '/games/:id/start', to: "games#start_game", as: 'start_game'
 
+  patch '/games/:id/leave', to: "games#leave_game", as: 'leave_game'
+
   get '/game_portal/:id', to: 'games#portal'
 
   get '/turn_logs/:id', to: 'turn_logs#return_json'
@@ -19,7 +21,7 @@ Cartogenesis::Application.routes.draw do
       end
     end
   end
-  
+
   get '/test3d', to: 'games#test3d'
 
   resources :games
