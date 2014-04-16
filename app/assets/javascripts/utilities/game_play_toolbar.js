@@ -132,7 +132,8 @@ $("#game_page").ready(function () {
         tile_id = $(this).attr("tile_id")
         selectedTool.type = $(this).attr("terrain")
         selectedTool.color = $(this).attr("fill")
-        activePlayerPoints = activePlayerPoints - 10
+        activePlayerPoints = activePlayerPoints - selectedTool.cost
+        $('#points_to_s').val(activePlayerPoints.toString())
         $('#tile_info').val(tile_id)
       }
       startHover().bind()
