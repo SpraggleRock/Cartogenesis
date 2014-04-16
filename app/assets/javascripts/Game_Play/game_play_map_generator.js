@@ -2,10 +2,11 @@ $(".games.play").ready(function(){
   var slugLength = 30;
   var radius = 300;
   var board;
+  var boardID;
   var createdTiles = [];
   var svg = d3.select(".play_game_svg_container").append("svg")
    .attr("width", 2*radius)
-   .attr("height", 2*radius);
+   .attr("height", 2*radius)
   var g = d3.select("svg").append("g")
     .attr("transform", "translate(" + [radius,radius] + ")");
   var lineFunction = d3.svg.line()
@@ -23,17 +24,22 @@ $(".games.play").ready(function(){
     location.reload();
   }
 
-  function Tile(radius, coordinates, terrain) {
+  function Tile(radius, coordinates, terrain ,landmark) {
     this.radius = radius;
     this.coordinates = coordinates;
     this.terrain = terrain;
+    this.landmark = landmark
   }
 
   function snapshotTiles() {
-    for(var i = 1; i <= $('g').children().length; i++){
+    for(var i = 1; i <= $('g').children().length - 1; i++){
       var path = $("path:nth-child("+i+")");
-      createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain")));
+      console.log(board[i].landmark)
+      createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain"), board[i].landmark));
     }
+    var path = $("path:nth-child("+board.length+")");
+    createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain"), false))
+    boardID = board[0].board_id
   }
 
   function format_coords(coord_string_array) {
@@ -120,6 +126,14 @@ $(".games.play").ready(function(){
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
+      complete: function(){
+        console.log('complete')},
+      error: function(){
+        console.log('error')
+      },
+      success: function(){
+        console.log('success')
+      }
     });
   });
 });

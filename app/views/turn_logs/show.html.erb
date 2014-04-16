@@ -3,10 +3,15 @@
 <div class='gameinfo' gameId=<%= params[:game_id] %>></div>
 <div class='loginfo' logId=<%= params[:id] %>></div>
 <div class='chronicleinfo' chronicleId=<%= params[:chronicle_id] %>></div>
+<div class='boardinfo' boardId=<%= @board.id %>></div>
 <%=@next%>
 <% if @next %>
 <%= link_to "Next", "/games/#{@chronicle.game_id}/chronicles/#{@chronicle.id}/turn_logs/#{@next}" %>
 <% end %>
+<% if @turn_log == @chronicle.turn_logs.last%>
+  <a href='#' id='render'>Render in 3D!</a>
+<% end %>
 <div class="replay_game_svg_container">
   <div class="game replay"></div>
 </div>
+<style id="3d">canvas { width: 100%; height: 100% }</style>
