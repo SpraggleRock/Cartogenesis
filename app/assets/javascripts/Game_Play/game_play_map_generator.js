@@ -77,6 +77,7 @@ $(".games.play").ready(function(){
       .attr("fill", getColor(board[j].terrain, allTools))
       .attr("tile_id", board[j].id)
       .attr("board_id", board[0].board_id)
+      .attr("coordinates", board[j].coordinates)
 
       j++;
     });

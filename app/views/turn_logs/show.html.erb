@@ -1,2 +1,10 @@
 <h1>Turn_Log Show Page!</h1>
 <p><%=@turn_log.documentation%></p>
+<div class='gameinfo' gameId=<%= params[:game_id] %>></div>
+<div class='loginfo' logId=<%= params[:id] %>></div>
+<div class='chronicleinfo' chronicleId=<%= params[:chronicle_id] %>></div>
+<%=@next%>
+<%= link_to "Next", "/games/#{@chronicle.game_id}/chronicles/#{@chronicle.id}/turn_logs/#{@next}" %>
+<div class="replay_game_svg_container">
+  <div class="game replay"></div>
+</div>
