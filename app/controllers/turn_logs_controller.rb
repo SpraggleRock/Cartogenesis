@@ -8,7 +8,8 @@ class TurnLogsController < ApplicationController
     turn_log = TurnLog.create(
       documentation: params['turn_log']['documentation'],
       board_json: params['turn_log']['board_json'],
-      active_player: active_player
+      active_player: active_player,
+      game_id: game.id
       )
     chronicle.turn_logs << turn_log
   end
