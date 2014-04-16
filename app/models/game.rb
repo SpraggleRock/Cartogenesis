@@ -36,17 +36,9 @@ class Game < ActiveRecord::Base
   end
 
   def new_round
-    if self.votes == self.players.length
-      end_game
-    end
     self.round_counter = self.round_counter + 1
     self.update(turn_counter: 1)
     self.next_player
     assign_round_points
   end
-
-  def end_game
-    self.is_running = false
-  end
-
 end

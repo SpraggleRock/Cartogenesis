@@ -42,17 +42,19 @@ class GamesController < ApplicationController
     player.save
     @game.end_turn
     @game.save
-    if @game.is_running
-      WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
-      redirect_to play_game_path(@game.slug)
-    else
-      WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
-      redirect_to game_overview
-    end
+    WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
+    redirect_to play_game_path(@game.slug)
   end
 
   def join_game
     @game = Game.find_by(slug: join_game_params)
+  end
+
+  def leave_game
+    @game = Game.find_by(params[:id])
+    player = player.where(game_id: @game.id, user_id: current_user.id)
+    @games.players.delete(player)
+    redirect_to root_path
   end
 
   def start_game
