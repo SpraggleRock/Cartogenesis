@@ -43,23 +43,28 @@
 
       = button_to("Leave Game", leave_game_path(@game.id), method: :patch)
     #left_panel_middle
-      .tabs
-        .tab
-          %input#tab-1{name: "tab-group-1", type: "radio", checked: "checked"}
-          %label{for: "tab-1"} Colors
-          .content
-            #toolbar
-        .tab
-          %input#tab-2{name: "tab-group-1", type: "radio"}
-          %label{for: "tab-2"} Navigate
-          .content
-            #other_tool
-              %p navigation tools
-        .tab
-          %input#tab-3{name: "tab-group-1", type: "radio"}
-          %label{for: "tab-3"} Something
-          .content
-            #another_tool
+      - if Player.find_by(id: @game.active_player, user_id: current_user.id)
+        .tabs
+          .tab
+            %input#tab-1{name: "tab-group-1", type: "radio", checked: "checked"}
+            %label{for: "tab-1"} Colors
+            .content
+              #toolbar
+          .tab
+            %input#tab-2{name: "tab-group-1", type: "radio"}
+            %label{for: "tab-2"} Navigate
+            .content
+              #other_tool
+                %p navigation tools
+          .tab
+            %input#tab-3{name: "tab-group-1", type: "radio"}
+            %label{for: "tab-3"} Something
+            .content
+              #another_tool
+                %p something else!!!!
+      - else
+        %p
+          nada
     #left_panel_bottom
       - if signed_in?
         #chat_window
