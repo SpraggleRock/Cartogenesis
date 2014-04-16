@@ -5,7 +5,6 @@ class ChatMessagesController < WebsocketRails::BaseController
   end
 
   def broadcast
-    puts 'in broadcast'
     broadcast_message :notification, message, namespace: 'chat_messages'
   end
 

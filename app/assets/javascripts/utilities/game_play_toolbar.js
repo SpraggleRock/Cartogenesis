@@ -130,7 +130,6 @@ $("#game_page").ready(function () {
         event.preventDefault()
         $('#landmark_modal').trigger('openModal');
         tile_id = $(this).attr("tile_id")
-        console.log(tile_id)
         selectedTool.type = $(this).attr("terrain")
         selectedTool.color = $(this).attr("fill")
         activePlayerPoints = activePlayerPoints - 10
@@ -138,32 +137,27 @@ $("#game_page").ready(function () {
       }
       startHover().bind()
       if(($(this).attr("terrain") != selectedTool.type) && (activePlayerPoints >= selectedTool.cost)){
-          $(this).attr("fill", selectedTool.color)
+          $(this).attr("fill", selectedTool.color);
           $(this).attr("terrain", selectedTool.type);
-          updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
-          activePlayerPoints = activePlayerPoints - selectedTool.cost
+          updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}));
+          activePlayerPoints = activePlayerPoints - selectedTool.cost;
           $('#points_to_s').val(activePlayerPoints.toString());
         }
-
     });
 
     $('a.close').on('click', function(){
       data = {name: $('#landmark_name').val(),
               description: $('#landmark_description').val(),
-              tile_id: $('#tile_info').val()}
+              tile_id: $('#tile_info').val()};
       $.ajax({
         type: 'POST',
         url: '/landmark/',
         data: data,
-        success: function(){
-          console.log(data)
-          console.log('landmark data sent!')
-        }
-      })
-    })
+        success: function(){}
+      });
+    });
 
     $(document).on('mouseup', function(event){
       $('svg').unbind('mouseenter')
     });
-
   });

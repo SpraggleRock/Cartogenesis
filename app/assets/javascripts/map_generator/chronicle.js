@@ -1,7 +1,5 @@
 $( document ).ready(function(){
- console.log(' document is ready');
   $(".gameinfo").ready(function(){
-    console.log(' in game replay');
     var radius = 300;
     var board;
     var createdTiles = [];
@@ -59,7 +57,6 @@ $( document ).ready(function(){
     $.getJSON( '/turn_logs/'+ logID, function(data){
       var tiles=[];
       board = data;
-      console.log(board)
       $.each(data, function(k, v){
         tiles.push(v.coordinates);
       });

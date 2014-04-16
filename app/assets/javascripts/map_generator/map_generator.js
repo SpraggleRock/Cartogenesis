@@ -37,7 +37,6 @@ $(".games.new").ready(function(){
       .attr("terrain", 'ocean')
       .attr("fill", "#0000FF")
       .attr("coordinates", tiles[i])
-      // .attr("tile_id", (i + (169 * board[0].board_id) - 169))
 
       i++;
     });
@@ -47,7 +46,6 @@ function snapshotTiles() {
   for(var i = 1; i <= $('g').children().length; i++){
     var path = $("path:nth-child("+i+")")
     createdTiles.push(new Tile(20, path.attr("coordinates"), path.attr("terrain")));
-    console.log(createdTiles[i-1]);
   }
 }
 
@@ -62,7 +60,6 @@ function snapshotTiles() {
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function(response){
-        console.log(response);
        window.location.href = '/join/' + response.slug
       }
     });
