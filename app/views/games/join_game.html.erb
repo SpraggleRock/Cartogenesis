@@ -1,7 +1,9 @@
 <%= form_for :player, url: players_path(@game.slug), html: {id: 'join_game'} do |f| %>
   <p>
     <%= hidden_field_tag :game_id, @game.id %>
-    <%= f.text_field :name%>
+    <%= f.label :name, "And Lo!" %>
+    <%= f.text_field :name, placeholder: "Deity Name"%>
+    discovered existence, and as they existed so existed the world.
   </p>
     <%= f.submit 'Join Game', id: "join_game" %>
 <%end%>
