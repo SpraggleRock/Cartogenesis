@@ -8,6 +8,10 @@ class Game < ActiveRecord::Base
   has_one :chronicle
   before_create :generate_url
 
+  def in_game?(user)
+    users.include?(user)
+  end
+
   def generate_url
     lowercase_letters = ('a'..'z').to_a
     uppercase_letters = lowercase_letters.map(&:upcase)

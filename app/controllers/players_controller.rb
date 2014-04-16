@@ -1,19 +1,17 @@
 class PlayersController < ApplicationController
 
-  def create
-    player = Player.find_or_create_by_all(game_id: params[:game_id],
-      user_id: current_user.id, name: params[:player][:name])
-    player.update(name: params[:player][:name])
-    @game = player.game
-    WebsocketRails[@game.slug.to_sym].trigger(:new_player, {player_name: player.name, username: current_user.username}.to_json)
-    puts
+def create
+    @game = Game.find(params[:game_id])
+    unless @game.in_game?(current_user)
+      player = Player.create(
+        name: params[:player][:name],
+        game: @game,
+        user: current_user
+        )
+      WebsocketRails[@game.slug.to_sym].trigger(
+        :new_player,
+        {player_name: player.name, username: current_user.username}.to_json
+        )
+    end
   end
-
-
-  # private
-  #   def player_params
-  #     params.require(:player).permit(:name)
-  #   end
-
-
 end
