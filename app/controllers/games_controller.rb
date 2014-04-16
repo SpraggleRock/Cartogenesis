@@ -37,7 +37,6 @@ class GamesController < ApplicationController
     @board = Board.find_by(game_id: params[:id])
     points = params[:points][:to_s]
     player = Player.find(@game.active_player)
-    puts points
     player.points = points
     player.save
     @game.end_turn
@@ -59,7 +58,6 @@ class GamesController < ApplicationController
 
   def start_game
     @game = Game.find(params[:id].to_i)
-    puts params
     @game.active_player = @game.players[0].id
     @game.assign_round_points
     @game.save
@@ -72,9 +70,6 @@ class GamesController < ApplicationController
     @points = Player.find(@game.active_player).points
   end
 
-  # def show
-  # end
-
   def json_params
     params.require(:_json)
   end
@@ -82,8 +77,4 @@ class GamesController < ApplicationController
   def join_game_params
     params.require(:game_slug)
   end
-
-  # def new_players_params
-  #   params.require(:players)
-  # end
 end

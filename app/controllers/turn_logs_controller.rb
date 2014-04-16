@@ -1,8 +1,6 @@
 class TurnLogsController < ApplicationController
 
   def create
-    puts "in turn log create-------------------------------------------"
-    p params['turn_log']['chronicle_id']
     game = Game.find(params['turn_log']['game_id'])
     active_player = Player.find(game.active_player)
     chronicle = Chronicle.find(params['turn_log']['chronicle_id'])
@@ -28,8 +26,7 @@ class TurnLogsController < ApplicationController
 
   def return_json
    @turn_log = TurnLog.find(params[:id])
-
    render json: @turn_log.board_json
   end
 end
-# board_json: [:radius, :terrain],
+

@@ -7,12 +7,10 @@ class BoardController < ApplicationController
 
   def create
     board = Board.create(board_size: 7)
-    puts json_params
     data = []
     json_params.each do |string|
       data.push(JSON.parse(string.to_json))
     end
-    puts data
     data.each do |datum|
       board.tiles << Tile.create(coordinates: datum['coordinates'], terrain: datum['terrain'], radius: datum['radius'])
     end
@@ -30,7 +28,6 @@ class BoardController < ApplicationController
     json_params.each do |string|
       data.push(JSON.parse(string.to_json))
     end
-    puts params
     data.each do |datum|
       tile = Tile.find(datum['id'])
       tile.update_attribute(:terrain, datum['terrain'])

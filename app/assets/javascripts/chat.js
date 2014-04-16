@@ -10,17 +10,13 @@ Chat.prototype.setUpChat = function() {
 Chat.prototype.sendChatMessage = function(message) {
   var message = { text: message };
   this.dispatcher.trigger('chat_messages.broadcast', message );
-  console.log('sent message: ' + message.text);
 }
 Chat.prototype.receiveAndDisplay = function() {
-  console.log('in receiveAndDisplay()')
   this.dispatcher.bind('chat_messages.notification', function(message) {
-    console.log(message);
     $('#chat_window').append("<p>"+message.text+"</p>");
   });
 }
 Chat.prototype.chatWindowOpenClose = function() {
-  console.log("in chat open,close");
   $('#open_chat').on('click', function(event){
     event.preventDefault();
     $('#chat_window').show();
@@ -37,7 +33,6 @@ Chat.prototype.chatWindowOpenClose = function() {
   });
 }
 Chat.prototype.hookUpWebSocketsToSendMessage = function() {
-  console.log('hooking up websockets');
   $('.chat_form').on('submit', function(event){
     event.preventDefault();
     var message = $('#chat_input').val();

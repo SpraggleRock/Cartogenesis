@@ -74,49 +74,4 @@ $(".games.replay").ready(function(){
   }
 
   renderBoard(board_json);
-
-  // $('svg').on('click', function(event){
-  //   console.log('holy shit i clicked');
-  //   $.ajax({
-  //     type: 'PATCH',
-  //     url: '/board/1/',
-  //     data: JSON.stringify(updateQueue),
-  //     accept: 'application/json',
-  //     contentType: 'application/json; charset=utf-8',
-  //     dataType: 'json',
-  //     success: function(){
-  //       console.log('success')
-  //       updateQueue = []
-  //     },
-  //     error: function(){
-  //       console.log(JSON.stringify(updateQueue))
-  //     }
-  //   })
-  // })
-
-  // $('.end_turn').on("submit", function(event){
-  //   snapshotTiles();
-
-  //   alert("about to send log data");
-
-  //   $.ajax({
-  //      type: "POST",
-  //       url: '/games/'+gameID+'/chronicles/'+chronicleID+'/turn_logs',
-  //       data: JSON.stringify({turn_log: {board_json: createdTiles,
-  //             documentation: $('#turn_log_documentation').val(),
-  //             chronicle_id: chronicleID,
-  //             game_id: gameID
-  //             }
-  //           }),
-  //       accept: 'application/json',
-  //       contentType: 'application/json; charset=utf-8',
-  //       dataType: 'json',
-  //        success: function(){
-  //          alert('Sent update info succesfully');
-  //        },
-  //        complete: function(){
-  //           alert('request went through.');
-  //        }
-  // });
-  // });
 });
