@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create(is_running: true)
+    @game = Game.create()
     board = Board.create(board_size: 7, game_id: @game.id)
     @game.board = board
     data = []
