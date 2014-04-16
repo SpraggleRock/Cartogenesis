@@ -8,9 +8,7 @@
 <% if @next %>
 <%= link_to "Next", "/games/#{@chronicle.game_id}/chronicles/#{@chronicle.id}/turn_logs/#{@next}" %>
 <% end %>
-<% if @turn_log == @chronicle.turn_logs.last%>
-  <a href='#' id='render'>Render in 3D!</a>
-<% end %>
+<a href='#' id='render'>Render in 3D!</a>
 <div class="replay_game_svg_container">
   <div class="game replay"></div>
 </div>

@@ -3,13 +3,15 @@ $( document ).ready(function() {
     console.log('getting board id')
     var idDiv = $('.boardinfo');
     boardID = idDiv.attr("boardid")
+    var turnDiv = $('.loginfo')
+    tlogID = turnDiv.attr("logId")
   })
 
   $( '#render' ).on("click", function(){
     var board3d = [];
     var hex_data;
 
-    var grabBoard = $.getJSON( '/board/' + boardID, function(data){
+    var grabBoard = $.getJSON( '/turn_logs/' + tlogID, function(data){
       console.log(data)
       data.forEach(function(datum){
         board3d.push(datum['terrain'])
@@ -271,7 +273,7 @@ $( document ).ready(function() {
     controls = new THREE.OrbitControls(camera);
 
     pointLight.position.z = 750
-    camera.position.z = 5;
+    camera.position.z = 750;
 
     function render() {
       stats.begin();

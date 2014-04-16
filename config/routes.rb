@@ -24,7 +24,7 @@ Cartogenesis::Application.routes.draw do
     end
   end
 
-  get '/test3d', to: 'games#test3d'
+  # get '/test3d', to: 'games#test3d'
 
   resources :games
 
