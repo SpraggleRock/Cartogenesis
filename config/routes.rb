@@ -11,6 +11,8 @@ Cartogenesis::Application.routes.draw do
 
   get '/game_portal/:id', to: 'games#portal'
 
+  get '/turn_logs/:id', to: 'turn_logs#return_json'
+
   resources :games do
     resources :chronicles do
       resources :turn_logs do
@@ -27,5 +29,4 @@ Cartogenesis::Application.routes.draw do
   get '/play/:game_slug', to: "games#play_game", as: 'play_game'
 
   post '/players/:game_slug', to: "players#create", as: 'players'
-
 end
