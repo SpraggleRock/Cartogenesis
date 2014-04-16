@@ -13,7 +13,7 @@ $(".games.play").ready(function(){
     .y(function(d){ return d.y;})
     .interpolate("linear");
   var gameID = $('.games.play').attr("id");
-  var chronicleID = $('.chronicle_id').attr("id");
+  var chronicleID = $('.chronicle_id_container').attr("id");
 
   socket = new Multiplayer(document.URL.slice(-slugLength));
 
@@ -98,10 +98,12 @@ $(".games.play").ready(function(){
     snapshotTiles();
     $.ajax({
       type: "POST",
-      url: '/turn_log',
+      url: '/games/:game_id/chronicles/:chronicle_id/turn_logs',
       data: JSON.stringify({turn_log: {board_json: createdTiles,
-             documentation: $('#turn_log_documentation').val(),
-             game_id: gameID}
+              documentation: $('#turn_log_documentation').val(),
+              game_id: gameID,
+              chronicle_id: chronicleID,
+            }
             }),
       accept: 'application/json',
       contentType: 'application/json; charset=utf-8',

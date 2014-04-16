@@ -1,6 +1,7 @@
 class TurnLogsController < ApplicationController
 
   def create
+    puts "in turn log create-------------------------------------------"
     p params['turn_log']['chronicle_id']
     game = Game.find(params['turn_log']['game_id'])
     active_player = Player.find(game.active_player)
