@@ -6,7 +6,6 @@
           %p= turn_log.active_player.name.upcase + "'s reign:"
           %p= link_to  'the world as it was', game_chronicle_turn_log_path(@game, @game.chronicle, turn_log)
           %p= turn_log.documentation
-          = link_to "Show History",game_chronicle_turn_log_path(@game, @game.chronicle, turn_log)
   #left_panel_wrapper
     #left_panel_top
       %p
