@@ -37,4 +37,10 @@ Cartogenesis::Application.routes.draw do
   get '/play/:game_slug', to: "games#play_game", as: 'play_game'
 
   post '/players/:game_slug', to: "players#create", as: 'players'
+
+  get '/tutorial', to: "tutorial#show"
 end
+
+
+
+
