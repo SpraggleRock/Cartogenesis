@@ -4,12 +4,13 @@ class Player < ActiveRecord::Base
 
   def self.find_or_create_by_all(params = {})
     if self.find_by(user_id: params[:user_id])
-      player = self.find_by(user_id: params[:user_id])
-      if (player.game_id == params[:game_id])
-        return player
-      else
-        self.create(params)
+      players = self.where(user_id: params[:user_id])
+      players.each do |player|
+        if (player.game_id == params[:game_id])
+          return player
+        end
       end
+      self.create(params)
     else
       self.create(params)
     end
