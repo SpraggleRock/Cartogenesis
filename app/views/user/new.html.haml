@@ -20,27 +20,31 @@
           .form_inputs
           = f.submit "Sign in", class: "login_button"
     #signup.front_buttons.hide
-      %p
-        SIGN UP
-      = form_for :user, url: user_index_path, method: :post do |f|
+      - if signed_in?
         %p
-        = f.label :username
+          = link_to "SIGN OUT", signout_path, method: "delete"
+      - else
         %p
-        = f.text_field :username
-        %p
-        = f.label :email
-        %p
-        = f.text_field :email
-        %p
-        = f.label :password
-        %p
-        = f.password_field :password
-        %p
-        = f.label :password_confirmation, "Confirmation"
-        %p
-        = f.password_field :password_confirmation
-        %p
-        = f.submit "Create an account", class: "signup_button"
+          SIGN UP
+        = form_for :user, url: user_index_path, method: :post do |f|
+          %p
+          = f.label :username
+          %p
+          = f.text_field :username
+          %p
+          = f.label :email
+          %p
+          = f.text_field :email
+          %p
+          = f.label :password
+          %p
+          = f.password_field :password
+          %p
+          = f.label :password_confirmation, "Confirmation"
+          %p
+          = f.password_field :password_confirmation
+          %p
+          = f.submit "Create an account", class: "signup_button"
   - flash.each do |key, value|
     .alert.alert-error
       %div{class: "alert alert-#{key}"}= value
