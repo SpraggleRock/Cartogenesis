@@ -69,8 +69,6 @@ $(".games.play").ready(function(){
   function drawHexes(hexes) {
     j = 0;
 
-    console.log(hexes[0])
-
     hexes.forEach(function(hex){
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
