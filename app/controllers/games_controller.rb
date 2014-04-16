@@ -11,6 +11,11 @@ class GamesController < ApplicationController
   def index
   end
 
+  def test3d
+
+    render :test_index
+  end
+
   def create
     @game = Game.create
     board = Board.create(board_size: 7, game_id: @game.id)
@@ -45,7 +50,7 @@ class GamesController < ApplicationController
     puts
     puts "========================================================"
 
-    redirect_to play_game_path
+    redirect_to play_game_path(@game.slug)
   end
 
   def join_game

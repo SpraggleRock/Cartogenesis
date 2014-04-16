@@ -21,6 +21,10 @@ Cartogenesis::Application.routes.draw do
       end
     end
   end
+  
+  get '/test3d', to: 'games#test3d'
+
+  resources :games
 
   resources :board, only: [ :update , :show, :create]
 
