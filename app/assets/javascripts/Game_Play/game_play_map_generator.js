@@ -68,6 +68,9 @@ $(".games.play").ready(function(){
 
   function drawHexes(hexes) {
     j = 0;
+
+    console.log(hexes[0])
+
     hexes.forEach(function(hex){
     hexShow = g.append("path")
       .attr("d", lineFunction(hex).concat("Z"))
@@ -79,6 +82,16 @@ $(".games.play").ready(function(){
       .attr("board_id", board[0].board_id)
       .attr("coordinates", board[j].coordinates)
 
+      if(board[j].landmark){
+        svg.append("svg:image")
+          .attr("xlink:href", 'https://cdn1.iconfinder.com/data/icons/huge-black-icons/512/City.png')
+          .attr("width", 27.5)
+          .attr("height", 27.5)
+          .attr("x", hexes[j][4].x + radius)
+          .attr("y", hexes[j][4].y + radius + 5)
+          .style('z-index', 5)
+      }
+
       j++;
     });
   }
@@ -88,6 +101,7 @@ $(".games.play").ready(function(){
   $.getJSON( '/board/'+ gameID, function(data){
     var tiles=[];
     board = data;
+    console.log(data)
     $.each(data, function(k, v){
       tiles.push(v.coordinates);
     });

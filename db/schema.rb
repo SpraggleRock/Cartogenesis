@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20140416140605) do
 
   create_table "tiles", force: true do |t|
     t.integer  "board_id"
+    t.boolean  "landmark"
     t.string   "terrain",     default: "ocean"
     t.float    "radius"
     t.string   "coordinates"
