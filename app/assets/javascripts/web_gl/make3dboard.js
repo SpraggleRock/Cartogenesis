@@ -34,15 +34,15 @@ $( document ).ready(function() {
       return Math.floor(Math.random()*(max-min+1)+min);
     }
 
-    var stats = new Stats();
-    stats.setMode(1); // 0: fps, 1: ms
+    // var stats = new Stats();
+    // stats.setMode(1); // 0: fps, 1: ms
 
-    // Align top-left
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
+    // // Align top-left
+    // stats.domElement.style.position = 'absolute';
+    // stats.domElement.style.left = '0px';
+    // stats.domElement.style.top = '0px';
 
-  document.body.appendChild( stats.domElement );
+  // document.body.appendChild( stats.domElement );
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / 2 / window.innerHeight , 0.1, 1000 );
 
@@ -276,13 +276,13 @@ $( document ).ready(function() {
     camera.position.z = 750;
 
     function render() {
-      stats.begin();
+      //stats.begin();
       controls.update();
       makeSomeWaves();
       //makeItSnow();
       requestAnimationFrame(render);
       renderer.render(scene, camera);
-      stats.end();
+      //stats.end();
     }
     render();
     })
