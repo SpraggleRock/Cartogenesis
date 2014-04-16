@@ -1,4 +1,19 @@
 #game_page
+  #landmark_modal
+    .header
+      %h3 Raise a Landmark
+    %form{action: '/landmark/', method: 'POST', id: 'create_landmark'}
+    .txt
+      %label{for: "Name"} Landmark Name:
+      %input#landmark_name{name: "", type: "text"}/
+    .txt
+      %label{for: "description"} Description:
+      %input#landmark_description{name: "", type: "text"}/
+    .tile_info_field
+      %input#tile_info{ type: "hidden" }/
+    .btn.clearfix
+      %a.close{href: "#"} Mark the Land!
+      %a.close.cancel{href: "#"} Cancel
   #chronicle
     %ul
       - @game.chronicle.turn_logs.each do |turn_log|

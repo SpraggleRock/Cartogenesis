@@ -1,3 +1,14 @@
+  $('#landmark_modal').ready(function(){
+    $('#landmark_modal').easyModal({
+      top: 200,
+      overlay: 0.4,
+      overlayClose: false,
+      onClose: function(){
+
+      }
+    });
+  })
+
 
   function Tool(args){
     this.type = args.type;
@@ -29,7 +40,7 @@
     cost: 3}]
 
   var creationToolData = [
-    {type: 'city', color: '', cost : 5}
+    {type: 'city', color: '', cost : 10}
   ]
 
   function loadTerrainTools(){
@@ -80,7 +91,6 @@
     return myTool
   }
 
-  var landmark_id = 1;
   var terrainTools = loadTerrainTools();
   var creationTools = loadCreationTools();
   var holdTools = terrainTools.concat(creationTools)
@@ -116,9 +126,15 @@ $("#game_page").ready(function () {
       })
     }
     $('svg').on('mousedown','path', function(event){
-      if(selectedTool.type == 'city'){
-        $(this).attr("landmark_id", landmark_id)
-        landmark_id++;
+      if(selectedTool.type == 'city' && activePlayerPoints >= selectedTool.cost){
+        event.preventDefault()
+        $('#landmark_modal').trigger('openModal');
+        tile_id = $(this).attr("tile_id")
+        console.log(tile_id)
+        selectedTool.type = $(this).attr("terrain")
+        selectedTool.color = $(this).attr("fill")
+        activePlayerPoints = activePlayerPoints - selectedTool.cost
+        $('#tile_info').val(tile_id)
       }
       startHover().bind()
       if(($(this).attr("terrain") != selectedTool.type) && (activePlayerPoints >= selectedTool.cost)){
@@ -128,9 +144,26 @@ $("#game_page").ready(function () {
           activePlayerPoints = activePlayerPoints - selectedTool.cost
           $('#points_to_s').val(activePlayerPoints.toString());
         }
+
     });
+
+    $('a.close').on('click', function(){
+      data = {name: $('#landmark_name').val(),
+              description: $('#landmark_description').val(),
+              tile_id: $('#tile_info').val()}
+      $.ajax({
+        type: 'POST',
+        url: '/landmark/',
+        data: data,
+        success: function(){
+          console.log(data)
+          console.log('landmark data sent!')
+        }
+      })
+    })
 
     $(document).on('mouseup', function(event){
       $('svg').unbind('mouseenter')
     });
+
   });

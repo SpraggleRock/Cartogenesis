@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20140416140605) do
   create_table "landmarks", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "coordinates"
+    t.string   "tile_id"
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"

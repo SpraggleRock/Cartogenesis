@@ -13,7 +13,7 @@ Cartogenesis::Application.routes.draw do
 
   get '/turn_logs/:id', to: 'turn_logs#return_json'
 
-  get '/landmark/:id', to: 'landmarks#create'
+  post '/landmark/', to: 'landmarks#create', as: 'create_landmark'
 
   resources :games do
     resources :chronicles do
