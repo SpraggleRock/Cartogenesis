@@ -1,10 +1,15 @@
 $( document ).ready(function() {
-  $( '#3d' ).ready(function(){
+  $("svg").ready(function(){
+    console.log('getting board id')
+    var idDiv = $('.boardinfo');
+    boardID = idDiv.attr("boardid")
+  })
+
+  $( '#render' ).on("click", function(){
     var board3d = [];
     var hex_data;
 
-
-    var grabBoard = $.getJSON( '/board/'+ 10, function(data){
+    var grabBoard = $.getJSON( '/board/' + boardID, function(data){
       console.log(data)
       data.forEach(function(datum){
         board3d.push(datum['terrain'])
@@ -138,7 +143,7 @@ $( document ).ready(function() {
           trunks = []
           treeTops = []
           randomLocations = []
-          for(i=0;i<15;i++){
+          for(i=0;i<12;i++){
             trunk = new THREE.CylinderGeometry(1,1,10,10,10,false)
             trunk.applyMatrix(new THREE.Matrix4().makeRotationX(1.57))
             randomLocations.push([randomIntFromInterval(side1.vertices[1].x, side1.vertices[4].x), randomIntFromInterval(side1.vertices[1].y, side1.vertices[5].y)])
@@ -146,7 +151,7 @@ $( document ).ready(function() {
             trunks.push(trunk)
           }
 
-          for(i=0; i<15; i++){
+          for(i=0; i<12; i++){
             hold = new THREE.SphereGeometry(3,10,10)
             hold.applyMatrix(new THREE.Matrix4().makeTranslation(randomLocations[i][0], randomLocations[i][1], side1.vertices[0].z + 7))//(side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, side1.vertices[0].z + 10)
             treeTops.push(hold)

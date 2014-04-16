@@ -3,6 +3,7 @@ $( document ).ready(function(){
     var radius = 300;
     var board;
     var createdTiles = [];
+    var boardID;
 
     function Tile(radius, coordinates, terrain) {
       this.radius = radius
@@ -57,6 +58,7 @@ $( document ).ready(function(){
     $.getJSON( '/turn_logs/'+ logID, function(data){
       var tiles=[];
       board = data;
+      boardID = board[0].board_id
       $.each(data, function(k, v){
         tiles.push(v.coordinates);
       });
@@ -68,4 +70,10 @@ $( document ).ready(function(){
       drawHexes(hex_data);
     });
   });
+
+  $('#render').on('click', function(){
+    console.log('here')
+    $('svg').remove();
+    $('head').append('<style id="3d">canvas { width: 100%; height: 100% }</style>')
+  })
 });

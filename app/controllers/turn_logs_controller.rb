@@ -19,6 +19,7 @@ class TurnLogsController < ApplicationController
     logs = @chronicle.turn_logs.order(id: :asc)
     @turn_log = @chronicle.turn_logs.find(params[:id])
     next_index = logs.find_index{|log| log.id == @turn_log.id} + 1
+    @board = Board.find_by(game_id: @chronicle.game_id)
     if logs[next_index]
       @next = logs[next_index].id
     end
