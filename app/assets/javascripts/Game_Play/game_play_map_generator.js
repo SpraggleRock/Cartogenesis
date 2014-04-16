@@ -99,7 +99,6 @@ $(".games.play").ready(function(){
   $.getJSON( '/board/'+ gameID, function(data){
     var tiles=[];
     board = data;
-    console.log(data)
     $.each(data, function(k, v){
       tiles.push(v.coordinates);
     });
