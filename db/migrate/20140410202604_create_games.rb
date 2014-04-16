@@ -4,6 +4,7 @@ class CreateGames < ActiveRecord::Migration
       t.integer :round_counter, default: 1
       t.integer :turn_counter, default: 1
       t.integer :active_player
+      t.string :slug
 
       t.timestamps
     end

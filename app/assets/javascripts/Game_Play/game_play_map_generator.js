@@ -1,4 +1,30 @@
 $(".games.play").ready(function(){
+  var slugLength = 30;
+  socket = new Multiplayer(document.URL.slice(-slugLength));
+
+  // var dispatcher = new WebSocketRails('localhost:3000/websocket');
+  // var multiplayer_channel = dispatcher.subscribe('multiplayer');
+
+  socket.update('end_turn', refresh);
+
+
+    // $('svg').remove();
+    // console.log('board data :' + data);
+    //  var tiles=[];
+    //  var board = data.board_json
+    // $.each(board, function(k, v){
+    //   tiles.push(v.coordinates);
+    //   console.log(v.coordinates);
+    // });
+    // var formatted_tiles = format_coords(tiles)
+    // var hex_data = formatted_tiles.map(function(tile){
+    //   return genHexData(genHexVertices(25), hexToCartesian(tile, 25));
+    // });
+    // drawHexes(hex_data);
+
+  function refresh(data) {
+    location.reload();
+  }
 
   var radius = 300;
   var board;
@@ -64,10 +90,9 @@ $(".games.play").ready(function(){
     $.each(data, function(k, v){
       tiles.push(v.coordinates);
     });
-    formatted_tiles = format_coords(tiles)
+    var formatted_tiles = format_coords(tiles)
     var hex_data = formatted_tiles.map(function(tile){
-      hold = genHexData(genHexVertices(25), hexToCartesian(tile, 25))
-      return hold
+      return genHexData(genHexVertices(25), hexToCartesian(tile, 25));
     });
     drawHexes(hex_data);
   });

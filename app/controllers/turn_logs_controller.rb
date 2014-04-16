@@ -28,5 +28,9 @@ class TurnLogsController < ApplicationController
     # end
     # turn_log.save
   end
+
+  def show
+    @turn_log = TurnLog.find(params[:id])
+  end
 end
 # board_json: [:radius, :terrain],

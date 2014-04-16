@@ -51,7 +51,7 @@ function snapshotTiles() {
   }
 }
 
-  $('#accept_board').on("submit", function(event){
+  $('#accept_board').on("click", function(event) {
     event.preventDefault();
     snapshotTiles();
     $.ajax({
@@ -62,13 +62,11 @@ function snapshotTiles() {
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function(response){
-        console.log(response)
-        board_id = response.id
-        window.location.href = '/game_portal/' + response.game_id
+        console.log(response);
+       window.location.href = '/join/' + response.slug
       }
     });
   });
-
 
 function Tile(radius, coordinates, terrain) {
   this.radius = radius

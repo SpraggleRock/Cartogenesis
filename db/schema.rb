@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140413210754) do
     t.integer  "round_counter", default: 1
     t.integer  "turn_counter",  default: 1
     t.integer  "active_player"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
