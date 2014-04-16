@@ -2,19 +2,23 @@
   %h1 CartoGenesis
   #sign_up_sign_in
     #signin.front_buttons.hide
-      %p
-        SIGN IN
-      = form_for :session, url: sessions_path do |f|
-        .form_inputs
-        = f.label :email
-        .form_inputs
-        = f.text_field :email
-        .form_inputs
-        = f.label :password
-        .form_inputs
-        = f.password_field :password
-        .form_inputs
-        = f.submit "Sign in", class: "login_button"
+      - if signed_in?
+        %p
+          = link_to "NEW GAME", new_game_path, method: "get"
+      - else
+        %p
+          SIGN IN
+        = form_for :session, url: sessions_path do |f|
+          .form_inputs
+          = f.label :email
+          .form_inputs
+          = f.text_field :email
+          .form_inputs
+          = f.label :password
+          .form_inputs
+          = f.password_field :password
+          .form_inputs
+          = f.submit "Sign in", class: "login_button"
     #signup.front_buttons.hide
       %p
         SIGN UP

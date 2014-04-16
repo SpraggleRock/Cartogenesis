@@ -12,6 +12,7 @@
       - if signed_in?
         = current_user.username
         = link_to "Sign out", signout_path, method: "delete"
+        = link_to "New game", new_game_path, method: "get"
       - else
         = link_to "Sign in", new_user_path, method: "get"
       = yield
