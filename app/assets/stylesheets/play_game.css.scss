@@ -1,12 +1,12 @@
 #game_page {
-  width: 1850px;
-  height: 1000px;
+  width: 1780px;
   border: 1px solid #000;
+  margin: 15px auto 0 auto;
 }
 
 #left_panel_wrapper {
-  height: 1000px;
-  width: 300px;
+  height: 1020px;
+  width: 460px;
   float: left;
   border-bottom: 1px solid #fff;
   background: #eee;
@@ -83,16 +83,16 @@
 
 .play_game_svg_container {
   border: 1px solid #000;
-  width: 1548px;
-  height: 997px;
+  width: 1318px;
+  height: 1018px;
   overflow: scroll;
   background: #000;
 }
 
 
 svg {
-  height: 2000px;
-  width: 2000px;
+  height: 3000px;
+  width: 3000px;
   padding: 40px;
 }
 
@@ -121,25 +121,10 @@ svg {
 #another_tool {
   border: 1px solid black;
   width: 298px;
-  height: 100px;
+  height: 200px;
 }
 
-#another_tool div{
-  border: 1px solid black;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  margin: 5px 20px;
-  text-decoration: none;
-  display: inline-block;
-}
+#chronicle {
 
-.chronicle_id_container{
-  display:none;
-}
-
-#landmark_modal{
-  border: 1px solid black;
-  background: white;
 }
 

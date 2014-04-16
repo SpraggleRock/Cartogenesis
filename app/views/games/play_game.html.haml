@@ -14,57 +14,81 @@
     .btn.clearfix
       %a.close{href: "#"} Mark the Land!
       %a.close.cancel{href: "#"} Cancel
-  #chronicle
-    %ul
-      - @game.chronicle.turn_logs.each do |turn_log|
-        %li
-          %p= turn_log.active_player.name.upcase + "'s reign:"
-          %p= link_to  'the world as it was', game_chronicle_turn_log_path(@game, @game.chronicle, turn_log)
-          %p= turn_log.documentation
   #left_panel_wrapper
     #left_panel_top
-      %p
-        Round #{@game.round_counter}
-      %p
-        Player #{@game.turn_counter} (#{Player.find(@game.active_player).name})'s turn
-      %ul
-        -@game.players.each do |player|
-          %li
-            = player.name
-            has
-            %span.points
-              =player.points
-            points to spend
-      %p
-        = text_area_tag(:turn_log_documentation)
-        = form_tag @game, class: "end_turn", method: :patch do |f|
-          = hidden_field(:points, :to_s)
-          = submit_tag "End Turn"
-
-      = button_to("Leave Game", leave_game_path(@game.id), method: :patch)
-    #left_panel_middle
       .tabs
         .tab
           %input#tab-1{name: "tab-group-1", type: "radio", checked: "checked"}
-          %label{for: "tab-1"} Colors
+          %label{for: "tab-1"} Game
           .content
-            #toolbar
+            %p
+              Round #{@game.round_counter}
+            %p
+              Player #{@game.turn_counter} (#{Player.find(@game.active_player).name})'s turn
+            %ul
+              -@game.players.each do |player|
+                %li
+                  = player.name
+                  has
+                  %span.points
+                    =player.points
+                  points to spend
+            %p
+              = text_area_tag(:turn_log_documentation)
+              = form_tag @game, class: "end_turn", method: :patch do |f|
+                = hidden_field(:points, :to_s)
+                = submit_tag "End Turn"
+
+            = button_to("Leave Game", leave_game_path(@game.id), method: :patch)
+
         .tab
           %input#tab-2{name: "tab-group-1", type: "radio"}
           %label{for: "tab-2"} Navigate
           .content
-            #other_tool
-              %p navigation tools
+            #chronicle
+              %ul
+                - @game.chronicle.turn_logs.each do |turn_log|
+                  %li
+                    %p= turn_log.active_player.name.upcase + "'s reign:"
+                    %p= link_to  'the world as it was', game_chronicle_turn_log_path(@game, @game.chronicle, turn_log)
+                    %p= turn_log.documentation
         .tab
           %input#tab-3{name: "tab-group-1", type: "radio"}
           %label{for: "tab-3"} Something
           .content
-            #another_tool
+    #left_panel_middle
+      - if Player.find_by(id: @game.active_player, user_id: current_user.id)
+        .tabs
+          .tab
+            %input#tab-4{name: "tab-group-2", type: "radio", checked: "checked"}
+            %label{for: "tab-4"} Colors
+            .content
+              #toolbar
+          .tab
+            %input#tab-5{name: "tab-group-2", type: "radio"}
+            %label{for: "tab-5"} Navigate
+            .content
+              #other_tool
+                %p navigation tools
+          .tab
+            %input#tab-6{name: "tab-group-2", type: "radio"}
+            %label{for: "tab-6"} Something
+            .content
+              #another_tool
+                %p something else!!!!
+      - else
+        %p
+          nada
     #left_panel_bottom
-      %p Chat
-      %p Bob: something something something
-      %p Larry: Hello, how are you doing???
-      %p something something something.
+      - if signed_in?
+        #chat_window
+        %form.chat_form{action: "#", method: "get"}
+          %p
+            %textarea#chat_input{cols: "30", rows: "5"}
+          %p
+            %input{type: "submit", value: "Send"}
+      - else
+        %p You must sign in to see chat!
   .play_game_svg_container
     .games.play{id: @game.id}
   .chronicle_id_container{id: @game.chronicle.id}

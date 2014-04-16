@@ -1,5 +1,5 @@
 .chat_form {
-  display: none;
+  display: block;
 }
 
 #chat_window {
@@ -9,8 +9,5 @@
   display: none;
   overflow: scroll;
   background-color:white;
-}
-
-#close_chat {
-  display: none;
+  display: block;
 }
