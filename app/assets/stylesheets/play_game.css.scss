@@ -19,7 +19,7 @@
 
 
 #left_panel_middle {
-  height: 20%;
+  height: 132px;
   width: 100%;
   border-top: 1px solid #000;
   background: #333;
@@ -38,7 +38,7 @@
 }
 
 #tabs_middle {
-  height: 149px;
+  height: 123px;
 }
 
 .tab {
@@ -82,11 +82,40 @@
 }
 
 #left_panel_bottom {
-  height: 310px;
-  width: 289px;
+  height: 347px;
+  width: 298px;
   border: 1px inset #000;
   background: url("button.jpg") top left;
+  padding: 1px 0 0 0;
+}
+
+#left_panel_bottom p {
+  margin: 0;
   padding: 5px;
+  background-color: rgba(120,120,120,0.8);
+}
+
+#chat_window {
+  width: 297px;
+  margin: 0;
+  height: 202px;
+  border: 1px solid black;
+  display: none;
+  overflow-y: scroll;
+  background-color: rgba(230,230,230,0.8);
+}
+
+.chat_form p{
+  margin: 0;
+  padding: 0;
+}
+
+#chat_input{
+  margin: 0;
+  padding: 0;
+  width: 297px;
+  height: 80px;
+  resize: none;
 }
 
 .play_game_svg_container {
@@ -193,4 +222,5 @@ svg {
   width: 290px;
   overflow-x: scroll;
 }
+
 
