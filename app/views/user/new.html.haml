@@ -60,7 +60,8 @@
 :javascript
   $(document).ready( function() {
     $('#signin p').on("click", function(){
-      if($(this).parent().hasClass('hide')) {
+      if($(this).parent().hasClass('hide') && $(this).children('a').text() != "NEW GAME") {
+        console.log(this);
         if($('#signup').hasClass('front_buttons_open')) {
           $('#signup').animate({height:130},200).addClass('hide').removeClass('front_buttons_open');
         }
@@ -70,7 +71,7 @@
       }
     });
   $('#signup p').on("click", function(){
-    if($(this).parent().hasClass('hide')) {
+    if($(this).parent().hasClass('hide') && $(this).children('a').text() != "SIGN OUT") {
       if($('#signin').hasClass('front_buttons_open')) {
         $('#signin').animate({height:130},200).addClass('hide').removeClass('front_buttons_open');
       }
