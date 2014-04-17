@@ -132,6 +132,8 @@ $(".games.play").ready(function(){
       });
     });
 
+
+
   $('.end_turn').on("submit", function(event){
     snapshotTiles();
     $.ajax({
