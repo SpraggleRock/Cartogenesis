@@ -1,5 +1,5 @@
 $(".games.play").ready(function(){
-  var slugLength = 30;
+  var slugLength = 8;
   var radius = 400;
   var board;
   var boardID;
