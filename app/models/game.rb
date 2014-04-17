@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
     uppercase_letters = lowercase_letters.map(&:upcase)
     numbers = (0..9).to_a
     char_set = lowercase_letters + uppercase_letters + numbers
-    self.slug = char_set.sample(30).join()
+    self.slug = char_set.sample(8).join()
   end
 
   def assign_round_points

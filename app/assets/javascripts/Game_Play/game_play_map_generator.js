@@ -1,4 +1,5 @@
 $(".games.play").ready(function(){
+<<<<<<< HEAD
   var slugLength = 30;
   var radius = 200;
   var board;
