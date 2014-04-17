@@ -4,7 +4,9 @@ def create
     @game = Game.find(params[:game_id])
     unless @game.in_game?(current_user)
       if params[:player][:name] == ""
+        placeholderName = ["Odin", "Ra", "Baphamet", "Marduke", "Tiamat", "Zeus", "Hera", "Aphrodite", "Athena", "Gilgamesh"].sample
         player = Player.create(
+          name: placeholderName,
           game: @game,
           user: current_user
         )
