@@ -110,7 +110,7 @@ $( document ).ready(function() {
         })
 
         if(terrain == 'mountain'){
-          side1.vertices.push( new THREE.Vector3((side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, 50) )
+          side1.vertices.push( new THREE.Vector3((side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, randomIntFromInterval(30,45)) )
           for(i=1; i < 7;i++){
             side1.faces.push( new THREE.Face3(i,i+1,7))
           }
