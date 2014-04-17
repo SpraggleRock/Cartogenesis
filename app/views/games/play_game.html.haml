@@ -53,14 +53,6 @@
                     %p= turn_log.active_player.name.upcase + "'s reign:"
                     %p= link_to  'the world as it was', game_chronicle_turn_log_path(@game, @game.chronicle, turn_log)
                     %p= turn_log.documentation
-
-
-        / .tab
-        /   %input#tab-3{name: "tab-group-1", type: "radio"}
-        /   %label{for: "tab-3"} Something
-        /   .content
-        /     %p
-        /       Here be last.
     #left_panel_middle
       - if Player.find_by(id: @game.active_player, user_id: current_user.id)
         .tabs#tabs_middle
@@ -73,12 +65,7 @@
             %input#tab-5{name: "tab-group-2", type: "radio"}
             %label{for: "tab-5"} Landmarks
             .content
-
-          / .tab
-          /   %input#tab-6{name: "tab-group-2", type: "radio"}
-          /   %label{for: "tab-6"} Something
-          /   .content
-          /     Here be last.
+              #another_tool
       - else
         %p
           nada
