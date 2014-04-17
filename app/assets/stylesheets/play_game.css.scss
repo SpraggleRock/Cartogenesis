@@ -1,6 +1,7 @@
 #game_page {
   width: 1480px;
   margin: 15px auto 0 auto;
+  background-color: rgba(120,120,120,0.8);
 }
 
 #left_panel_wrapper {
@@ -154,7 +155,7 @@ svg {
   display: inline-block;
 }
 
-#another_tool {
+#landmark_panel {
   border: 1px solid black;
   width: 298px;
   height: 200px;
@@ -231,4 +232,21 @@ svg {
   overflow-x: scroll;
 }
 
+#landmark_modal {
+  background: #ddd;
+  width: 200px;
+  padding: 5px 0 15px 15px;
+}
 
+#landmark_modal input[type=text] {
+display: block;
+width: 154px;
+}
+
+#city {
+  background: #ddd;
+  padding: 10px;
+  width: 30px;
+  margin: 5px;
+  cursor: pointer;
+}
