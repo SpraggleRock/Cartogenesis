@@ -37,6 +37,9 @@
     cost: 3},
     {type: 'ocean',
     color: '#0000FF',
+    cost: 3},
+    {type: 'volcanic',
+    color: '#8A2E00',
     cost: 3}]
 
   var creationToolData = [
