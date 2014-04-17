@@ -21,6 +21,8 @@ $(".games.play").ready(function(){
   socket.update('end_turn', refresh);
 
   function refresh(data) {
+    console.log("socketed!" + data);
+    debugger
     location.reload();
   }
 

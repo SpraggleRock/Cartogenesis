@@ -25,13 +25,16 @@ class BoardController < ApplicationController
 
   def update
     data = []
+    puts json_params
     json_params.each do |string|
       data.push(JSON.parse(string.to_json))
     end
+    game = Tile.find(data[0]['id']).board.game
     data.each do |datum|
       tile = Tile.find(datum['id'])
       tile.update_attribute(:terrain, datum['terrain'])
     end
+    WebsocketRails[game.slug.to_sym].trigger(:end_turn, {board_json: json_params, myTurn: true})
     render nothing: true
   end
 
