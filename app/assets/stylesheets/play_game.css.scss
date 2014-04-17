@@ -22,7 +22,15 @@
   height: 132px;
   width: 100%;
   border-top: 1px solid #000;
-  background: #333;
+  overflow-y: scroll;
+  background: url("button.jpg") top left;
+}
+
+#wait_panel p{
+  background-color: rgba(40,40,40,0.7);
+  padding: 30px 5px;
+  margin: 0;
+  height: 71px;
 }
 
 /* TABS */
