@@ -5,26 +5,28 @@
     %form{action: '/landmark/', method: 'POST', id: 'create_landmark'}
     .txt
       %label{for: "Name"} Landmark Name:
-      %input#landmark_name{name: "", type: "text"}/
+      %input#landmark_name{name: "", type: "text"}
     .txt
       %label{for: "description"} Description:
-      %input#landmark_description{name: "", type: "text"}/
+      %input#landmark_description{name: "", type: "text"}
     .tile_info_field
-      %input#tile_info{ type: "hidden" }/
+      %input#tile_info{ type: "hidden" }
     .btn.clearfix
       %a.close{href: "#"} Mark the Land!
       %a.close.cancel{href: "#"} Cancel
+
+
+
+
   #left_panel_wrapper
     #left_panel_top
-      .tabs
+      .tabs#tabs_top
         .tab
           %input#tab-1{name: "tab-group-1", type: "radio", checked: "checked"}
           %label{for: "tab-1"} Game
           .content
             %p
-              Round #{@game.round_counter}
-            %p
-              Player #{@game.turn_counter} (#{Player.find(@game.active_player).name})'s turn
+              Round: #{@game.round_counter} - #{Player.find(@game.active_player).name}'s turn
             %ul
               -@game.players.each do |player|
                 %li
@@ -40,10 +42,9 @@
                 = submit_tag "End Turn"
 
             = button_to("Leave Game", leave_game_path(@game.id), method: :patch)
-
         .tab
           %input#tab-2{name: "tab-group-1", type: "radio"}
-          %label{for: "tab-2"} Navigate
+          %label{for: "tab-2"} History
           .content
             #chronicle
               %ul
@@ -52,30 +53,32 @@
                     %p= turn_log.active_player.name.upcase + "'s reign:"
                     %p= link_to  'the world as it was', game_chronicle_turn_log_path(@game, @game.chronicle, turn_log)
                     %p= turn_log.documentation
-        .tab
-          %input#tab-3{name: "tab-group-1", type: "radio"}
-          %label{for: "tab-3"} Something
-          .content
+
+
+        / .tab
+        /   %input#tab-3{name: "tab-group-1", type: "radio"}
+        /   %label{for: "tab-3"} Something
+        /   .content
+        /     %p
+        /       Here be last.
     #left_panel_middle
       - if Player.find_by(id: @game.active_player, user_id: current_user.id)
-        .tabs
+        .tabs#tabs_middle
           .tab
             %input#tab-4{name: "tab-group-2", type: "radio", checked: "checked"}
-            %label{for: "tab-4"} Colors
+            %label{for: "tab-4"} Land
             .content
               #toolbar
           .tab
             %input#tab-5{name: "tab-group-2", type: "radio"}
-            %label{for: "tab-5"} Navigate
+            %label{for: "tab-5"} Landmarks
             .content
-              #other_tool
-                %p navigation tools
-          .tab
-            %input#tab-6{name: "tab-group-2", type: "radio"}
-            %label{for: "tab-6"} Something
-            .content
-              #another_tool
-                %p something else!!!!
+
+          / .tab
+          /   %input#tab-6{name: "tab-group-2", type: "radio"}
+          /   %label{for: "tab-6"} Something
+          /   .content
+          /     Here be last.
       - else
         %p
           nada
@@ -89,6 +92,7 @@
             %input{type: "submit", value: "Send"}
       - else
         %p You must sign in to see chat!
+
   .play_game_svg_container
     .games.play{id: @game.id}
   .chronicle_id_container{id: @game.chronicle.id}
