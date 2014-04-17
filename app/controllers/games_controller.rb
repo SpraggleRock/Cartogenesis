@@ -41,8 +41,9 @@ class GamesController < ApplicationController
     player.save
     @game.end_turn
     @game.save
-    # WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
-    redirect_to play_game_path(@game.slug)
+    WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
+    # redirect_to play_game_path(@game.slug)
+    render partial: 'side_panel'
   end
 
   def join_game

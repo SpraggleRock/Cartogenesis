@@ -34,7 +34,7 @@ class BoardController < ApplicationController
       tile = Tile.find(datum['id'])
       tile.update_attribute(:terrain, datum['terrain'])
     end
-    WebsocketRails[game.slug.to_sym].trigger(:end_turn, {board_json: json_params, myTurn: true})
+    WebsocketRails[game.slug.to_sym].trigger(:update_tiles, {board_json: json_params})
     render nothing: true
   end
 

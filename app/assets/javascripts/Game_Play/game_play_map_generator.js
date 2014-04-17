@@ -18,7 +18,8 @@ $(".games.play").ready(function(){
 
   socket = new Multiplayer(document.URL.slice(-slugLength));
 
-  socket.update('end_turn', renderNew);
+  socket.update('update_tiles', renderNew);
+  socket.update('end_turn', endTurn)
 
   function renderNew(data) {
     var tiles=[];
@@ -34,6 +35,10 @@ $(".games.play").ready(function(){
     });
     drawHexes(hex_data);
     //location.reload();
+  }
+
+  function endTurn(data){
+
   }
 
   function Tile(radius, coordinates, terrain ,landmark) {
