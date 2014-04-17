@@ -10,7 +10,7 @@ Multiplayer.prototype.update = function(eventName, callback) {
 }
 
 $(function(){
-  socket = new Multiplayer(document.URL.slice(-30));
+  socket = new Multiplayer(document.URL.slice(-8));
   socket.update('new_player', appendPlayer);
 });
 

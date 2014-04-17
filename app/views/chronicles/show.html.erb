@@ -1,0 +1,15 @@
+<h1>Delve Into <%= @world_name %></h1>
+<ul>
+  <% @chronicle.turn_logs.each do |turn_log| %>
+  <li>
+    <% deity = Player.find(turn_log.active_player_id) %>
+    <p>In the Reign of <%= deity %>:</p>
+    <p><%= turn_log.documentation %></p>
+    <%= link_to "the world as it was", game_chronicle_turn_log_path(
+    @game, @chronicle, turn_log.id), method: "get" %>
+  </li>
+  <% end %>
+
+
+
+</ul>
