@@ -70,7 +70,6 @@
   bottom: 0;
   padding: 0;
   background: url("button.jpg") top left;
-  padding: 5px;
 }
 
 
@@ -135,6 +134,37 @@ svg {
   border: 1px solid black;
   width: 298px;
   height: 200px;
+}
+
+#round {
+  background: #ddd;
+  width: 100%;
+  padding: 4px;
+  margin: 0;
+}
+
+#current_round {
+  font-size: 21px;
+}
+
+#round p {
+  margin: 0;
+  padding: 0;
+}
+
+#points p {
+  margin: 0;
+  padding: 5px;
+  background: #aaa;
+}
+
+#points ul {
+  list-style-type: none;
+  padding: 0 0 0 5px;
+  margin: 5px 0 0 0;
+  overflow-y: scroll;
+  border: 1px solid #000;
+  height: 100px;
 }
 
 #chronicle {
