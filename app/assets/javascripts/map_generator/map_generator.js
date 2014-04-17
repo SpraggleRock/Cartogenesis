@@ -1,6 +1,6 @@
 $(".games.new").ready(function(){
 
-  var radius = 300;
+  var radius = 800;
   var board_id;
   var createdTiles = [];
 
@@ -75,7 +75,7 @@ function Tile(radius, coordinates, terrain) {
   $('#generate_map').on("click", function(event){
     event.preventDefault();
     var tiles = [];
-    var boardSize = 7;
+    var boardSize = 17;
     for (var i = -boardSize; Math.abs(i) <= boardSize; i++){
       for (var j = -boardSize; Math.abs(j) <= boardSize; j++){
         for (var k = -boardSize; Math.abs(k) <= boardSize; k++){

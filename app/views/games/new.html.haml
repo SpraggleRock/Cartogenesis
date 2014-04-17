@@ -3,9 +3,14 @@
     = submit_tag "Accept Map and Create Game"
   / = form_tag create_board_path, id: "generate_map", method: :post do
   /   = submit_tag "Generate Map"
+  / :javascript
+  /   $( document ).ready(function(){
+  /     $('#slider').slider();
+  /   })
   %button.generate_map{type: "button", id: 'generate_map'} Generate Map
   / = form_tag game_path(@game.id), id: "end_turn", method: :post do
   /   = submit_tag "End Turn"
+  %div{:id => 'slider'}
 
   %div{class: 'game_container'}
     %div{:id => 'toolbar'}

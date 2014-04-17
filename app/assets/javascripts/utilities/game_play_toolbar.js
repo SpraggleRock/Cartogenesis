@@ -120,6 +120,7 @@ $("#game_page").ready(function () {
           $(this).attr("fill", selectedTool.color)
           $(this).attr("terrain", selectedTool.type);
           activePlayerPoints = activePlayerPoints - selectedTool.cost
+          $('span.points').html(activePlayerPoints)
           updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
           $('#points_to_s').val(activePlayerPoints.toString());
         }
@@ -133,6 +134,8 @@ $("#game_page").ready(function () {
         selectedTool.type = $(this).attr("terrain")
         selectedTool.color = $(this).attr("fill")
         activePlayerPoints = activePlayerPoints - 10
+        $('#points_to_s').val(activePlayerPoints.toString());
+        $('span.points').html(activePlayerPoints)
         $('#tile_info').val(tile_id)
       }
       startHover().bind()
@@ -142,6 +145,7 @@ $("#game_page").ready(function () {
           updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}));
           activePlayerPoints = activePlayerPoints - selectedTool.cost;
           $('#points_to_s').val(activePlayerPoints.toString());
+          $('span.points').html(activePlayerPoints)
         }
     });
 

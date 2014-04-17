@@ -1,6 +1,6 @@
 $(".games.play").ready(function(){
   var slugLength = 30;
-  var radius = 300;
+  var radius = 800;
   var board;
   var boardID;
   var createdTiles = [];
