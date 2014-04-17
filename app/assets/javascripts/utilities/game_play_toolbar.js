@@ -76,7 +76,7 @@
           selectedTool = allTools[i]
       }
     });
-    $("#another_tool").on('click', 'div', function(){
+    $("#landmark_panel").on('click', 'div', function(){
       for(i=0; i < allTools.length; i++){
         if (allTools[i].type == this.id)
           selectedTool = allTools[i]
@@ -112,7 +112,7 @@ $("#game_page").ready(function () {
       $('#toolbar').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 10px; background-color: " + this.color +";'></div>");
     });
     $.each(creationTools, function(){
-      $('#another_tool').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='width: 20px; background-color: " + this.color +";'>" + this.type +"</div>");
+      $('#landmark_panel').append("<div id='"+ this.type + "'data-color='" + this.color + "' style='background-color: " + this.color +";'>" + this.type +"</div>");
     });
     currentTool(allTools);
 
