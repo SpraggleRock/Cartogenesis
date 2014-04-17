@@ -151,8 +151,9 @@ $( document ).ready(function() {
           }
 
           for(i=0; i<12; i++){
-            hold = new THREE.SphereGeometry(3,10,10)
-            hold.applyMatrix(new THREE.Matrix4().makeTranslation(randomLocations[i][0], randomLocations[i][1], side1.vertices[0].z + 7))//(side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, side1.vertices[0].z + 10)
+            hold = new THREE.CylinderGeometry(0,3,7,7,7,false)
+            hold.applyMatrix(new THREE.Matrix4().makeRotationX(1.57))
+            hold.applyMatrix(new THREE.Matrix4().makeTranslation(randomLocations[i][0], randomLocations[i][1], side1.vertices[0].z + 6.1))//(side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, side1.vertices[0].z + 10)
             treeTops.push(hold)
           }
 
