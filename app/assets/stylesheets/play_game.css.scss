@@ -145,6 +145,7 @@ svg {
 #toolbar {
   border: 1px solid black;
   width: 298px;
+  background-color: rgba(200,200,200,0.5);
 }
 
 #toolbar div {
@@ -152,6 +153,7 @@ svg {
   height: 30px;
   line-height: 30px;
   padding: 0 10px;
+  margin: 5px 20px;
   text-decoration: none;
   display: inline-block;
 }

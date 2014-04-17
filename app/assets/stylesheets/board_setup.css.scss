@@ -1,29 +1,28 @@
-#toolbar {
-  border: 1px solid black;
-  width: 440px;
-}
 
-#toolbar div {
-  border: 1px solid black;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  margin: 5px 20px;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.svg_container {
+.create_board_svg_container {
   border: 1px solid #000;
   width: 1000px;
   height: 750px;
   overflow: scroll;
+  margin: 20px auto;
+  background: #000;
+  padding: 0;
 }
 
 svg {
-  height: 1000px;
-  width: 1000px;
+  height: 500px;
+  width: 500px;
   padding: 40px;
 }
 
+.create_toolbar {
+  width: 600px;
+}
 
+.hidden_accept {
+  visibility: hidden;
+}
+
+#accept_map_button {
+  height: 50px;
+}
