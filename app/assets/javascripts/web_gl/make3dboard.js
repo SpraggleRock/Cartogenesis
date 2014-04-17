@@ -34,6 +34,8 @@ $( document ).ready(function() {
       return Math.floor(Math.random()*(max-min+1)+min);
     }
 
+    var snowSystems = []
+    var lavaSystems = []
     // var stats = new Stats();
     // stats.setMode(1); // 0: fps, 1: ms
 
@@ -77,6 +79,10 @@ $( document ).ready(function() {
         }
         else if(terrain == 'mountain'){
           var material = new THREE.MeshLambertMaterial( { color: '#999999' } );
+          z = 12
+        }
+        else if(terrain = 'volcanic'){
+          var material = new THREE.MeshLambertMaterial( { color: '#390E00' } );
           z = 12
         }
 
@@ -172,7 +178,7 @@ $( document ).ready(function() {
         
         var pX = randomIntFromInterval(side1.vertices[0].x, side1.vertices[3].x),
             pY = randomIntFromInterval(side1.vertices[1].y, side1.vertices[5].y),
-            pZ = randomIntFromInterval(75, 125),
+            pZ = randomIntFromInterval(50, 75),
             particle = new THREE.Vector4(pX, pY, pZ, 0)
 
             particle.velocity = new THREE.Vector3(
@@ -190,8 +196,56 @@ $( document ).ready(function() {
           particles,
           pMaterial);
 
+        particleSystem.particles = particles;
+
         particleSystem.name = 'particleSys'
         particleSystem.sortParticles = true;
+
+        snowSystems.push( particleSystem )
+
+        scene.add( particleSystem )
+        }
+
+        if(terrain == 'volcanic'){
+          var mp = new THREE.Vector3((side1.vertices[0].x + side1.vertices[3].x)/2,(side1.vertices[1].y + side1.vertices[5].y)/2)
+          var cyl = new THREE.CylinderGeometry(6, 22, 20, 10, 10, false)
+          cyl.applyMatrix(new THREE.Matrix4().makeRotationX(1.57))
+          cyl.applyMatrix(new THREE.Matrix4().makeTranslation((side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, 20))
+          THREE.GeometryUtils.merge(side1, cyl)
+
+          var particleCount = 180,
+          particles = new THREE.Geometry(),
+          pMaterial = new THREE.ParticleBasicMaterial({
+            color: 0x808080,
+            size: 1
+          });
+
+      // now create the individual particles
+      for (var p = 0; p < particleCount; p++) {
+        
+        var pX = mp.x,
+            pY = mp.y,
+            pZ = 10,
+            particle = new THREE.Vector4(pX, pY, pZ, 0)
+            particle.initX = mp.x
+            particle.initY = mp.y
+
+
+        // add it to the geometry
+        particles.vertices.push(particle);
+      }
+
+      // create the particle system
+      var particleSystem = new THREE.ParticleSystem(
+          particles,
+          pMaterial);
+
+        particleSystem.particles = particles;
+
+        particleSystem.name = 'particleSys'
+        particleSystem.sortParticles = true;
+
+        lavaSystems.push( particleSystem )
 
         scene.add( particleSystem )
         }
@@ -253,18 +307,53 @@ $( document ).ready(function() {
 
     g = 0
     function makeItSnow(){
-      scene.children.forEach(function(object){
-        if(object.name == 'particleSys' && g % 100){
-          if(object.position.z < -15){
-            object.position.z = 50
+      snowSystems.forEach(function(object){
+        if(g % 100){
+          object.particles.vertices.forEach(function(vert){
+
+          if(vert.z < -15){
+            vert.z = 55
           }
           else{
-            object.position.z -= randomIntFromInterval(0, .5)
+            vert.z -= randomIntFromInterval(0, .5)
           }
+          })
         }
       })
       g++
     }
+
+    l = 0
+
+    function makeItLava(){
+      i = 0
+      lavaSystems.forEach(function(object){
+        if(l % 6 == 0){
+        object.particles.vertices.forEach(function(vert){
+            if(vert.z > 55){
+              vert.z = 30
+              vert.x = vert.initX
+              vert.y = vert.initY
+            }
+            else{
+                if(randomIntFromInterval(-1,1) > 0){
+                  vert.z += randomIntFromInterval(0, 1.5)
+                  vert.x += randomIntFromInterval(0, .15)
+                  vert.y += randomIntFromInterval(0, .15)
+                }
+                else{
+                  vert.z += randomIntFromInterval(0, 1.5)
+                  vert.x -= randomIntFromInterval(0, 1)
+                  vert.y -= randomIntFromInterval(0, .15)
+                }
+            }
+          })
+        }
+        i++
+        })
+      l++
+    }
+    console.log(lavaSystems)
           // object.geometry.vertices.forEach(function(particle){
           //   if (particle.position.z < 0) {
           //     particle.position.z = 200;
@@ -288,6 +377,7 @@ $( document ).ready(function() {
       controls.update();
       makeSomeWaves();
       makeItSnow();
+      makeItLava();
       requestAnimationFrame(render);
       renderer.render(scene, camera);
       //stats.end();
