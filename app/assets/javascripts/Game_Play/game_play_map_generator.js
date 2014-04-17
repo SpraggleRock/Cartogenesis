@@ -38,7 +38,8 @@ $(".games.play").ready(function(){
   }
 
   function endTurn(data){
-
+    location.reload();
+    // $("#left_panel_wrapper").load('/controller_name/action_name');
   }
 
   function Tile(radius, coordinates, terrain ,landmark) {
@@ -154,5 +155,6 @@ $(".games.play").ready(function(){
         console.log('success')
       }
     });
+
   });
 });

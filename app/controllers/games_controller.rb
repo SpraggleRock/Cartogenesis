@@ -42,8 +42,7 @@ class GamesController < ApplicationController
     @game.end_turn
     @game.save
     WebsocketRails[@game.slug.to_sym].trigger(:end_turn, {board_json: @tiles, myTurn: true})
-    # redirect_to play_game_path(@game.slug)
-    render partial: 'side_panel'
+    redirect_to play_game_path(@game.slug)
   end
 
   def join_game
@@ -69,6 +68,13 @@ class GamesController < ApplicationController
     @game = Game.find_by(slug: params[:game_slug])
     @players = @game.players.order(id: :asc)
     @points = Player.find(@game.active_player).points
+  end
+
+  def end_turn
+    @game = Game.find_by(slug: params[:game_slug])
+    @players = @game.players.order(id: :asc)
+    @points = Player.find(@game.active_player).points
+    render partial: 'side_panel'
   end
 
   def json_params
