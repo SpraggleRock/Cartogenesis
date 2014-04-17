@@ -10,6 +10,7 @@
   float: left;
   border-bottom: 1px solid #fff;
   background: #fff;
+  overflow: hidden;
 }
 
 #left_panel_top {
@@ -21,7 +22,7 @@
 
 #left_panel_middle {
   height: 132px;
-  width: 100%;
+  width: 320px;
   border-top: 1px solid #000;
   overflow-y: scroll;
   background: url("button.jpg") top left;
@@ -191,6 +192,7 @@ svg {
   border: 1px solid #000;
   height: 80px;
   background-color: rgba(230,230,230,0.8);
+  width: 295px;
 }
 
 .points {
