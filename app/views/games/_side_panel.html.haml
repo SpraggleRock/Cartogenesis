@@ -7,31 +7,26 @@
         #round
           #current_round
             %p
-              Round #{@game.round_counter} active player:
+              Round #{@game.round_counter}, active player:
               %br
               #{Player.find(@game.active_player).name}
         #points
           %p
-            Points to spend:
+            Players and Points:
           %ul
             -@game.players.each do |player|
-              %li
-                Test Person 1
-              %li
-                Test Person 2
-              %li
-                Test Person 3
               %li
                 #{player.name}:
                 %span.points
                   =player.points
-        %p
-          = text_area_tag(:turn_log_documentation, nil, placeholder: "#{Player.find(@game.active_player).name} stirred, and as they breathed, they \n did some stuff.  Record your history here!")
-          = form_tag @game, class: "end_turn", method: :patch do |f|
-            = hidden_field(:points, :to_s)
-            = submit_tag "End Turn"
-
-        = button_to("Leave Game", leave_game_path(@game.id), method: :patch)
+        #history_input
+          %p
+            = text_area_tag(:turn_log_documentation, nil, placeholder: "#{Player.find(@game.active_player).name} stirred, and as they breathed, they did some stuff.  Record your history here!")
+            = form_tag @game, class: "end_turn", method: :patch do |f|
+              = hidden_field(:points, :to_s)
+              = submit_tag "End Turn"
+              #leave_game_button
+                = button_to("Leave Game", leave_game_path(@game.id), method: :patch)
     .tab
       %input#tab-2{name: "tab-group-1", type: "radio"}
       %label{for: "tab-2"} History
@@ -40,9 +35,12 @@
           %ul
             - @game.chronicle.turn_logs.each do |turn_log|
               %li
-                %p= turn_log.active_player.name.upcase + "'s reign:"
-                %p= link_to  'the world as it was', game_chronicle_turn_log_path(@game, @game.chronicle, turn_log)
-                %p= turn_log.documentation
+                %p
+                  = turn_log.active_player.name.upcase + "'s reign:"
+                %p
+                  = link_to  'the world as it was', game_chronicle_turn_log_path(@game, @game.chronicle, turn_log), target: "_blank"
+                %p
+                  = turn_log.documentation
 #left_panel_middle
   - if Player.find_by(id: @game.active_player, user_id: current_user.id)
     .tabs#tabs_middle
@@ -55,17 +53,19 @@
         %input#tab-5{name: "tab-group-2", type: "radio"}
         %label{for: "tab-5"} Landmarks
         .content
-          #another_tool
+          #landmark_panel
   - else
-    %p
-      nada
+    #wait_panel
+      %p
+        Waiting for #{Player.find(@game.active_player).name} to finish. Check out the logs on the history tab while you wait!
 #left_panel_bottom
   - if signed_in?
+    %p
+      Chat:
     #chat_window
     %form.chat_form{action: "#", method: "get"}
-      %p
-        %textarea#chat_input{cols: "30", rows: "5"}
-      %p
-        %input{type: "submit", value: "Send"}
+      %textarea#chat_input{cols: "30", rows: "5"}
+      %br
+      %input{type: "submit", value: "Send"}
   - else
     %p You must sign in to see chat!

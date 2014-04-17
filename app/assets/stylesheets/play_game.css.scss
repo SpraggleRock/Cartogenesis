@@ -25,8 +25,6 @@
   background: #333;
 }
 
-
-
 /* TABS */
 .tabs {
   position: absolute;
@@ -72,7 +70,6 @@
   background: url("button.jpg") top left;
 }
 
-
 [type=radio]:checked ~ label {
   background: rgb(98,125,77);
   border-bottom: 1px solid white;
@@ -84,7 +81,6 @@
   z-index: 1;
 }
 
-
 #left_panel_bottom {
   height: 310px;
   width: 289px;
@@ -92,8 +88,6 @@
   background: url("button.jpg") top left;
   padding: 5px;
 }
-
-
 
 .play_game_svg_container {
   border: 1px solid #000;
@@ -119,15 +113,8 @@ svg {
   height: 30px;
   line-height: 30px;
   padding: 0 10px;
-  margin: 5px 20px;
   text-decoration: none;
   display: inline-block;
-}
-
-#other_tool {
-  border: 1px solid black;
-  width: 298px;
-  height: 200px;
 }
 
 #another_tool {
@@ -137,7 +124,7 @@ svg {
 }
 
 #round {
-  background: #ddd;
+  background-color: rgba(200,200,200,0.5);
   width: 100%;
   padding: 4px;
   margin: 0;
@@ -155,19 +142,55 @@ svg {
 #points p {
   margin: 0;
   padding: 5px;
-  background: #aaa;
+  background-color: rgba(120,120,120,0.8);
 }
 
 #points ul {
   list-style-type: none;
   padding: 0 0 0 5px;
-  margin: 5px 0 0 0;
+  margin: 0;
   overflow-y: scroll;
   border: 1px solid #000;
-  height: 100px;
+  height: 80px;
+  background-color: rgba(230,230,230,0.8);
+}
+
+.points {
+  float: right;
+  margin: 0 10px 0 0;
+}
+
+#history_input input[type=submit] {
+  margin: 0 5px;
+  padding: 5px;
+  float: left;
+}
+
+#history_input textarea {
+  width: 294px;
+  height: 80px;
+  resize: none;
+}
+
+#history_input p {
+  margin: 0;
+}
+
+#leave_game_button {
+  float: right;
 }
 
 #chronicle {
+  background-color: rgba(200,200,200,0.5);
+}
 
+#chronicle ul{
+  word-wrap: break-word;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 5px;
+  height: 296px;
+  width: 290px;
+  overflow-x: scroll;
 }
 
