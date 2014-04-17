@@ -1,18 +1,20 @@
 #create_game_page
-  = form_tag games_path, id: "accept_board", method: :post do
-    = submit_tag "Accept Map and Create Game"
-  / = form_tag create_board_path, id: "generate_map", method: :post do
-  /   = submit_tag "Generate Map"
-  / :javascript
-  /   $( document ).ready(function(){
-  /     $('#slider').slider();
-  /   })
-  %button.generate_map{type: "button", id: 'generate_map'} Generate Map
-  / = form_tag game_path(@game.id), id: "end_turn", method: :post do
-  /   = submit_tag "End Turn"
   %div{:id => 'slider'}
 
-  %div{class: 'game_container'}
-    %div{:id => 'toolbar'}
-    %div{class: 'svg_container'}
-      %div.games.new
+  .game_container
+
+    .create_board_svg_container
+      #toolbar
+      = form_tag games_path, id: "accept_board", method: :post do
+        = submit_tag "Accept Map and Create Game", id: "accept_map_button", class: "hidden_accept"
+      %button.generate_map{type: "button", id: 'generate_map'} Generate Map
+      .games.new
+:javascript
+  $(document).ready( function() {
+    $('#generate_map').on("click", function(){
+      if($('#accept_map_button').hasClass('hidden_accept')) {
+        console.log("HELLO!")
+        $('#accept_map_button').removeClass('hidden_accept');
+      }
+    });
+  });
