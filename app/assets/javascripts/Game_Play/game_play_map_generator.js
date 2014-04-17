@@ -18,10 +18,28 @@ $(".games.play").ready(function(){
 
   socket = new Multiplayer(document.URL.slice(-slugLength));
 
-  socket.update('end_turn', refresh);
+  socket.update('update_tiles', renderNew);
+  socket.update('end_turn', endTurn)
 
-  function refresh(data) {
+  function renderNew(data) {
+    var tiles=[];
+    console.log(data);
+    board = data.board_json;
+    console.log(board)
+    $.each(board, function(k, v){
+      tiles.push(v.coordinates);
+    });
+    formatted_tiles = format_coords(tiles);
+    var hex_data = formatted_tiles.map(function(tile){
+      return genHexData(genHexVertices(25), hexToCartesian(tile, 25));
+    });
+    drawHexes(hex_data);
+    //location.reload();
+  }
+
+  function endTurn(data){
     location.reload();
+    // $("#left_panel_wrapper").load('/controller_name/action_name');
   }
 
   function Tile(radius, coordinates, terrain ,landmark) {
@@ -43,6 +61,7 @@ $(".games.play").ready(function(){
   }
 
   function format_coords(coord_string_array) {
+    console.log("coord string array: " + coord_string_array);
     var coord_array = coord_string_array.map(function(coord_string){
       return coord_string.split(',');
     });
@@ -95,6 +114,7 @@ $(".games.play").ready(function(){
 
   $('svg').on('click', function(event){
       console.log('holy shit i clicked');
+      console.log(JSON.stringify(updateQueue));
       $.ajax({
         type: 'PATCH',
         url: '/board/1/',
@@ -135,5 +155,6 @@ $(".games.play").ready(function(){
         console.log('success')
       }
     });
+
   });
 });

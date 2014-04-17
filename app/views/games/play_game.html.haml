@@ -14,8 +14,8 @@
     .btn.clearfix
       %a.close{href: "#"} Mark the Land!
       %a.close.cancel{href: "#"} Cancel
-
-  =render "side_panel"
+  #left_panel_wrapper
+    =render "side_panel"
 
   .play_game_svg_container
     .games.play{id: @game.id}

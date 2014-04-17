@@ -70,6 +70,13 @@ class GamesController < ApplicationController
     @points = Player.find(@game.active_player).points
   end
 
+  def end_turn
+    @game = Game.find_by(slug: params[:game_slug])
+    @players = @game.players.order(id: :asc)
+    @points = Player.find(@game.active_player).points
+    render partial: 'side_panel'
+  end
+
   def json_params
     params.require(:_json)
   end

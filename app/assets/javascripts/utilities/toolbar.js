@@ -68,7 +68,7 @@ var allTools = loadTools();
       if($(this).attr("terrain") != selectedTool.type){
         $(this).attr("fill", selectedTool.color)
         $(this).attr("terrain", selectedTool.type);
-        updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+        updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain"), coordinates: $(this).attr("coordinates")}))
       }
     })
   }
@@ -77,7 +77,7 @@ var allTools = loadTools();
     if($(this).attr("terrain") != selectedTool.type){
         $(this).attr("fill", selectedTool.color)
         $(this).attr("terrain", selectedTool.type);
-        updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain")}))
+        updateQueue.push(({id: $(this).attr("tile_id"), terrain: $(this).attr("terrain"), coordinates: $(this).attr("coordinates")}))
       }
   });
 
