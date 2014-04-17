@@ -92,6 +92,6 @@ function Tile(radius, coordinates, terrain) {
       return hold
     });
     drawHexes(hex_data, tiles);
-
+    $(this).html("Reset Map");
   });
 });
