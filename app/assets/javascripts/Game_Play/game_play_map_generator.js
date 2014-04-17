@@ -1,5 +1,10 @@
 $(".games.play").ready(function(){
-  var slugLength = 8;
+  $('#chat_window').show();
+  $('.chat_form').show();
+  var slug = document.URL.slice(-8);
+  chat = new Chat();
+  chat.setUpChannelChat(slug);
+  var slugLength = 8 //see multiplayer.js for slug;
   var radius = 400;
   var board;
   var boardID;
