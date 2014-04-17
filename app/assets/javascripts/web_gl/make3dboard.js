@@ -50,18 +50,9 @@ $( document ).ready(function() {
     renderer.setSize( window.innerWidth / 2, window.innerHeight );
     document.body.appendChild( renderer.domElement );
 
-    // testVerts = genHexData(genHexVertices(1),);
-    //generateNewMap();
-    // var hex_data = formatted_tiles.map(function(tile){
-    //     hold = genHexData(genHexVertices(20), hexToCartesian(tile, 20))
-    //     return hold
-    //   });
-
       function makeHex(vertices, radius, terrain){
         var side1 = new THREE.Geometry();
         var side2 = new THREE.Geometry();
-
-
         
         //cache materials instead of making them every time
         if(terrain == 'ocean'){
@@ -130,16 +121,16 @@ $( document ).ready(function() {
           side1.faces.push( new THREE.Face3(facesToCreate2[i][0],facesToCreate2[i][1],facesToCreate2[i][2]))
         }
 
-        if(terrain == 'desert'){
-          randomLocations = []
-          var dunes = []
-          for(i=0;i<2;i++){
-            dune = new THREE.CylinderGeometry( 2, 3, 20, 3 );
-            dune.applyMatrix(new THREE.Matrix4().makeRotationZ(randomIntFromInterval(0,1.57)))
-            dune.applyMatrix(new THREE.Matrix4().makeTranslation(randomIntFromInterval(side1.vertices[1].x, side1.vertices[4].x) ,randomIntFromInterval(side1.vertices[1].y, side1.vertices[5].y - 2), side1.vertices[0].z))
-            THREE.GeometryUtils.merge(side1, dune)
-          }
-        }
+        // if(terrain == 'desert'){
+        //   randomLocations = []
+        //   var dunes = []
+        //   for(i=0;i<2;i++){
+        //     dune = new THREE.CylinderGeometry( 2, 3, 20, 3 );
+        //     dune.applyMatrix(new THREE.Matrix4().makeRotationZ(randomIntFromInterval(0,1.57)))
+        //     dune.applyMatrix(new THREE.Matrix4().makeTranslation(randomIntFromInterval(side1.vertices[1].x, side1.vertices[4].x) ,randomIntFromInterval(side1.vertices[1].y, side1.vertices[5].y - 2), side1.vertices[0].z))
+        //     THREE.GeometryUtils.merge(side1, dune)
+        //   }
+        // }
 
         if(terrain == 'forest'){
           trunks = []
@@ -169,7 +160,7 @@ $( document ).ready(function() {
         }
 
         if (terrain == 'tundra'){
-          var particleCount = 15,
+          var particleCount = 30,
           particles = new THREE.Geometry(),
           pMaterial = new THREE.ParticleBasicMaterial({
             color: 0xffffff,
@@ -181,8 +172,14 @@ $( document ).ready(function() {
         
         var pX = randomIntFromInterval(side1.vertices[0].x, side1.vertices[3].x),
             pY = randomIntFromInterval(side1.vertices[1].y, side1.vertices[5].y),
-            pZ = 20,
+            pZ = randomIntFromInterval(75, 125),
             particle = new THREE.Vector4(pX, pY, pZ, 0)
+
+            particle.velocity = new THREE.Vector3(
+              0,              
+              0, 
+              -Math.random()); 
+            particle.position = new THREE.Matrix4()
 
         // add it to the geometry
         particles.vertices.push(particle);
@@ -194,6 +191,7 @@ $( document ).ready(function() {
           pMaterial);
 
         particleSystem.name = 'particleSys'
+        particleSystem.sortParticles = true;
 
         scene.add( particleSystem )
         }
@@ -236,29 +234,6 @@ $( document ).ready(function() {
       y++
     }
 
-    g = 0
-    function makeItSnow(){
-      scene.__objectsAdded.forEach(function(object){
-        //console.log(object)
-        if(object.name == 'particleSys' && g % 10 == 0){
-         // console.log(object.position)
-        //   object.geometry.vertices.forEach(function(particle){
-        //     console.log(object)
-        //       if (particle.y < 0) {
-        //         particle.y = 20;
-        //         particle.velocity.y = 0;
-        //       }
-        //       particle.velocity.y -= Math.random() * .1;
-
-        //       particle.position.addSelf(particle.velocity);
-
-        //       particleSystem.geometry.__dirtyVertices = true;
-        //   })
-        // }
-      }
-      })
-      g++
-    }
     
     makeBoard(hex_data);
 
@@ -275,11 +250,44 @@ $( document ).ready(function() {
     pointLight.position.z = 750
     camera.position.z = 750;
 
+
+    g = 0
+    function makeItSnow(){
+      scene.children.forEach(function(object){
+        if(object.name == 'particleSys' && g % 100){
+          if(object.position.z < -15){
+            object.position.z = 50
+          }
+          else{
+            object.position.z -= randomIntFromInterval(0, .5)
+          }
+        }
+      })
+      g++
+    }
+          // object.geometry.vertices.forEach(function(particle){
+          //   if (particle.position.z < 0) {
+          //     particle.position.z = 200;
+          //     particle.velocity.z = 0;
+          //   }
+
+          //   // update the velocity with
+          //   // a splat of randomniz
+          //   particle.velocity.z -= Math.random() * .1;
+
+          //   // and the position
+          //   particle.position += particle.velocity;
+
+          // // flag to the particle system
+          // // that we've changed its vertices.
+          // object.geometry.__dirtyVertices = true;
+
+
     function render() {
       //stats.begin();
       controls.update();
       makeSomeWaves();
-      //makeItSnow();
+      makeItSnow();
       requestAnimationFrame(render);
       renderer.render(scene, camera);
       //stats.end();

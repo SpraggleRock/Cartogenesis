@@ -1,6 +1,6 @@
 $(".games.replay").ready(function(){
 
-  var radius = 300;
+  var radius = 200;
   var board;
   var createdTiles = [];
   var board_json = parseJSON($("#board_json").html());
