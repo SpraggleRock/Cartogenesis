@@ -110,7 +110,7 @@ $( document ).ready(function() {
         })
 
         if(terrain == 'mountain'){
-          side1.vertices.push( new THREE.Vector3((side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, randomIntFromInterval(30,45)) )
+          side1.vertices.push( new THREE.Vector3((side1.vertices[0].x + side1.vertices[3].x)/2, side1.vertices[0].y, randomIntFromInterval(35,55)) )
           for(i=1; i < 7;i++){
             side1.faces.push( new THREE.Face3(i,i+1,7))
           }
@@ -331,7 +331,7 @@ $( document ).ready(function() {
       lavaSystems.forEach(function(object){
         if(l % 6 == 0){
         object.particles.vertices.forEach(function(vert){
-            if(vert.z > 55){
+            if(vert.z > randomIntFromInterval(45,100)){
               vert.z = 30
               vert.x = vert.initX
               vert.y = vert.initY
