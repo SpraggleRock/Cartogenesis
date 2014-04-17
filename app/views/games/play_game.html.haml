@@ -34,7 +34,7 @@
                     =player.points
                   points to spend
             %p
-              = text_area_tag(:turn_log_documentation)
+              = text_area_tag(:turn_log_documentation, nil, placeholder: "#{Player.find(@game.active_player).name} stirred, and as they breathed, they \n did some stuff.  Record your history here!")
               = form_tag @game, class: "end_turn", method: :patch do |f|
                 = hidden_field(:points, :to_s)
                 = submit_tag "End Turn"
