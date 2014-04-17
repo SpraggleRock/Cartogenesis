@@ -4,7 +4,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :game_id
       t.integer :user_id
       t.integer :points, default: 0
-      t.string :name
+      t.string :name, default: 'newb'
 
       t.timestamps
     end
