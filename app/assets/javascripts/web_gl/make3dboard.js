@@ -354,23 +354,6 @@ $( document ).ready(function() {
         })
       l++
     }
-    console.log(lavaSystems)
-          // object.geometry.vertices.forEach(function(particle){
-          //   if (particle.position.z < 0) {
-          //     particle.position.z = 200;
-          //     particle.velocity.z = 0;
-          //   }
-
-          //   // update the velocity with
-          //   // a splat of randomniz
-          //   particle.velocity.z -= Math.random() * .1;
-
-          //   // and the position
-          //   particle.position += particle.velocity;
-
-          // // flag to the particle system
-          // // that we've changed its vertices.
-          // object.geometry.__dirtyVertices = true;
 
 
     function render() {
