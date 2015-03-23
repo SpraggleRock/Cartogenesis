@@ -118,8 +118,6 @@ $(".games.play").ready(function(){
   });
 
   $('svg').on('click', function(event){
-      console.log('holy shit i clicked');
-      console.log(JSON.stringify(updateQueue));
       $.ajax({
         type: 'PATCH',
         url: '/board/1/',
